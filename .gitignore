@@ -158,3 +158,9 @@ Library/
 Build/
 WebGL Builds/
 Logs/
+UserSettings/
+obj/
+Obj/
+.idea/
+
+FP/
