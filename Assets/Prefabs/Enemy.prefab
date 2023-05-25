@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6628663547805270819}
   - component: {fileID: 548051508477315112}
   - component: {fileID: 5751369247161905049}
+  - component: {fileID: 5919451320593565378}
+  - component: {fileID: 3058784724231846140}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -99,6 +101,34 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5919451320593565378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630711349794651465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544e52e7528d39543a55e8259cace9bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_angle: 20
+  m_distance: 20
+  m_isTrigger: 1
+  m_isFixScale: 1
+--- !u!114 &3058784724231846140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630711349794651465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9549143480fa8594890b6b3b4516cf5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7708883105559959592
 GameObject:
   m_ObjectHideFlags: 0

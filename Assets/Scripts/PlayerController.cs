@@ -50,13 +50,11 @@ public class PlayerController : MonoBehaviour
             // crouching
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                Debug.Log("Should be crouching");
                 transform.localScale = 
                     Vector3.Lerp(transform.localScale, new Vector3(1, 0.5f, 1), Time.deltaTime * 10);
             }
             else
             {
-                Debug.Log("Should not be crouching");
                 transform.localScale = 
                     Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1), Time.deltaTime * 10);
             }
