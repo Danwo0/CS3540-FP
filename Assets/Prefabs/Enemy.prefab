@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 6628663547805270819}
   - component: {fileID: 548051508477315112}
   - component: {fileID: 5751369247161905049}
+  - component: {fileID: 5919451320593565378}
+  - component: {fileID: 3058784724231846140}
+  - component: {fileID: -7234618549844055124}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -63,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f7ef11d9d4be0be4c99888dfc0d08d7a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,6 +102,49 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5919451320593565378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630711349794651465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544e52e7528d39543a55e8259cace9bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_angle: 20
+  m_distance: 20
+  m_isTrigger: 1
+  m_isFixScale: 1
+--- !u!114 &3058784724231846140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630711349794651465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9549143480fa8594890b6b3b4516cf5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-7234618549844055124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630711349794651465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d1d62426679658499f750be68085505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 9045565599046844531, guid: 755acdcc4bcd1dd4a87d74a250b8e211, type: 3}
+  bulletSpeed: 100
+  player: {fileID: 0}
 --- !u!1 &7708883105559959592
 GameObject:
   m_ObjectHideFlags: 0
