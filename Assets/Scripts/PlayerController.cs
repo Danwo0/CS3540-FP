@@ -58,6 +58,5 @@ public class PlayerController : MonoBehaviour
                 transform.localScale = 
                     Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1), Time.deltaTime * 10);
             }
-            Debug.Log(transform.localScale.ToString());
         }
 }
