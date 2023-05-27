@@ -12,7 +12,9 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 input, moveDirection;
     private string currentItem = "";
+
     private float speedBoost = 1;
+    private float jumpBoost = 1;
     
     void Start()
     {
@@ -35,7 +37,7 @@ public class PlayerController : MonoBehaviour
             moveDirection = input;
             if (Input.GetButton("Jump"))
             {
-                moveDirection.y = Mathf.Sqrt(2 * jumpHeight * gravity);
+                moveDirection.y = Mathf.Sqrt(2 * jumpHeight * jumpBoost * gravity);
             }
             else
             {
@@ -73,9 +75,11 @@ public class PlayerController : MonoBehaviour
         if(currentItem == "speed")
         {
             speedBoost = 3;
-        } else
+            jumpBoost = 1;
+        } else if (currentItem == "jump")
         {
             speedBoost = 1;
+            jumpBoost = 3;
         }
     }
 }

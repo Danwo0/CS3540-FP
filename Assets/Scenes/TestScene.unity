@@ -812,7 +812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5990504853436347847, guid: d0b8344fecff977458b532aa6d88708b, type: 3}
       propertyPath: pickupType
-      value: speed
+      value: jump
       objectReference: {fileID: 0}
     - target: {fileID: 7880876496497396479, guid: d0b8344fecff977458b532aa6d88708b, type: 3}
       propertyPath: m_RootOrder
@@ -858,6 +858,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8243189663357358689, guid: d0b8344fecff977458b532aa6d88708b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2c8b36edc16bfbb488e3a818b00a7703, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0b8344fecff977458b532aa6d88708b, type: 3}
 --- !u!4 &2107315912 stripped
