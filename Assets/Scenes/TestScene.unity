@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d95a3207a3067148a398f919022446c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1377514370119029230, guid: c36d2e0b526354e4a9ad9ff440f6a5e4, type: 3}
+  projectilePrefab: {fileID: 8726825292919489769, guid: d1e53a7b0cfc9304a9940ac0f4afae5a, type: 3}
   projectileSpeed: 300
 --- !u!1 &810537145
 GameObject:
