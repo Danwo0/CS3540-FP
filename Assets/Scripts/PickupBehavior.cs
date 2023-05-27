@@ -5,6 +5,7 @@ using UnityEngine;
 public class PickupBehavior : MonoBehaviour
 {
     public float duration = 60f;
+    public string pickupType = "";
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,9 @@ public class PickupBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            other.GetComponent<PlayerController>().setCurrentItem(pickupType);
+
             Destroy(gameObject);
         }
-    }
+    }   
 }
