@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
         
     void Update()
@@ -31,7 +33,13 @@ public class PlayerController : MonoBehaviour
         input = (transform.right * moveHorizontal + transform.forward * moveVertical).normalized;
         
         input *= moveSpeed * speedBoost;
-    
+
+        if (input.magnitude > 0.01f)
+        {
+            float cameraYawRotation = Camera.main.transform.eulerAngles.y;
+            Quaternion newRotation = Quaternion.Euler(0f, cameraYawRotation, 0f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * 10);
+        }
         if (controller.isGrounded)
         {
             moveDirection = input;
