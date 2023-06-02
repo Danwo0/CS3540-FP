@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 public class ConeCollider : MonoBehaviour {
     [SerializeField, Range(0.01f,88.5f)]
-    private float m_angle = 45;
+    public float m_angle = 45;
     [SerializeField]
-    private float m_distance = 1;
+    public float m_distance = 1;
     [SerializeField]
     private bool m_isTrigger;
     private Mesh m_mesh;
