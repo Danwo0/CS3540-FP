@@ -718,6 +718,28 @@ Transform:
   m_Father: {fileID: 303709331}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &491673102 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 436593224815811149, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+  m_PrefabInstance: {fileID: 4369137550583572455}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &516986762 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4860090054972232867, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+  m_PrefabInstance: {fileID: 4369137550583572455}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &616409228
 GameObject:
   m_ObjectHideFlags: 3
@@ -934,13 +956,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 689530063}
     - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
+      propertyPath: nextLevel
+      value: TestScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
       propertyPath: timerText
       value: 
       objectReference: {fileID: 2085399408}
-    - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
-      propertyPath: levelDuration
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
       propertyPath: enemyCountText
       value: 
@@ -1795,6 +1817,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4621360695748854984, guid: 997c8b3aee0611c4380d8027e1e705c7, type: 3}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 491673102}
+    - target: {fileID: 4621360695748854984, guid: 997c8b3aee0611c4380d8027e1e705c7, type: 3}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 516986762}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 997c8b3aee0611c4380d8027e1e705c7, type: 3}
 --- !u!1001 &4369137550583572455
@@ -1891,6 +1921,14 @@ PrefabInstance:
     - target: {fileID: 4369137550847473502, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925032990803777580, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925032990803777580, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
