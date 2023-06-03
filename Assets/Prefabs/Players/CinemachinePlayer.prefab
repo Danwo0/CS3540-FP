@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5380833423199013716}
   - component: {fileID: 8556228701556139261}
   - component: {fileID: 807392111125163914}
-  - component: {fileID: 4083228522434631711}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -111,22 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d95a3207a3067148a398f919022446c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1377514370119029230, guid: c36d2e0b526354e4a9ad9ff440f6a5e4, type: 3}
-  projectileSpeed: 300
---- !u!114 &4083228522434631711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223304442009045252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d95a3207a3067148a398f919022446c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8726825292919489769, guid: d1e53a7b0cfc9304a9940ac0f4afae5a, type: 3}
-  projectileSpeed: 300
+  meleePrefab: {fileID: 1377514370119029230, guid: c36d2e0b526354e4a9ad9ff440f6a5e4, type: 3}
+  projectileSpeed: 100
+  meleeSpeed: 0
+  projectileSFX: {fileID: 8300000, guid: b51854597354ccc41b4c03a823a2271d, type: 3}
+  meleeSFX: {fileID: 8300000, guid: 1fa738313b21f1549ae26fd6e106e156, type: 3}
 --- !u!1 &4083228522816829075
 GameObject:
   m_ObjectHideFlags: 0
