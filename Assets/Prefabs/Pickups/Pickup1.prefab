@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 60
   pickupType: speed
+  pickupSFX: {fileID: 8300000, guid: f9ee47617dceade44aec4c826afaadb9, type: 3}
 --- !u!1 &4963277974103078946
 GameObject:
   m_ObjectHideFlags: 0
