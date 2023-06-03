@@ -8,7 +8,6 @@ public class ShootProjectile : MonoBehaviour
     public GameObject meleePrefab;
 
     public float projectileSpeed = 100f;
-    public float meleeSpeed = 0f;
 
     public AudioClip projectileSFX;
     public AudioClip meleeSFX;
