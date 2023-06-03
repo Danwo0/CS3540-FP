@@ -71,6 +71,7 @@ public class LevelManager : MonoBehaviour
 
         Invoke("LoadCurrentLevel", 2);
     }
+    
     public void LevelBeat()
     {
         isGameOver = true;

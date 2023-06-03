@@ -7,31 +7,32 @@ public class PlayerHealth : MonoBehaviour
 {
     public int startingHealth = 100;
     public Slider healthSlider;
+    public Text healthText;
 
     private int currentHealth;
+    private LevelManager lm;
     void Start()
     {
         currentHealth = startingHealth;
         healthSlider.value = currentHealth;
+        lm = FindObjectOfType<LevelManager>();
     }
 
-    void Update()
-    {
-        
-    }
 
     public void TakeDamage(int damageAmount)
     {
         if (currentHealth > 0)
         {
             currentHealth -= damageAmount;
-            healthSlider.value = currentHealth;
+            healthSlider.value = Mathf.Clamp(currentHealth, 0, 100);
+            SetHealthText();
         }
         if (currentHealth <= 0)
         {
+            currentHealth = 0;
+            SetHealthText();
             PlayerDies();
         }
-        
     }
     
     public void TakeHealth(int healthAmount)
@@ -40,12 +41,17 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth += healthAmount;
             healthSlider.value = Mathf.Clamp(currentHealth, 0, 100);
+            SetHealthText();
         }
-        
+    }
+    
+    private void SetHealthText()
+    {
+        healthText.text = currentHealth.ToString("");
     }
 
     void PlayerDies()
     {
-        
+        lm.LevelLost();
     }
 }
