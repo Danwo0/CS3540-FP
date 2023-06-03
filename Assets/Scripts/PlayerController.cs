@@ -25,52 +25,56 @@ public class PlayerController : MonoBehaviour
         
     void Update()
     {
-        PowerUp();
-
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-    
-        input = (transform.right * moveHorizontal + transform.forward * moveVertical).normalized;
-        
-        input *= moveSpeed * speedBoost;
-
-        if (input.magnitude > 0.01f)
+        if (!LevelManager.isGameOver)
         {
-            float cameraYawRotation = Camera.main.transform.eulerAngles.y;
-            Quaternion newRotation = Quaternion.Euler(0f, cameraYawRotation, 0f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * 10);
-        }
-        if (controller.isGrounded)
-        {
-            moveDirection = input;
-            if (Input.GetButton("Jump"))
+            PowerUp();
+
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+
+            input = (transform.right * moveHorizontal + transform.forward * moveVertical).normalized;
+
+            input *= moveSpeed * speedBoost;
+
+            if (input.magnitude > 0.01f)
             {
-                moveDirection.y = Mathf.Sqrt(2 * jumpHeight * jumpBoost * gravity);
+                float cameraYawRotation = Camera.main.transform.eulerAngles.y;
+                Quaternion newRotation = Quaternion.Euler(0f, cameraYawRotation, 0f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * 10);
+            }
+
+            if (controller.isGrounded)
+            {
+                moveDirection = input;
+                if (Input.GetButton("Jump"))
+                {
+                    moveDirection.y = Mathf.Sqrt(2 * jumpHeight * jumpBoost * gravity);
+                }
+                else
+                {
+                    moveDirection.y = 0.0f;
+                }
             }
             else
             {
-                moveDirection.y = 0.0f;
+                input.y = moveDirection.y;
+                moveDirection = Vector3.Lerp(moveDirection, input, airControl * Time.deltaTime);
             }
-        }
-        else
-        {
-            input.y = moveDirection.y;
-            moveDirection = Vector3.Lerp(moveDirection, input, airControl * Time.deltaTime);
-        }
-    
-        moveDirection.y -= gravity * Time.deltaTime;
-        controller.Move(moveDirection * Time.deltaTime);
 
-        // crouching
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            transform.localScale = 
-                Vector3.Lerp(transform.localScale, new Vector3(1, 0.5f, 1), Time.deltaTime * 10);
-        }
-        else
-        {
-            transform.localScale = 
-                Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1), Time.deltaTime * 10);
+            moveDirection.y -= gravity * Time.deltaTime;
+            controller.Move(moveDirection * Time.deltaTime);
+
+            // crouching
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                transform.localScale =
+                    Vector3.Lerp(transform.localScale, new Vector3(1, 0.5f, 1), Time.deltaTime * 10);
+            }
+            else
+            {
+                transform.localScale =
+                    Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1), Time.deltaTime * 10);
+            }
         }
     }
 
