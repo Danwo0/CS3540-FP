@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class AstronautBehavior : MonoBehaviour
 {
+    public static int keyEnemyCount = 0;
     public Transform player;
+    
     private bool playerDetected;
+    private LevelManager lm;
     
     void Start()
     {
+        keyEnemyCount++;
         playerDetected = false;
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
         }
+
+        lm = FindObjectOfType<LevelManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (LevelManager.isGameOver)
+        {
+            keyEnemyCount = 0;
+        }
         if (playerDetected)
         {
             Vector3 directionToTarget = (player.position - transform.parent.position).normalized;
@@ -44,6 +54,18 @@ public class AstronautBehavior : MonoBehaviour
         {
             Debug.Log("Player Exited");
             playerDetected = false;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (!LevelManager.isGameOver)
+        {
+            keyEnemyCount--;
+            if (keyEnemyCount <= 0)
+            {
+                lm.LevelBeat();
+            }
         }
     }
 }

@@ -6,9 +6,7 @@ public class ShootProjectile : MonoBehaviour
 {
     public GameObject projectilePrefab;
     public float projectileSpeed = 300f;
-    // public AudioClip spellSFX;
 
-    // Start is called before the first frame update
     void Start()
     {
     }
@@ -16,17 +14,22 @@ public class ShootProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if(!LevelManager.isGameOver)
         {
-            GameObject projectile = Instantiate(projectilePrefab, transform.position + transform.forward, transform.rotation) as GameObject;
+            if (Input.GetButtonDown("Fire1"))
+            {
+                GameObject projectile =
+                    Instantiate(projectilePrefab, transform.position + transform.forward, transform.rotation) as
+                        GameObject;
 
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
-            rb.AddForce(transform.forward * projectileSpeed, ForceMode.VelocityChange);
+                rb.AddForce(transform.forward * projectileSpeed, ForceMode.VelocityChange);
 
-            projectile.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
+                projectile.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
 
-            // AudioSource.PlayClipAtPoint(spellSFX, transform.position);
+                // AudioSource.PlayClipAtPoint(spellSFX, transform.position);
+            }
         }
     }
 }

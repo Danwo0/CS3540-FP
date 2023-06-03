@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    /*
-    public float levelDuration = 10.0f;
+    
+    public float levelDuration = 100f;
+    
     public Text timerText;
     public Text gameText;
-    public Text pointText;
-    */
+    public Text enemyCountText;
 
     public AudioClip gameOverSFX;
     public AudioClip gameWonSFX;
@@ -19,24 +19,18 @@ public class LevelManager : MonoBehaviour
     public static bool isGameOver = false;
 
     public string nextLevel;
-
-    // float countDown;
-
-    int points = 0;
+    private float countDown;
 
     void Start()
     {
         isGameOver = false;
-        /*
         countDown = levelDuration;
         SetTimerText();
-        */
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*
         if (!isGameOver)
         {
             if (countDown > 0)
@@ -50,20 +44,27 @@ public class LevelManager : MonoBehaviour
                 LevelLost();
             }
             SetTimerText();
+            SetCountText();
         }
-        */
     }
-    /*
+    
     private void SetTimerText()
     {
         timerText.text = countDown.ToString("f2");
     }
-    */
+
+    private void SetCountText()
+    {
+        enemyCountText.text = "   Enemies Left: " + EnemyHit.enemyCount.ToString("00")
+                                                 + "\nAstronauts Left: " 
+                                                 + AstronautBehavior.keyEnemyCount.ToString("00");
+    }
+    
     public void LevelLost()
     {
         isGameOver = true;
-        // gameText.text = "Game Over!";
-        // gameText.gameObject.SetActive(true);
+        gameText.text = "Game Over!";
+        gameText.gameObject.SetActive(true);
 
         // Camera.main.GetComponent<AudioSource>().pitch = 1;
         AudioSource.PlayClipAtPoint(gameOverSFX, Camera.main.transform.position);
@@ -73,8 +74,8 @@ public class LevelManager : MonoBehaviour
     public void LevelBeat()
     {
         isGameOver = true;
-        // gameText.text = "You Win!";
-        // gameText.gameObject.SetActive(true);
+        gameText.text = "You Win!";
+        gameText.gameObject.SetActive(true);
 
         // Camera.main.GetComponent<AudioSource>().pitch = 5;
         AudioSource.PlayClipAtPoint(gameWonSFX, Camera.main.transform.position);
@@ -84,11 +85,6 @@ public class LevelManager : MonoBehaviour
             Invoke("LoadNextLevel", 2);
         }
 
-    }
-
-    public void IncrementPoints(int value)
-    {
-        points += value;
     }
 
     void LoadNextLevel()
