@@ -116,6 +116,9 @@ MonoBehaviour:
   meleeSpeed: 0
   projectileSFX: {fileID: 8300000, guid: b51854597354ccc41b4c03a823a2271d, type: 3}
   meleeSFX: {fileID: 8300000, guid: 1fa738313b21f1549ae26fd6e106e156, type: 3}
+  selectionImage: {fileID: 0}
+  gunSprite: {fileID: 0}
+  meleeSprite: {fileID: 0}
 --- !u!1 &4083228522816829075
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,6 +133,7 @@ GameObject:
   - component: {fileID: 4083228522816829077}
   - component: {fileID: 4083228522816829076}
   - component: {fileID: 4083228522816829081}
+  - component: {fileID: 4621360695748854984}
   m_Layer: 0
   m_Name: CinemachinePlayer
   m_TagString: Player
@@ -252,6 +256,20 @@ MonoBehaviour:
   jumpHeight: 2
   gravity: 9.81
   airControl: 10
+--- !u!114 &4621360695748854984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4083228522816829075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac6ba5fa24bbb94196377642e1133b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  healthSlider: {fileID: 0}
 --- !u!1 &4083228524195961859
 GameObject:
   m_ObjectHideFlags: 0
