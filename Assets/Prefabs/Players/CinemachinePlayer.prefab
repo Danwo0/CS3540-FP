@@ -114,8 +114,8 @@ MonoBehaviour:
   meleePrefab: {fileID: 1377514370119029230, guid: c36d2e0b526354e4a9ad9ff440f6a5e4, type: 3}
   projectileSpeed: 100
   meleeSpeed: 0
-  projectileSFX: {fileID: 8300000, guid: dfde0cc2ed111f343add31c83fa10f0f, type: 3}
-  meleeSFX: {fileID: 8300000, guid: 67939400dfa2b22469b1827e94e556eb, type: 3}
+  projectileSFX: {fileID: 8300000, guid: b51854597354ccc41b4c03a823a2271d, type: 3}
+  meleeSFX: {fileID: 8300000, guid: 1fa738313b21f1549ae26fd6e106e156, type: 3}
 --- !u!1 &4083228522816829075
 GameObject:
   m_ObjectHideFlags: 0

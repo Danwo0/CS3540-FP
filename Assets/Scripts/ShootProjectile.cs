@@ -13,12 +13,17 @@ public class ShootProjectile : MonoBehaviour
     public AudioClip projectileSFX;
     public AudioClip meleeSFX;
 
+    public Image selectionImage;
+    public Sprite gunSprite;
+    public Sprite meleeSprite;
+
     int type;
 
     // Start is called before the first frame update
     void Start()
     {
         type = 0;
+        selectionImage.sprite = gunSprite;
     }
 
     // Update is called once per frame
@@ -27,6 +32,13 @@ public class ShootProjectile : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
             type = (type + 1) % 2;
+            if (type == 0)
+            {
+                selectionImage.sprite = gunSprite;
+            } else if (type == 1)
+            {
+                selectionImage.sprite = meleeSprite;
+            }
         }
 
         if (Input.GetButtonDown("Fire1"))

@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d05d532308ecdd74e911628fa040f403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverSFX: {fileID: 8300000, guid: c6c83c3fca518b1448e9e0876976bb36, type: 3}
+  gameOverSFX: {fileID: 8300000, guid: b8864dc4fb5faa04183f5de3ec4198ef, type: 3}
   gameWonSFX: {fileID: 8300000, guid: 208e6b7c6c174a64aa6d4f37afc20fe7, type: 3}
   nextLevel: 
