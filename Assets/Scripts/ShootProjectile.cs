@@ -19,7 +19,6 @@ public class ShootProjectile : MonoBehaviour
 
     int type;
 
-    // Start is called before the first frame update
     void Start()
     {
         type = 0;
@@ -29,26 +28,31 @@ public class ShootProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        if (!LevelManager.isGameOver)
         {
-            type = (type + 1) % 2;
-            if (type == 0)
+            if (Input.GetAxis("Mouse ScrollWheel") != 0)
             {
-                selectionImage.sprite = gunSprite;
-            } else if (type == 1)
-            {
-                selectionImage.sprite = meleeSprite;
+                type = (type + 1) % 2;
+                if (type == 0)
+                {
+                    selectionImage.sprite = gunSprite;
+                }
+                else if (type == 1)
+                {
+                    selectionImage.sprite = meleeSprite;
+                }
             }
-        }
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            if (type == 0)
+            if (Input.GetButtonDown("Fire1"))
             {
-                fireProjectile();
-            } else if (type == 1)
-            {
-                fireMelee();
+                if (type == 0)
+                {
+                    fireProjectile();
+                }
+                else if (type == 1)
+                {
+                    fireMelee();
+                }
             }
         }
     }
@@ -70,6 +74,8 @@ public class ShootProjectile : MonoBehaviour
         GameObject projectile = Instantiate(meleePrefab, transform.position + transform.forward, transform.rotation) as GameObject;
 
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        
+        rb.AddForce(transform.forward, ForceMode.VelocityChange);
 
         projectile.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
 
