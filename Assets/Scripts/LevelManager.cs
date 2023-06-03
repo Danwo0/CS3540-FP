@@ -44,8 +44,8 @@ public class LevelManager : MonoBehaviour
                 LevelLost();
             }
             SetTimerText();
-            SetCountText();
         }
+        SetCountText();
     }
     
     private void SetTimerText()
@@ -55,7 +55,7 @@ public class LevelManager : MonoBehaviour
 
     private void SetCountText()
     {
-        enemyCountText.text = "   Enemies Left: " + EnemyHit.enemyCount.ToString("00")
+        enemyCountText.text = "Enemies Left: " + EnemyHit.enemyCount.ToString("00")
                                                  + "\nAstronauts Left: " 
                                                  + AstronautBehavior.keyEnemyCount.ToString("00");
     }

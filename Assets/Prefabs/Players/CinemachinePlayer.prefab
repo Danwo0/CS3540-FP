@@ -116,6 +116,9 @@ MonoBehaviour:
   meleeSpeed: 0
   projectileSFX: {fileID: 8300000, guid: b51854597354ccc41b4c03a823a2271d, type: 3}
   meleeSFX: {fileID: 8300000, guid: 1fa738313b21f1549ae26fd6e106e156, type: 3}
+  selectionImage: {fileID: 0}
+  gunSprite: {fileID: 21300000, guid: 5a3caf4fed7abb245b13d5775d8e8ba2, type: 3}
+  meleeSprite: {fileID: 21300000, guid: 0c54bc26e645035489f1d2184d29a8ef, type: 3}
 --- !u!1 &4083228522816829075
 GameObject:
   m_ObjectHideFlags: 0
