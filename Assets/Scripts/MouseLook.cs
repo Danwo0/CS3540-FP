@@ -4,31 +4,37 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public float mouseSensitivity = 100;
-    private Transform player;
-    Vector3 offset;
+    public GameObject cameraTarget;
+
+    private float yaw;
+    private float pitch;
     
     void Start()
     {
-        player = transform.parent.transform;
-        offset = player.transform.position - transform.position;
-        
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        float moveX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        player.Rotate(0, moveX, 0);
+        float moveX = Input.GetAxis("Mouse X");
+        float moveY = Input.GetAxis("Mouse Y");
 
-        float desiredAngle = player.eulerAngles.y;
-        Quaternion q = Quaternion.Euler(0, desiredAngle, 0);
-        transform.position = player.position - (q * offset);
+        yaw += moveX;
+        pitch -= moveY;
 
-        transform.LookAt(player);
+        yaw = ClampAngle(yaw, float.MinValue, float.MaxValue);
+        pitch = ClampAngle(pitch, -30f, 70f);
 
-
+        cameraTarget.transform.rotation = Quaternion.Euler(pitch, yaw, 0.0f);
+    }
+    
+    private static float ClampAngle(float angle, float min, float max)
+    {
+        if (angle < -360f) angle += 360f;
+        if (angle > 360f) angle -= 360f;
+        
+        return Mathf.Clamp(angle, min, max);
     }
 }
