@@ -28,8 +28,8 @@ public class ThirdPersonShooterController : MonoBehaviour
 
     private Animator anim;
     
-    private MouseLook mouseLook;
-    private ThirdPersonController controller;
+    private CameraController mouseLook;
+    private ThirdPersonMovementController controller;
     private Vector3 mouseWorldPosition;
     
     private bool isAiming;
@@ -37,8 +37,8 @@ public class ThirdPersonShooterController : MonoBehaviour
 
     void Start()
     {
-        mouseLook = GetComponent<MouseLook>();
-        controller = GetComponent<ThirdPersonController>();
+        mouseLook = GetComponent<CameraController>();
+        controller = GetComponent<ThirdPersonMovementController>();
         anim = GetComponent<Animator>();
         
         isAiming = false;

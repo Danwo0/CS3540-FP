@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThirdPersonController : MonoBehaviour
+public class ThirdPersonMovementController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpHeight = 2f;
@@ -29,8 +29,6 @@ public class ThirdPersonController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
-        // Cursor.visible = false;
-        // Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
