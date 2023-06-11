@@ -5,6 +5,7 @@ using UnityEngine;
 public class ThirdPersonController : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public float jumpHeight = 2f;
     public float gravity = 9.81f;
     public float airControl = 0.5f;
     public float acceleration = 5f;
@@ -17,6 +18,7 @@ public class ThirdPersonController : MonoBehaviour
     
     private float angVelocity = 0f;
     private float speed = 0f;
+    private string currentItem = "";
     private bool rotateOnMove = true;
 
     private bool isGrounded;
@@ -35,7 +37,8 @@ public class ThirdPersonController : MonoBehaviour
     void Update()
     {
         if (LevelManager.isGameOver) return;
-        //PowerUp();
+        
+        PowerUp();
         Setup();
         Jump();
         Move();
@@ -43,7 +46,7 @@ public class ThirdPersonController : MonoBehaviour
     
     void Setup()
     {
-        moveDirection = Vector3.zero;
+        moveDirection = new Vector3(0, moveDirection.y, 0);
         isGrounded = controller.isGrounded;
         anim.SetBool("isJumping", false);
     }
@@ -54,7 +57,7 @@ public class ThirdPersonController : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             anim.SetBool("isJumping", true);
-            //moveDirection.y = Mathf.Sqrt(2 * jumpBoost * gravity);
+            moveDirection.y = Mathf.Sqrt(2 * jumpHeight * jumpBoost * gravity);
         } 
         // on the ground
         else if (isGrounded)
@@ -62,7 +65,7 @@ public class ThirdPersonController : MonoBehaviour
             moveDirection.y = 0.0f;
         }
         // gravity as constant force
-        moveDirection.y -= gravity;
+        moveDirection.y -= gravity * Time.deltaTime;
     }
     
     void Move()
@@ -112,7 +115,7 @@ public class ThirdPersonController : MonoBehaviour
             targetDirection *= airControl;
         }
         
-        moveDirection += targetDirection * speed * speedBoost;
+        moveDirection += targetDirection * (speed * speedBoost);
         controller.Move(moveDirection * Time.deltaTime);
     }
 
@@ -120,4 +123,23 @@ public class ThirdPersonController : MonoBehaviour
     {
         rotateOnMove = newRotateOnMove;
     }
+    
+    public void setCurrentItem(string item)
+    {
+        currentItem = item;
+    }
+    
+    void PowerUp()
+    {
+        if(currentItem == "speed")
+        {
+            speedBoost = 3;
+            jumpBoost = 1;
+        } else if (currentItem == "jump")
+        {
+            speedBoost = 1;
+            jumpBoost = 3;
+        }
+    }
+    
 }
