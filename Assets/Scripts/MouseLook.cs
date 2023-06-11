@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
+    public float sensitivity = 1f;
+    
     public GameObject cameraTarget;
 
     private float yaw;
@@ -14,12 +16,11 @@ public class MouseLook : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
-
-    // Update is called once per frame
+    
     void LateUpdate()
     {
-        float moveX = Input.GetAxis("Mouse X");
-        float moveY = Input.GetAxis("Mouse Y");
+        float moveX = Input.GetAxis("Mouse X") * sensitivity;
+        float moveY = Input.GetAxis("Mouse Y") * sensitivity;
 
         yaw += moveX;
         pitch -= moveY;
@@ -36,5 +37,10 @@ public class MouseLook : MonoBehaviour
         if (angle > 360f) angle -= 360f;
         
         return Mathf.Clamp(angle, min, max);
+    }
+
+    public void SetSensitivity(float newSensitivity)
+    {
+        sensitivity = newSensitivity;
     }
 }

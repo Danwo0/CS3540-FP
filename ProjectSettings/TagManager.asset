@@ -8,6 +8,8 @@ TagManager:
   - ProjectileParent
   - Projectile
   - EnemyBullet
+  - CinemachineTarget
+  - PlayerTarget
   layers:
   - Default
   - TransparentFX

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller : MonoBehaviour
+public class ThirdPersonController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float gravity = 9.81f;
@@ -19,6 +19,7 @@ public class Controller : MonoBehaviour
     
     private float angVelocity = 0f;
     private float speed = 0f;
+    private bool rotateOnMove = true;
 
     private bool isGrounded;
     private Vector3 moveDirection;
@@ -69,6 +70,7 @@ public class Controller : MonoBehaviour
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
+        float targetSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeed * 2 : moveSpeed;
 
         float currentSpeed = new Vector3(controller.velocity.x, 0.0f, controller.velocity.z).magnitude;
         Vector3 input = new Vector3(moveHorizontal, 0, moveVertical);
@@ -79,9 +81,13 @@ public class Controller : MonoBehaviour
         {
             speed = 0.0f;
         }
+        else if (currentSpeed > targetSpeed + 0.1 || currentSpeed < targetSpeed - 0.1)
+        {
+            speed = Mathf.Lerp(currentSpeed, targetSpeed, acceleration * Time.deltaTime);
+        }
         else
         {
-            speed = Input.GetKey(KeyCode.LeftShift) ? moveSpeed * 2 : moveSpeed;
+            speed = targetSpeed;
         }
 
         anim.SetFloat("Speed", speed);
@@ -93,7 +99,11 @@ public class Controller : MonoBehaviour
                           Camera.main.transform.eulerAngles.y;
             float rotation = Mathf.SmoothDampAngle
                 (transform.eulerAngles.y, rotateAngle, ref angVelocity, Time.deltaTime * 0.05f);
-            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            
+            if (rotateOnMove)
+            {
+                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            }
         }
 
         Vector3 targetDirection = (Quaternion.Euler(0.0f, rotateAngle, 0.0f) * Vector3.forward).normalized;
@@ -105,5 +115,10 @@ public class Controller : MonoBehaviour
         
         moveDirection += targetDirection * speed * speedBoost;
         controller.Move(moveDirection * Time.deltaTime);
+    }
+
+    public void SetRotateOnMove(bool newRotateOnMove)
+    {
+        rotateOnMove = newRotateOnMove;
     }
 }
