@@ -24,7 +24,7 @@ public class PickupBehavior : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(pickupSFX, transform.position);
 
-            other.GetComponent<PlayerController>().setCurrentItem(pickupType);
+            other.GetComponent<ThirdPersonMovementController>().setCurrentItem(pickupType);
 
             Destroy(gameObject);
         }
