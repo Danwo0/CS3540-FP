@@ -114,7 +114,7 @@ public class ThirdPersonShooterController : MonoBehaviour
 
     void Attack()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Walk_Run") && Input.GetButtonDown("Fire1"))
         {
             if (weaponType == 0)
             {

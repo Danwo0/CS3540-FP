@@ -10,12 +10,17 @@ public class PlayerHealth : MonoBehaviour
     public Text healthText;
 
     private int currentHealth;
+    
     private LevelManager lm;
+    private Animator anim;
+    
     void Start()
     {
         currentHealth = startingHealth;
         healthSlider.value = currentHealth;
+        
         lm = FindObjectOfType<LevelManager>();
+        anim = GetComponent<Animator>();
     }
 
 
@@ -52,6 +57,7 @@ public class PlayerHealth : MonoBehaviour
 
     void PlayerDies()
     {
+        anim.SetBool("isDead", true);
         lm.LevelLost();
     }
 }
