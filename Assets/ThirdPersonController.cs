@@ -9,8 +9,6 @@ public class ThirdPersonController : MonoBehaviour
     public float airControl = 0.5f;
     public float acceleration = 5f;
 
-    public GameObject cameraTarget;
-
     private CharacterController controller;
     private Animator anim;
     
@@ -36,6 +34,7 @@ public class ThirdPersonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (LevelManager.isGameOver) return;
         //PowerUp();
         Setup();
         Jump();
