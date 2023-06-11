@@ -2600,7 +2600,6 @@ GameObject:
   - component: {fileID: 2819208144215346617}
   - component: {fileID: 2819208144215346619}
   - component: {fileID: 2819208144215346618}
-  - component: {fileID: 2819208144215346620}
   - component: {fileID: 2819208144215346621}
   - component: {fileID: 2819208144215346622}
   - component: {fileID: 2819208144215346623}
@@ -7126,22 +7125,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 10, z: 0}
---- !u!114 &2819208144215346620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2819208144206003835}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96b77d84bea2df340b4dcf71d2b14cb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpHeight: 2
-  gravity: 9.81
-  airControl: 10
 --- !u!114 &2819208144215346621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7155,8 +7138,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  jumpHeight: 3
   gravity: 9.81
-  airControl: 0.5
+  airControl: 1
   acceleration: 5
 --- !u!114 &2819208144215346622
 MonoBehaviour:
