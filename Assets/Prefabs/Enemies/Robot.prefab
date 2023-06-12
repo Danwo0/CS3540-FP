@@ -97,6 +97,7 @@ MonoBehaviour:
   playerTarget: {fileID: 0}
   barrel1: {fileID: 3415431819812326858}
   barrel2: {fileID: 536044622979751482}
+  shootSFX: {fileID: 8300000, guid: b51854597354ccc41b4c03a823a2271d, type: 3}
   bulletSpeed: 25
   damage: 20
   shootInterval: 0.5

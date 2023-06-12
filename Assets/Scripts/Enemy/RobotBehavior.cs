@@ -12,8 +12,8 @@ public class RobotBehavior : MonoBehaviour
 
     public AudioClip shootSFX;
     
-    public float bulletSpeed = 100f;
-    public int damage = 30;
+    public float bulletSpeed = 25f;
+    public int damage = 20;
     public float shootInterval = 0.5f;
     
     private bool playerDetected;
