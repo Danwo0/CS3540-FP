@@ -5,7 +5,7 @@ using UnityEngine;
 public class AstronautBehavior : MonoBehaviour
 {
     public static int keyEnemyCount = 0;
-    public Transform player;
+    public Transform playerTarget;
     
     private bool playerDetected;
     private LevelManager lm;
@@ -14,9 +14,9 @@ public class AstronautBehavior : MonoBehaviour
     {
         keyEnemyCount++;
         playerDetected = false;
-        if (player == null)
+        if (playerTarget == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
+            playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
         }
 
         lm = FindObjectOfType<LevelManager>();
@@ -28,10 +28,11 @@ public class AstronautBehavior : MonoBehaviour
         if (LevelManager.isGameOver)
         {
             keyEnemyCount = 0;
+            return;
         }
         if (playerDetected)
         {
-            Vector3 directionToTarget = (player.position - transform.parent.position).normalized;
+            Vector3 directionToTarget = (playerTarget.position - transform.parent.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
             lookRotation.x = 0;
 

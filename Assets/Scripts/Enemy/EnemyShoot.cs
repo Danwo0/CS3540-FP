@@ -7,7 +7,7 @@ public class EnemyShoot : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public float bulletSpeed = 100f;
-    public Transform player;
+    public Transform playerTarget;
 
     private bool playerDetected;
     private float shootInterval = 0.5f;
@@ -17,9 +17,9 @@ public class EnemyShoot : MonoBehaviour
     {
         playerDetected = false;
         timer = 0;
-        if (player == null)
+        if (playerTarget == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
+            playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
         }
     }
 
@@ -31,7 +31,7 @@ public class EnemyShoot : MonoBehaviour
             GameObject bullet =
                 Instantiate(bulletPrefab, transform.position + transform.forward, transform.rotation) as GameObject;
             
-            bullet.transform.LookAt(player);
+            bullet.transform.LookAt(playerTarget);
             
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.VelocityChange);

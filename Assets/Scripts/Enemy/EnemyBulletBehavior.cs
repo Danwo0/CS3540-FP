@@ -25,4 +25,9 @@ public class EnemyBulletBehavior : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void SetDamage(int newDamage)
+    {
+        damageAmount = newDamage;
+    }
 }

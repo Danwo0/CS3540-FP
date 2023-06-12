@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1358980158513836499}
   - component: {fileID: 1358980158513836496}
   - component: {fileID: 1358980158513836497}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: VisionIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1358980158607029711}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.277, y: 1, z: -1.989}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 1358980160343768019}
   - component: {fileID: 1358980160343768018}
   - component: {fileID: 1358980160343768021}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Vision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,8 +193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 9045565599046844531, guid: 755acdcc4bcd1dd4a87d74a250b8e211, type: 3}
-  bulletSpeed: 100
-  player: {fileID: 0}
+  bulletSpeed: 25
+  playerTarget: {fileID: 0}
 --- !u!1 &5681596139251965593
 GameObject:
   m_ObjectHideFlags: 0

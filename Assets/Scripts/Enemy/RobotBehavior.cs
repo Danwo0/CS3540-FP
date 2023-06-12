@@ -5,37 +5,54 @@ using UnityEngine;
 public class RobotBehavior : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public float bulletSpeed = 100f;
-    public Transform player;
+    public Transform playerTarget;
 
+    public Transform barrel1;
+    public Transform barrel2;
+
+    public AudioClip shootSFX;
+    
+    public float bulletSpeed = 25f;
+    public int damage = 20;
+    public float shootInterval = 0.5f;
+    
     private bool playerDetected;
-    private float shootInterval = 0.5f;
-    private float timer; 
+    private float timer;
+    private int barrel;
 
     void Start()
     {
         playerDetected = false;
         timer = 0;
-        if (player == null)
+        barrel = 0;
+        if (playerTarget == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
+            playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
         }
     }
 
     void Update()
     {
+        if (LevelManager.isGameOver) return; 
+        
         timer -= Time.deltaTime;
         if (playerDetected && timer <= 0)
-        {   
-            GameObject bullet =
-                Instantiate(bulletPrefab, transform.position + transform.forward, transform.rotation) as GameObject;
+        {
+            Transform bulletSource = barrel % 2 == 0 ? barrel1 : barrel2;
+            barrel = (barrel + 1) % 2;
+                
+            GameObject bullet = Instantiate
+                (bulletPrefab, bulletSource.position + bulletSource.forward, bulletSource.rotation) as GameObject;
             
-            bullet.transform.LookAt(player);
+            bullet.GetComponent<EnemyBulletBehavior>().SetDamage(damage);
+            bullet.transform.LookAt(playerTarget);
             
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.VelocityChange);
             
             bullet.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
+            
+            AudioSource.PlayClipAtPoint(shootSFX, bulletSource.position);
             timer = shootInterval;
         }
     }

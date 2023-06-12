@@ -10,6 +10,7 @@ TagManager:
   - EnemyBullet
   - CinemachineTarget
   - PlayerTarget
+  - IgnoreCollision
   layers:
   - Default
   - TransparentFX
