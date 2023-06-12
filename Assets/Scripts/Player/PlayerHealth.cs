@@ -26,6 +26,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
+        if (LevelManager.isGameOver) return; 
+
         if (currentHealth > 0)
         {
             currentHealth -= damageAmount;

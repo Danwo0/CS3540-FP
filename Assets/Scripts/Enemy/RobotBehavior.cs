@@ -31,6 +31,8 @@ public class RobotBehavior : MonoBehaviour
 
     void Update()
     {
+        if (LevelManager.isGameOver) return; 
+        
         timer -= Time.deltaTime;
         if (playerDetected && timer <= 0)
         {

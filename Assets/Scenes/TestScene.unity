@@ -740,7 +740,7 @@ GameObject:
   - component: {fileID: 872303981}
   - component: {fileID: 872303980}
   - component: {fileID: 872303979}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Debug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1801,6 +1801,10 @@ PrefabInstance:
       propertyPath: debug
       value: 
       objectReference: {fileID: 872303982}
+    - target: {fileID: 7049061234677372605, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
+      propertyPath: isDebugging
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7049061234677372605, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: selectionImage
       value: 

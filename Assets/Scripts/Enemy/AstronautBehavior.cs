@@ -28,6 +28,7 @@ public class AstronautBehavior : MonoBehaviour
         if (LevelManager.isGameOver)
         {
             keyEnemyCount = 0;
+            return;
         }
         if (playerDetected)
         {
