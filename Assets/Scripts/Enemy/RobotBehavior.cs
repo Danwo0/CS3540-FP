@@ -5,20 +5,22 @@ using UnityEngine;
 public class RobotBehavior : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public float bulletSpeed = 100f;
-    public Transform player;
+    public Transform playerTarget;
 
+    public float bulletSpeed = 100f;
+    public int damage = 30;
+    public float shootInterval = 0.5f;
+    
     private bool playerDetected;
-    private float shootInterval = 0.5f;
     private float timer; 
 
     void Start()
     {
         playerDetected = false;
         timer = 0;
-        if (player == null)
+        if (playerTarget == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
+            playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
         }
     }
 
@@ -30,7 +32,8 @@ public class RobotBehavior : MonoBehaviour
             GameObject bullet =
                 Instantiate(bulletPrefab, transform.position + transform.forward, transform.rotation) as GameObject;
             
-            bullet.transform.LookAt(player);
+            bullet.GetComponent<EnemyBulletBehavior>().SetDamage(damage);
+            bullet.transform.LookAt(playerTarget);
             
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.VelocityChange);
