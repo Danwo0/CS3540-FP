@@ -19,7 +19,8 @@ public class ThirdPersonShooterController : MonoBehaviour
     public Image selectionImage;
     public Sprite gunSprite;
     public Sprite meleeSprite;
-    
+
+    public bool isDebugging = false;
     public Transform debug;
 
     public float normalSensitivity = 1f;
@@ -67,7 +68,7 @@ public class ThirdPersonShooterController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderMask))
         {
-            debug.position = raycastHit.point;
+            if (isDebugging) debug.position = raycastHit.point;
             mouseWorldPosition = raycastHit.point;
         }
     }
