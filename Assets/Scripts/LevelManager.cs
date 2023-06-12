@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     public AudioClip gameWonSFX;
 
     public static bool isGameOver = false;
+    public static bool isLightOn = true;
 
     public string nextLevel;
     private float countDown;
@@ -24,6 +25,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         isGameOver = false;
+        isLightOn = true;
         countDown = levelDuration;
         SetTimerText();
     }
@@ -47,7 +49,7 @@ public class LevelManager : MonoBehaviour
         }
         SetCountText();
     }
-    
+
     private void SetTimerText()
     {
         timerText.text = countDown.ToString("f2");

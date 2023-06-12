@@ -8,6 +8,7 @@ public class LightSwitchBehavior : MonoBehaviour
 
     private bool switchOn;
     private bool playerDetected;
+    
     void Start()
     {
         switchOn = true;
@@ -22,6 +23,7 @@ public class LightSwitchBehavior : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             switchOn = !switchOn;
+            LevelManager.isLightOn = switchOn;
             lightSource.intensity = switchOn ? 1.0f : 0.2f;
         }
     }
