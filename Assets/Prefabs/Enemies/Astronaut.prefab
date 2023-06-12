@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ebaf57d9c29fb4f9dac3a8e7229b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deadSFX: {fileID: 8300000, guid: 1fa738313b21f1549ae26fd6e106e156, type: 3}
 --- !u!65 &2320265134348194200
 BoxCollider:
   m_ObjectHideFlags: 0

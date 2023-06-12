@@ -15,6 +15,8 @@ public class ThirdPersonShooterController : MonoBehaviour
     
     public AudioClip projectileSFX;
     public AudioClip meleeSFX;
+    public AudioClip jumpSFX;
+    public AudioClip landSFX;
 
     public Image selectionImage;
     public Sprite gunSprite;
