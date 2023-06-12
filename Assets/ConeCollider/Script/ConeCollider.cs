@@ -16,13 +16,11 @@ public class ConeCollider : MonoBehaviour {
     private Vector3 m_localScale;
     [SerializeField]
     private bool m_isFixScale = true;
-
-    private GameObject cone;
     
     void OnEnable()
     {
         //リソースロード
-        cone = Resources.Load("Prefab/ConeCollider") as GameObject;
+        GameObject cone = Resources.Load("Prefab/ConeCollider") as GameObject;
 
         //回転を初期位置に
         var initRot = this.transform.rotation;
