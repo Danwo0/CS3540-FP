@@ -7,17 +7,22 @@ public class RobotBehavior : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform playerTarget;
 
+    public Transform barrel1;
+    public Transform barrel2;
+
     public float bulletSpeed = 100f;
     public int damage = 30;
     public float shootInterval = 0.5f;
     
     private bool playerDetected;
-    private float timer; 
+    private float timer;
+    private int barrel;
 
     void Start()
     {
         playerDetected = false;
         timer = 0;
+        barrel = 0;
         if (playerTarget == null)
         {
             playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
@@ -28,9 +33,12 @@ public class RobotBehavior : MonoBehaviour
     {
         timer -= Time.deltaTime;
         if (playerDetected && timer <= 0)
-        {   
-            GameObject bullet =
-                Instantiate(bulletPrefab, transform.position + transform.forward, transform.rotation) as GameObject;
+        {
+            Transform bulletSource = barrel % 2 == 0 ? barrel1 : barrel2;
+            barrel = (barrel + 1) % 2;
+                
+            GameObject bullet = Instantiate
+                (bulletPrefab, bulletSource.position + bulletSource.forward, bulletSource.rotation) as GameObject;
             
             bullet.GetComponent<EnemyBulletBehavior>().SetDamage(damage);
             bullet.transform.LookAt(playerTarget);

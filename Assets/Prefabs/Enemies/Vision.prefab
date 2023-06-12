@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1970739891148066714}
   - component: {fileID: 1603475424458258998}
   - component: {fileID: 8693421477758472727}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: VisionIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1333139020807760424}
   - component: {fileID: 4898972890718294109}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Vision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
