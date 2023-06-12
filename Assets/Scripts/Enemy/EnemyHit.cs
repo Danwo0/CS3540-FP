@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class EnemyHit : MonoBehaviour
 {
+    public AudioClip deadSFX;
+    
     public static int enemyCount = 0;
-
+    
     private LevelManager lm;
     void Start()
     {
@@ -35,6 +37,7 @@ public class EnemyHit : MonoBehaviour
         if (!LevelManager.isGameOver)
         {
             enemyCount--;
+            AudioSource.PlayClipAtPoint(deadSFX, transform.position);
             if (enemyCount <= 0)
             {
                 lm.LevelBeat();

@@ -128,6 +128,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8027850325763812783, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
   m_PrefabInstance: {fileID: 8027850325824095600}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &119374008 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3924722590369069109, guid: 6bb36230c3d5cd847bab92dc243cbfad, type: 3}
+  m_PrefabInstance: {fileID: 4490742267334060113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &139776996
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,6 +962,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 689530063}
     - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
+      propertyPath: bgmSource
+      value: 
+      objectReference: {fileID: 119374008}
+    - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
       propertyPath: nextLevel
       value: TestScene
       objectReference: {fileID: 0}
@@ -966,7 +975,7 @@ PrefabInstance:
       objectReference: {fileID: 2085399408}
     - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
       propertyPath: levelDuration
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
       propertyPath: enemyCountText
@@ -1692,6 +1701,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3924722590369069109, guid: 6bb36230c3d5cd847bab92dc243cbfad, type: 3}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924722590369069109, guid: 6bb36230c3d5cd847bab92dc243cbfad, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3883e3265d3507a4f8371feee7260786, type: 3}
     - target: {fileID: 4490742267685743683, guid: 6bb36230c3d5cd847bab92dc243cbfad, type: 3}
       propertyPath: m_Name
       value: MainCamera

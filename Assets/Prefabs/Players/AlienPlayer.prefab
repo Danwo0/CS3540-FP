@@ -3976,11 +3976,14 @@ MonoBehaviour:
   projectileOrigin: {fileID: 5101625129168971460}
   projectilePrefab: {fileID: 8726825292919489769, guid: d1e53a7b0cfc9304a9940ac0f4afae5a, type: 3}
   meleePrefab: {fileID: 1377514370119029230, guid: c36d2e0b526354e4a9ad9ff440f6a5e4, type: 3}
-  projectileSFX: {fileID: 8300000, guid: b51854597354ccc41b4c03a823a2271d, type: 3}
-  meleeSFX: {fileID: 8300000, guid: 1fa738313b21f1549ae26fd6e106e156, type: 3}
+  projectileSFX: {fileID: 8300000, guid: bffcd77f0fdb45d4a8725ce7d5dea284, type: 3}
+  meleeSFX: {fileID: 8300000, guid: 1ebb08ab614f74345945cff93db2ce33, type: 3}
+  jumpSFX: {fileID: 0}
+  landSFX: {fileID: 0}
   selectionImage: {fileID: 0}
   gunSprite: {fileID: 21300000, guid: 5a3caf4fed7abb245b13d5775d8e8ba2, type: 3}
   meleeSprite: {fileID: 21300000, guid: 0c54bc26e645035489f1d2184d29a8ef, type: 3}
+  isDebugging: 0
   debug: {fileID: 0}
   normalSensitivity: 1
   aimSensitivity: 0.6

@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    
     public float levelDuration = 100f;
     
     public Text timerText;
     public Text gameText;
     public Text enemyCountText;
 
+    public AudioSource bgmSource;
     public AudioClip gameOverSFX;
     public AudioClip gameWonSFX;
 
@@ -38,6 +38,9 @@ public class LevelManager : MonoBehaviour
             if (countDown > 0)
             {
                 countDown -= Time.deltaTime;
+                bgmSource.pitch = countDown > levelDuration * 0.25f ? 
+                        0.9f + (levelDuration - countDown) / (levelDuration * 0.75f) * 0.2f : 
+                        1.15f;
             }
             else
             {
