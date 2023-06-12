@@ -1663,26 +1663,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8610568032267737588, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8610568032267737588, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8610568032267737588, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8610568032267737588, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8610568032267737588, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
 --- !u!1001 &4490742267334060113
@@ -1952,6 +1932,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 406944677}
     m_Modifications:
+    - target: {fileID: 1258944690405316838, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: shootSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: b51854597354ccc41b4c03a823a2271d, type: 3}
     - target: {fileID: 8027850325763812782, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
       propertyPath: m_Name
       value: Robot

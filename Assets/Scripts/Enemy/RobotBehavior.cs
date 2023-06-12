@@ -10,6 +10,8 @@ public class RobotBehavior : MonoBehaviour
     public Transform barrel1;
     public Transform barrel2;
 
+    public AudioClip shootSFX;
+    
     public float bulletSpeed = 100f;
     public int damage = 30;
     public float shootInterval = 0.5f;
@@ -49,6 +51,8 @@ public class RobotBehavior : MonoBehaviour
             rb.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.VelocityChange);
             
             bullet.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
+            
+            AudioSource.PlayClipAtPoint(shootSFX, bulletSource.position);
             timer = shootInterval;
         }
     }
