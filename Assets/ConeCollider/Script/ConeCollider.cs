@@ -17,10 +17,12 @@ public class ConeCollider : MonoBehaviour {
     [SerializeField]
     private bool m_isFixScale = true;
 
-    void Awake()
+    private GameObject cone;
+    
+    void OnEnable()
     {
         //リソースロード
-        GameObject cone = Resources.Load("Prefab/ConeCollider") as GameObject;
+        cone = Resources.Load("Prefab/ConeCollider") as GameObject;
 
         //回転を初期位置に
         var initRot = this.transform.rotation;
@@ -85,6 +87,12 @@ public class ConeCollider : MonoBehaviour {
             scale.z = 1.0f / scale.z;
             this.transform.localScale = scale;
         }
+    }
+
+    void OnDisable()
+    {
+        var meshCollider = gameObject.GetComponent<MeshCollider>();
+        Destroy(meshCollider);
     }
 
     private void Start() {
