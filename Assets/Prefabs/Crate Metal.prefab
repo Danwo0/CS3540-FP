@@ -131,5 +131,5 @@ MonoBehaviour:
   explosionForce: 100
   explosionRadius: 10
   loots:
-  - {fileID: 4158193149782084911, guid: 52aaa0eb94f17ec4cb8a3cf621445688, type: 3}
-  - {fileID: 8529364478548830172, guid: 2a3b27fa0a2243d47a9814146cd3be5c, type: 3}
+  - {fileID: 8645260350993093668, guid: 52aaa0eb94f17ec4cb8a3cf621445688, type: 3}
+  - {fileID: 2987281366875299184, guid: 2a3b27fa0a2243d47a9814146cd3be5c, type: 3}
