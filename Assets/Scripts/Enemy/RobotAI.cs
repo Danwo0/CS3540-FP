@@ -20,33 +20,33 @@ public class RobotAI : MonoBehaviour
 
     public float attackDistance = 15.0f;
     public float chaseDistance = 20.0f;
-    public float enemySpeed = 5.0f;
+    public float enemySpeed = 3.0f;
     public float shootRate = 1.0f;
     public float alertTimer = 5.0f;
 
     public GameObject player;
+    public GameObject bulletPrefab;
 
-    GameObject[] wanderPoints;
-    int currentDestinationIndex = 0;
-    Vector3 nextDestination;
+    private GameObject[] wanderPoints;
+    private int currentDestinationIndex = 0;
+    private Vector3 nextDestination;
 
-    float distanceToPlayer;
-    bool playerInFOV;
-    float elapsedTime = 0;
+    private float distanceToPlayer;
+    private bool playerInFOV;
+    private float elapsedTime = 0;
 
     private RobotVision visionScript;
-    EnemyHealth enemyHealth;
-    int health;
+    private EnemyHealth enemyHealth;
+    private int health;
 
     // Animator anim;
     NavMeshAgent agent;
-
-    public GameObject bulletPrefab;
 
     public Transform barrel1;
     public Transform barrel2;
 
     public AudioClip shootSFX;
+    public AudioClip deadSFX;
 
     public float bulletSpeed = 25f;
     public int damage = 20;
@@ -63,7 +63,7 @@ public class RobotAI : MonoBehaviour
         // wandTip = GameObject.FindGameObjectWithTag("WandTip");
         agent = GetComponent<NavMeshAgent>();
 
-        enemyHealth = GetComponentInChildren<EnemyHealth>();
+        enemyHealth = GetComponent<EnemyHealth>();
         visionScript = GetComponentInChildren<RobotVision>();
         health = enemyHealth.currentHealth;
 
@@ -115,10 +115,11 @@ public class RobotAI : MonoBehaviour
         this.playerInFOV = false;
     }
 
-    public void alert()
+    public void Alert()
     {
         this.currentState = FSMStates.Alert;
         elapsedTime = 0;
+        visionScript.ToggleIndicator(false);
     }
 
     void UpdatePatrolState()
@@ -226,9 +227,9 @@ public class RobotAI : MonoBehaviour
     {
         // anim.SetInteger("animState", 4);
 
-        // AudioSource.PlayClipAtPoint( , transform.position);
+        AudioSource.PlayClipAtPoint(deadSFX, transform.position);
 
-        Destroy(gameObject, 3);
+        Destroy(gameObject);
     }
 
     void FindNextPoint()
@@ -265,7 +266,7 @@ public class RobotAI : MonoBehaviour
 
             bullet.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
 
-            // AudioSource.PlayClipAtPoint(shootSFX, bulletSource.position);
+            AudioSource.PlayClipAtPoint(shootSFX, bulletSource.position);
 
             elapsedTime = 0f;
         }

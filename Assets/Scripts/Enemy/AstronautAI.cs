@@ -23,26 +23,29 @@ public class AstronautAI : MonoBehaviour
     public float enemySpeed = 5.0f;
     public float shootRate = 1.0f;
     public float alertTimer = 5.0f;
+    public float alertRadius = 20f;
 
     public GameObject player;
     public GameObject meleePrefab;
-    public GameObject alertSphere;
 
-    GameObject[] wanderPoints;
-    int currentDestinationIndex = 0;
-    Vector3 nextDestination;
+    private GameObject[] wanderPoints;
+    private int currentDestinationIndex = 0;
+    private Vector3 nextDestination;
 
-    float distanceToPlayer;
-    bool playerInFOV;
-    float elapsedTime = 0;
+    private float distanceToPlayer;
+    private bool playerInFOV;
+    private float elapsedTime = 0;
 
     private AstronautVision visionScript;
-    EnemyHealth enemyHealth;
-    int health;
+    private EnemyHealth enemyHealth;
+    private int health;
 
     // Animator anim;
     // NavMeshAgent agent;
 
+    public AudioClip meleeSFX;
+    public AudioClip deadSFX;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +55,7 @@ public class AstronautAI : MonoBehaviour
         // wandTip = GameObject.FindGameObjectWithTag("WandTip");
         // agent = GetComponent<NavMeshAgent>();
 
-        enemyHealth = GetComponentInChildren<EnemyHealth>();
+        enemyHealth = GetComponent<EnemyHealth>();
         visionScript = GetComponentInChildren<AstronautVision>();
         health = enemyHealth.currentHealth;
 
@@ -97,21 +100,47 @@ public class AstronautAI : MonoBehaviour
     public void playerSeen()
     {
         this.playerInFOV = true;
-
-        GameObject projectile = Instantiate(alertSphere, transform.position, transform.rotation) as GameObject;
-        projectile.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
+        AlertNearby();
     }
-
+    
     public void playerLost()
     {
         this.playerInFOV = false;
     }
-    public void alert()
+    public void Alert()
     {
         this.currentState = FSMStates.Alert;
         elapsedTime = 0;
+        visionScript.ToggleIndicator(false);
     }
 
+    void AlertNearby()
+    {
+        Collider[] others = Physics.OverlapSphere(transform.position, alertRadius);
+        
+        foreach(Collider other in others)
+        {
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                print("Alerting!");
+
+                AstronautAI astronaut = other.gameObject.GetComponent<AstronautAI>();
+                RobotAI robot = other.gameObject.GetComponent<RobotAI>();
+
+                if (astronaut != null)
+                {
+                    astronaut.Alert();
+                    Debug.Log("Alerting astronaut" + other.gameObject.name);
+                }
+
+                if (robot != null)
+                {
+                    robot.Alert();
+                    Debug.Log("Alerting astronaut" + other.gameObject.name);
+                }
+            }
+        }
+    }
     void UpdatePatrolState()
     {
         // print("Patrolling!");
@@ -217,9 +246,9 @@ public class AstronautAI : MonoBehaviour
     {
         // anim.SetInteger("animState", 4);
 
-        // AudioSource.PlayClipAtPoint( , transform.position);
+        AudioSource.PlayClipAtPoint(deadSFX, transform.position);
 
-        Destroy(gameObject, 3);
+        Destroy(gameObject);
     }
 
     void FindNextPoint()
@@ -247,7 +276,7 @@ public class AstronautAI : MonoBehaviour
 
             GameObject projectile = Instantiate(meleePrefab, pos, transform.rotation) as GameObject;
             projectile.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
-            // AudioSource.PlayClipAtPoint( , transform.position);
+            AudioSource.PlayClipAtPoint(meleeSFX, transform.position);
 
             elapsedTime = 0f;
         }

@@ -200,6 +200,8 @@ GameObject:
   - component: {fileID: 8027850325763812783}
   - component: {fileID: 847465192}
   - component: {fileID: 847465194}
+  - component: {fileID: 4007999417714128053}
+  - component: {fileID: 977950962158379651}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Enemy
@@ -241,11 +243,13 @@ MonoBehaviour:
   chaseDistance: 20
   enemySpeed: 5
   shootRate: 1
+  alertTimer: 5
   player: {fileID: 0}
   bulletPrefab: {fileID: 9045565599046844531, guid: 755acdcc4bcd1dd4a87d74a250b8e211, type: 3}
   barrel1: {fileID: 3415431819812326858}
   barrel2: {fileID: 536044622979751482}
   shootSFX: {fileID: 8300000, guid: bffcd77f0fdb45d4a8725ce7d5dea284, type: 3}
+  deadSFX: {fileID: 8300000, guid: e81741307efa96a44863e539661cb1d5, type: 3}
   bulletSpeed: 25
   damage: 20
   shootInterval: 0.5
@@ -271,6 +275,34 @@ NavMeshAgent:
   m_BaseOffset: 0.9
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &4007999417714128053
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027850325763812782}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.2
+  m_Center: {x: -0.29, y: 0, z: 0.2}
+--- !u!114 &977950962158379651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027850325763812782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3012f415b5ed7e45a2ccd306c64b81e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 20
+  healthBar: {fileID: 0}
+  currentHealth: 20
 --- !u!1 &8029014613472188432
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,8 +753,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8032607420566722044}
-  - component: {fileID: 8032607420566722045}
-  - component: {fileID: 1654772993}
   m_Layer: 0
   m_Name: RobotBody
   m_TagString: IgnoreCollision
@@ -749,34 +779,6 @@ Transform:
   m_Father: {fileID: 8027850325763812783}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!135 &8032607420566722045
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8029494739693422412}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.059
-  m_Center: {x: 0, y: 0.02, z: 0}
---- !u!114 &1654772993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8029494739693422412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3012f415b5ed7e45a2ccd306c64b81e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 100
-  healthBar: {fileID: 0}
-  currentHealth: 100
 --- !u!1 &8137227096593209554
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,6 +924,14 @@ PrefabInstance:
     - target: {fileID: 6986536824507642856, guid: 1e0378e56882b3b41a783ccb662d1465, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986536824794609762, guid: 1e0378e56882b3b41a783ccb662d1465, type: 3}
+      propertyPath: m_Value
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986536824794609762, guid: 1e0378e56882b3b41a783ccb662d1465, type: 3}
+      propertyPath: m_MaxValue
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e0378e56882b3b41a783ccb662d1465, type: 3}
