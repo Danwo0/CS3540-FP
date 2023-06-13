@@ -123,8 +123,8 @@ public class RobotAI : MonoBehaviour
 
     void UpdatePatrolState()
     {
-        print("Patrolling!");
-        print(nextDestination);
+        // print("Patrolling!");
+        // print(nextDestination);
 
         // anim.SetInteger("animState", 1);
 
@@ -165,7 +165,7 @@ public class RobotAI : MonoBehaviour
 
     void UpdateChaseState()
     {
-        print("Chasing!");
+        // print("Chasing!");
 
         // anim.SetInteger("animState", 2);
 
@@ -194,7 +194,7 @@ public class RobotAI : MonoBehaviour
 
     void UpdateAttackState()
     {
-        print("Attacking!");
+        // print("Attacking!");
 
         agent.stoppingDistance = attackDistance;
 

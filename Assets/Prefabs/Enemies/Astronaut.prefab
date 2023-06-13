@@ -847,8 +847,10 @@ MonoBehaviour:
   chaseDistance: 10
   enemySpeed: 5
   shootRate: 1
+  alertTimer: 5
   player: {fileID: 0}
   meleePrefab: {fileID: 9045565599046844531, guid: 7c0bde66e3602174c82e4e2a5eeed83b, type: 3}
+  alertSphere: {fileID: 1266596815993485622, guid: 0b33e5ca9dff5234b89806fe48a5ea81, type: 3}
 --- !u!1 &6761353605446791639
 GameObject:
   m_ObjectHideFlags: 0

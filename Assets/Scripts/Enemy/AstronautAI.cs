@@ -53,6 +53,7 @@ public class AstronautAI : MonoBehaviour
         // agent = GetComponent<NavMeshAgent>();
 
         enemyHealth = GetComponentInChildren<EnemyHealth>();
+        visionScript = GetComponentInChildren<AstronautVision>();
         health = enemyHealth.currentHealth;
 
         currentState = FSMStates.Patrol;
@@ -113,8 +114,8 @@ public class AstronautAI : MonoBehaviour
 
     void UpdatePatrolState()
     {
-        print("Patrolling!");
-        print(nextDestination);
+        // print("Patrolling!");
+        // print(nextDestination);
 
         // anim.SetInteger("animState", 1);
 
@@ -155,7 +156,7 @@ public class AstronautAI : MonoBehaviour
 
     void UpdateChaseState()
     {
-        print("Chasing!");
+        // print("Chasing!");
 
         // anim.SetInteger("animState", 2);
 
@@ -184,7 +185,7 @@ public class AstronautAI : MonoBehaviour
 
     void UpdateAttackState()
     {
-        print("Attacking!");
+        // print("Attacking!");
 
         // agent.stoppingDistance = attackDistance;
 

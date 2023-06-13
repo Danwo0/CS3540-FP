@@ -11,6 +11,8 @@ public class AlertEnemies : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            print("Alerting!");
+
             astronaut = transform.parent.gameObject.GetComponent<AstronautAI>();
             robot = transform.parent.gameObject.GetComponent<RobotAI>();
 
