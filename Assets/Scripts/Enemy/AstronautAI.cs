@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.PlayerSettings;
 
 public class AstronautAI : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class AstronautAI : MonoBehaviour
     {
         Idle,
         Patrol,
+        Alert,
         Chase,
         Attack,
         Dead
@@ -20,9 +22,11 @@ public class AstronautAI : MonoBehaviour
     public float chaseDistance = 10.0f;
     public float enemySpeed = 5.0f;
     public float shootRate = 1.0f;
+    public float alertTimer = 5.0f;
 
     public GameObject player;
     public GameObject meleePrefab;
+    public GameObject alertSphere;
 
     GameObject[] wanderPoints;
     int currentDestinationIndex = 0;
@@ -67,6 +71,9 @@ public class AstronautAI : MonoBehaviour
             case FSMStates.Patrol:
                 UpdatePatrolState();
                 break;
+            case FSMStates.Alert:
+                UpdateAlertState();
+                break;
             case FSMStates.Chase:
                 UpdateChaseState();
                 break;
@@ -89,11 +96,19 @@ public class AstronautAI : MonoBehaviour
     public void playerSeen()
     {
         this.playerInFOV = true;
+
+        GameObject projectile = Instantiate(alertSphere, transform.position, transform.rotation) as GameObject;
+        projectile.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
     }
 
     public void playerLost()
     {
         this.playerInFOV = false;
+    }
+    public void alert()
+    {
+        this.currentState = FSMStates.Alert;
+        elapsedTime = 0;
     }
 
     void UpdatePatrolState()
@@ -119,6 +134,23 @@ public class AstronautAI : MonoBehaviour
         FaceTarget(nextDestination);
 
         // agent.SetDestination(nextDestination);
+    }
+
+    void UpdateAlertState()
+    {
+        print("Alert!");
+
+        if (distanceToPlayer < chaseDistance)
+        {
+            currentState = FSMStates.Chase;
+        }
+
+        if (elapsedTime > alertTimer)
+        {
+            currentState = FSMStates.Patrol;
+        }
+
+        FaceTarget(player.transform.position);
     }
 
     void UpdateChaseState()

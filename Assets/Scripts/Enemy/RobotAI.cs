@@ -10,6 +10,7 @@ public class RobotAI : MonoBehaviour
     {
         Idle,
         Patrol,
+        Alert,
         Chase,
         Attack,
         Dead
@@ -21,6 +22,7 @@ public class RobotAI : MonoBehaviour
     public float chaseDistance = 20.0f;
     public float enemySpeed = 5.0f;
     public float shootRate = 1.0f;
+    public float alertTimer = 5.0f;
 
     public GameObject player;
 
@@ -81,6 +83,9 @@ public class RobotAI : MonoBehaviour
             case FSMStates.Patrol:
                 UpdatePatrolState();
                 break;
+            case FSMStates.Alert:
+                UpdateAlertState();
+                break;
             case FSMStates.Chase:
                 UpdateChaseState();
                 break;
@@ -110,6 +115,12 @@ public class RobotAI : MonoBehaviour
         this.playerInFOV = false;
     }
 
+    public void alert()
+    {
+        this.currentState = FSMStates.Alert;
+        elapsedTime = 0;
+    }
+
     void UpdatePatrolState()
     {
         print("Patrolling!");
@@ -133,6 +144,23 @@ public class RobotAI : MonoBehaviour
         FaceTarget(nextDestination);
 
         // agent.SetDestination(nextDestination);
+    }
+
+    void UpdateAlertState()
+    {
+        print("Alert!");
+
+        if (distanceToPlayer < chaseDistance)
+        {
+            currentState = FSMStates.Chase;
+        }
+
+        if (elapsedTime > alertTimer)
+        {
+            currentState = FSMStates.Patrol;
+        }
+
+        FaceTarget(player.transform.position);
     }
 
     void UpdateChaseState()
