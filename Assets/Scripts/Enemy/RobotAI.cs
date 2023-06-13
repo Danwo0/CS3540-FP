@@ -36,7 +36,7 @@ public class RobotAI : MonoBehaviour
     int health;
 
     // Animator anim;
-    // NavMeshAgent agent;
+    NavMeshAgent agent;
 
     public GameObject bulletPrefab;
 
@@ -58,7 +58,7 @@ public class RobotAI : MonoBehaviour
         // wanderPoints = GameObject.FindGameObjectsWithTag("WanderPoint");
         // anim = GetComponent<Animator>();
         // wandTip = GameObject.FindGameObjectWithTag("WandTip");
-        // agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
 
         enemyHealth = GetComponentInChildren<EnemyHealth>();
         health = enemyHealth.currentHealth;
@@ -138,8 +138,8 @@ public class RobotAI : MonoBehaviour
 
         // anim.SetInteger("animState", 2);
 
-        // agent.stoppingDistance = attackDistance;
-        // agent.speed = 5f;
+        agent.stoppingDistance = attackDistance;
+        agent.speed = 5f;
 
         nextDestination = player.transform.position;
 
@@ -157,14 +157,14 @@ public class RobotAI : MonoBehaviour
 
         // transform.position = Vector3.MoveTowards(transform.position, nextDestination, enemySpeed * Time.deltaTime);
 
-        // agent.SetDestination(nextDestination);
+        agent.SetDestination(nextDestination);
     }
 
     void UpdateAttackState()
     {
         print("Attacking!");
 
-        // agent.stoppingDistance = attackDistance;
+        agent.stoppingDistance = attackDistance;
 
         nextDestination = player.transform.position;
 
