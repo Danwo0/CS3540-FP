@@ -60,7 +60,7 @@ public class LevelManager : MonoBehaviour
 
     private void SetCountText()
     {
-        enemyCountText.text = "Targets Left: " + AstronautBehavior.keyEnemyCount.ToString("00");
+        enemyCountText.text = "Targets Left: " + AstronautAI.keyEnemyCount.ToString("00");
     }
     
     public void LevelLost()
