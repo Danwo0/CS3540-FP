@@ -944,14 +944,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
-<<<<<<< HEAD
-=======
---- !u!4 &1137934959 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1358980158607029710, guid: 5ab0a4d743d04034ab03d7b935596aea, type: 3}
-  m_PrefabInstance: {fileID: 1358980159658588065}
-  m_PrefabAsset: {fileID: 0}
->>>>>>> parent of f56fe1b (fsm prototype)
 --- !u!1001 &1186182872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1914,7 +1906,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 406944677}
     m_Modifications:
-<<<<<<< HEAD
     - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1923,12 +1914,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-=======
-    - target: {fileID: 1258944690405316838, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
-      propertyPath: shootSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: b51854597354ccc41b4c03a823a2271d, type: 3}
->>>>>>> parent of f56fe1b (fsm prototype)
     - target: {fileID: 8027850325763812782, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
       propertyPath: m_Name
       value: Robot
@@ -2034,7 +2019,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Astronaut
       objectReference: {fileID: 0}
-<<<<<<< HEAD
     - target: {fileID: 8815181745211056942, guid: b5e8e711fdf383b4295c497370317b88, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2043,7 +2027,5 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-=======
->>>>>>> parent of f56fe1b (fsm prototype)
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5e8e711fdf383b4295c497370317b88, type: 3}
