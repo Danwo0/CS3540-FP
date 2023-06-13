@@ -14,7 +14,6 @@ public class DestroyObject : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.gameObject.name);
         if (!(other.collider.CompareTag("Player"))) Destroy(gameObject);
     }
 }
