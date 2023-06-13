@@ -11,6 +11,7 @@ TagManager:
   - CinemachineTarget
   - PlayerTarget
   - IgnoreCollision
+  - PlayerProjectile
   layers:
   - Default
   - TransparentFX

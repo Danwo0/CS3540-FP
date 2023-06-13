@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 930241399}
     m_Modifications:
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8027850325763812782, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
       propertyPath: m_Name
       value: Robot (2)
@@ -286,6 +294,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 930241399}
     m_Modifications:
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8027850325763812782, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
       propertyPath: m_Name
       value: Robot
@@ -718,6 +734,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 930241399}
     m_Modifications:
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8027850325763812782, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
       propertyPath: m_Name
       value: Robot (1)
@@ -987,6 +1011,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 930241399}
     m_Modifications:
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8027850325763812782, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
       propertyPath: m_Name
       value: Robot (3)
@@ -1098,6 +1130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 930241399}
     m_Modifications:
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8027850325763812782, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
       propertyPath: m_Name
       value: Robot (1)
@@ -1291,6 +1331,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 930241399}
     m_Modifications:
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8027850325763812782, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
       propertyPath: m_Name
       value: Robot
@@ -1749,6 +1797,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 930241399}
     m_Modifications:
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8027850325763812782, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
       propertyPath: m_Name
       value: Robot (2)
