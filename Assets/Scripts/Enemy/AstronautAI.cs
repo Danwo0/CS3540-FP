@@ -6,6 +6,9 @@ using static UnityEditor.PlayerSettings;
 
 public class AstronautAI : MonoBehaviour
 {
+    public static int keyEnemyCount = 0;
+    private LevelManager lm;
+    
     public enum FSMStates
     {
         Idle,
@@ -49,23 +52,30 @@ public class AstronautAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        keyEnemyCount++;
+        
         player = GameObject.FindGameObjectWithTag("Player");
-        // wanderPoints = GameObject.FindGameObjectsWithTag("WanderPoint");
         // anim = GetComponent<Animator>();
-        // wandTip = GameObject.FindGameObjectWithTag("WandTip");
         // agent = GetComponent<NavMeshAgent>();
 
         enemyHealth = GetComponent<EnemyHealth>();
         visionScript = GetComponentInChildren<AstronautVision>();
+        lm = FindObjectOfType<LevelManager>();
         health = enemyHealth.currentHealth;
-
+        
         currentState = FSMStates.Patrol;
-        FindNextPoint();
+        //FindNextPoint();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (LevelManager.isGameOver)
+        {
+            keyEnemyCount = 0;
+            return;
+        }
+        
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
         health = enemyHealth.currentHealth;
@@ -157,7 +167,7 @@ public class AstronautAI : MonoBehaviour
             currentState = FSMStates.Chase;
         }
 
-        FaceTarget(nextDestination);
+        // FaceTarget(nextDestination);
 
         // agent.SetDestination(nextDestination);
     }
@@ -242,8 +252,11 @@ public class AstronautAI : MonoBehaviour
     {
         // anim.SetInteger("animState", 4);
 
-        AudioSource.PlayClipAtPoint(deadSFX, transform.position);
-
+        AudioSource.PlayClipAtPoint(deadSFX, transform.position, 2f);
+        
+        keyEnemyCount--;
+        if (keyEnemyCount <= 0) lm.LevelBeat();
+        
         Destroy(gameObject);
     }
 

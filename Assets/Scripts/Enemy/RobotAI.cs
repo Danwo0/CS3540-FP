@@ -66,12 +66,14 @@ public class RobotAI : MonoBehaviour
         health = enemyHealth.currentHealth;
 
         currentState = FSMStates.Patrol;
-        FindNextPoint();
+        //FindNextPoint();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (LevelManager.isGameOver) return;
+        
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
         health = enemyHealth.currentHealth;
@@ -135,7 +137,7 @@ public class RobotAI : MonoBehaviour
             currentState = FSMStates.Chase;
         }
 
-        FaceTarget(nextDestination);
+        // FaceTarget(nextDestination);
 
         // agent.SetDestination(nextDestination);
     }
