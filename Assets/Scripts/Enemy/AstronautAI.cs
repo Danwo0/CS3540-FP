@@ -32,6 +32,7 @@ public class AstronautAI : MonoBehaviour
     bool playerInFOV;
     float elapsedTime = 0;
 
+    private AstronautVision visionScript;
     EnemyHealth enemyHealth;
     int health;
 
@@ -111,6 +112,7 @@ public class AstronautAI : MonoBehaviour
         }
         else if (playerInFOV)
         {
+            visionScript.ToggleIndicator(false);
             currentState = FSMStates.Chase;
         }
 
@@ -136,6 +138,7 @@ public class AstronautAI : MonoBehaviour
         }
         else if (distanceToPlayer > chaseDistance)
         {
+            visionScript.ToggleIndicator(true);
             currentState = FSMStates.Patrol;
             FindNextPoint();
         }
@@ -165,6 +168,7 @@ public class AstronautAI : MonoBehaviour
         }
         else if (distanceToPlayer > chaseDistance)
         {
+            visionScript.ToggleIndicator(true);
             currentState = FSMStates.Patrol;
             FindNextPoint();
         }

@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class RobotVision : MonoBehaviour
 {
+    private RobotAI aiScript;
+    private VisionAdjuster indicatorScript;
+    
+    void Start()
+    {
+        aiScript = transform.parent.gameObject.GetComponent<RobotAI>();
+        indicatorScript = transform.GetChild(0).gameObject.GetComponent<VisionAdjuster>();
+    }
+    
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Entered");
-            transform.parent.parent.gameObject.GetComponent<RobotAI>().playerSeen();
+            aiScript.playerSeen();
         }
     }
 
@@ -18,8 +27,13 @@ public class RobotVision : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Exited");
-            transform.parent.parent.gameObject.GetComponent<RobotAI>().playerLost();
+            aiScript.playerLost();
         }
+    }
+
+    public void ToggleIndicator(bool state)
+    {
+        indicatorScript.ToggleIndicator(state);
     }
 }
 

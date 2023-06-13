@@ -32,6 +32,7 @@ public class RobotAI : MonoBehaviour
     bool playerInFOV;
     float elapsedTime = 0;
 
+    private RobotVision visionScript;
     EnemyHealth enemyHealth;
     int health;
 
@@ -61,6 +62,7 @@ public class RobotAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
         enemyHealth = GetComponentInChildren<EnemyHealth>();
+        visionScript = GetComponentInChildren<RobotVision>();
         health = enemyHealth.currentHealth;
 
         currentState = FSMStates.Patrol;
@@ -124,6 +126,7 @@ public class RobotAI : MonoBehaviour
         }
         else if (playerInFOV)
         {
+            visionScript.ToggleIndicator(false);
             currentState = FSMStates.Chase;
         }
 
@@ -149,6 +152,7 @@ public class RobotAI : MonoBehaviour
         }
         else if (distanceToPlayer > chaseDistance)
         {
+            visionScript.ToggleIndicator(true);
             currentState = FSMStates.Patrol;
             FindNextPoint();
         }
@@ -178,6 +182,7 @@ public class RobotAI : MonoBehaviour
         }
         else if (distanceToPlayer > chaseDistance)
         {
+            visionScript.ToggleIndicator(true);
             currentState = FSMStates.Patrol;
             FindNextPoint();
         }

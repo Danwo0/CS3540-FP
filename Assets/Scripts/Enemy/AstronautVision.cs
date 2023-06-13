@@ -5,11 +5,21 @@ using UnityEngine;
 
 public class AstronautVision : MonoBehaviour
 {
-    void OnTriggerEnter(Collider other) {
+    private AstronautAI aiScript;
+    private VisionAdjuster indicatorScript;
+    
+    void Start()
+    {
+        aiScript = transform.parent.gameObject.GetComponent<AstronautAI>();
+        indicatorScript = transform.GetChild(0).gameObject.GetComponent<VisionAdjuster>();
+    }
+    
+    void OnTriggerEnter(Collider other)
+    {
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Entered");
-            transform.parent.gameObject.GetComponent<AstronautAI>().playerSeen();
+            aiScript.playerSeen();
         }
     }
 
@@ -18,7 +28,12 @@ public class AstronautVision : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Exited");
-            transform.parent.gameObject.GetComponent<AstronautAI>().playerLost();
+            aiScript.playerLost();
         }
+    }
+    
+    public void ToggleIndicator(bool state)
+    {
+        indicatorScript.ToggleIndicator(state);
     }
 }

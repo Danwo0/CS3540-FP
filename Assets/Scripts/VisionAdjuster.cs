@@ -9,6 +9,7 @@ public class VisionAdjuster : MonoBehaviour
     private float angle;
     private float distance;
 
+    private bool toggleState;
     private bool prevLightOn;
 
     private ConeCollider coneCollider;
@@ -22,6 +23,7 @@ public class VisionAdjuster : MonoBehaviour
         angle = startingAngle;
         distance = startingDistance;
 
+        toggleState = true;
         prevLightOn = true;
     }
     void Update()
@@ -68,8 +70,20 @@ public class VisionAdjuster : MonoBehaviour
     
     void UpdateIndicator()
     {
-        float scale = 0.0025f * angle * angle + 0.305f * angle + 0.1f;
+        if (toggleState)
+        {
+            float scale = 0.0025f * angle * angle + 0.305f * angle + 0.1f;
 
-        transform.localScale = new Vector3(scale, scale, distance);
+            transform.localScale = new Vector3(scale, scale, distance);
+        }
+        else
+        {
+            transform.localScale = Vector3.zero;
+        }
+    }
+
+    public void ToggleIndicator(bool newState)
+    {
+        toggleState = newState;
     }
 }
