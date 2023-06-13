@@ -100,6 +100,7 @@ public class AstronautAI : MonoBehaviour
     public void PlayerSeen(bool newPlayerSeen)
     {
         this.playerInFOV = newPlayerSeen;
+        AlertNearby();
     }
     
     public void Alert()
