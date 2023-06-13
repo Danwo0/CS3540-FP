@@ -241,7 +241,7 @@ MonoBehaviour:
   currentState: 0
   attackDistance: 15
   chaseDistance: 20
-  enemySpeed: 5
+  enemySpeed: 3
   shootRate: 1
   alertTimer: 5
   player: {fileID: 0}

@@ -18,7 +18,7 @@ public class RobotVision : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Entered");
-            aiScript.playerSeen();
+            aiScript.PlayerSeen(true);
         }
     }
 
@@ -27,7 +27,7 @@ public class RobotVision : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Exited");
-            aiScript.playerLost();
+            aiScript.PlayerSeen(false);
         }
     }
 

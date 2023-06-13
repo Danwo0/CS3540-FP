@@ -23,10 +23,18 @@ public class RobotAI : MonoBehaviour
     public float enemySpeed = 3.0f;
     public float shootRate = 1.0f;
     public float alertTimer = 5.0f;
+    public float bulletSpeed = 25f;
+    public int damage = 20;
 
     public GameObject player;
     public GameObject bulletPrefab;
 
+    public AudioClip shootSFX;
+    public AudioClip deadSFX;
+    
+    public Transform barrel1;
+    public Transform barrel2;
+    
     private GameObject[] wanderPoints;
     private int currentDestinationIndex = 0;
     private Vector3 nextDestination;
@@ -40,17 +48,7 @@ public class RobotAI : MonoBehaviour
     private int health;
 
     // Animator anim;
-    NavMeshAgent agent;
-
-    public Transform barrel1;
-    public Transform barrel2;
-
-    public AudioClip shootSFX;
-    public AudioClip deadSFX;
-
-    public float bulletSpeed = 25f;
-    public int damage = 20;
-    public float shootInterval = 0.5f;
+    private NavMeshAgent agent;
 
     private int barrel;
 
@@ -105,14 +103,9 @@ public class RobotAI : MonoBehaviour
         }
     }
 
-    public void playerSeen()
+    public void PlayerSeen(bool newPlayerSeen)
     {
-        this.playerInFOV = true;
-    }
-
-    public void playerLost()
-    {
-        this.playerInFOV = false;
+        this.playerInFOV = newPlayerSeen;
     }
 
     public void Alert()
@@ -171,7 +164,7 @@ public class RobotAI : MonoBehaviour
         // anim.SetInteger("animState", 2);
 
         agent.stoppingDistance = attackDistance;
-        agent.speed = 5f;
+        agent.speed = enemySpeed;
 
         nextDestination = player.transform.position;
 

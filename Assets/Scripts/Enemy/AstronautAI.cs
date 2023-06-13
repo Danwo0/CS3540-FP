@@ -28,6 +28,9 @@ public class AstronautAI : MonoBehaviour
     public GameObject player;
     public GameObject meleePrefab;
 
+    public AudioClip meleeSFX;
+    public AudioClip deadSFX;
+    
     private GameObject[] wanderPoints;
     private int currentDestinationIndex = 0;
     private Vector3 nextDestination;
@@ -43,9 +46,6 @@ public class AstronautAI : MonoBehaviour
     // Animator anim;
     // NavMeshAgent agent;
 
-    public AudioClip meleeSFX;
-    public AudioClip deadSFX;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -97,16 +97,11 @@ public class AstronautAI : MonoBehaviour
         }
     }
 
-    public void playerSeen()
+    public void PlayerSeen(bool newPlayerSeen)
     {
-        this.playerInFOV = true;
-        AlertNearby();
+        this.playerInFOV = newPlayerSeen;
     }
     
-    public void playerLost()
-    {
-        this.playerInFOV = false;
-    }
     public void Alert()
     {
         this.currentState = FSMStates.Alert;
@@ -190,7 +185,7 @@ public class AstronautAI : MonoBehaviour
         // anim.SetInteger("animState", 2);
 
         // agent.stoppingDistance = attackDistance;
-        // agent.speed = 5f;
+        // agent.speed = enemySpeed;
 
         nextDestination = player.transform.position;
 
