@@ -32,12 +32,4 @@ public class EnemyHealth : MonoBehaviour
 
         Debug.Log("Current Health:" + currentHealth);
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Projectile"))
-        {
-            // TakeDamage(WeaponSwap.projectileDamage);
-            TakeDamage(10);
-        }
-    }
 }
