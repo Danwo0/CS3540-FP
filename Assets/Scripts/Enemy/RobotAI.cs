@@ -126,10 +126,22 @@ public class RobotAI : MonoBehaviour
 
     public void Alert()
     {
-        this.currentState = FSMStates.Alert;
-        elapsedTime = 0;
-        alertPosition = player.transform.position;
-        visionScript.ToggleIndicator(false);
+        if (currentState == FSMStates.Idle || currentState == FSMStates.Patrol)
+        {
+            this.currentState = FSMStates.Alert;
+            elapsedTime = 0;
+            alertPosition = player.transform.position;
+        }
+    }
+
+    public void GunshotAlert()
+    {
+        if (currentState == FSMStates.Idle || currentState == FSMStates.Patrol || currentState == FSMStates.Alert)
+        {
+            this.currentState = FSMStates.Alert;
+            elapsedTime = 0;
+            alertPosition = player.transform.position;
+        }
     }
 
     void UpdatePatrolState()
@@ -159,8 +171,6 @@ public class RobotAI : MonoBehaviour
 
     void UpdateAlertState()
     {
-        print("Alert!");
-
         if (distanceToPlayer < chaseDistance)
         {
             visionScript.ToggleIndicator(false);
@@ -173,7 +183,7 @@ public class RobotAI : MonoBehaviour
             currentState = FSMStates.Patrol;
         }
 
-        FaceTarget(player.transform.position);
+        FaceTarget(alertPosition);
     }
 
     void UpdateChaseState()
