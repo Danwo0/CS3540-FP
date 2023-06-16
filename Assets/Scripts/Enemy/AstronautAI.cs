@@ -45,6 +45,8 @@ public class AstronautAI : MonoBehaviour
     private EnemyHealth enemyHealth;
     private int health;
 
+    private Collider[] nearbyColliders;
+
     // Animator anim;
     // NavMeshAgent agent;
 
@@ -82,15 +84,19 @@ public class AstronautAI : MonoBehaviour
         switch (currentState)
         {
             case FSMStates.Patrol:
+                Debug.Log("State: Patrol");
                 UpdatePatrolState();
                 break;
             case FSMStates.Alert:
+                Debug.Log("State: Alert");
                 UpdateAlertState();
                 break;
             case FSMStates.Chase:
+                Debug.Log("State: Chase");
                 UpdateChaseState();
                 break;
             case FSMStates.Attack:
+                Debug.Log("State: Attack");
                 UpdateAttackState();
                 break;
             case FSMStates.Dead:
@@ -122,27 +128,18 @@ public class AstronautAI : MonoBehaviour
     void AlertNearby()
     {
         Collider[] others = Physics.OverlapSphere(transform.position, alertRadius);
-        
+
         foreach(Collider other in others)
         {
-            if (other.gameObject.CompareTag("Enemy"))
+            if (other.gameObject.CompareTag("Astronaut"))
             {
-                print("Alerting!");
-
                 AstronautAI astronaut = other.gameObject.GetComponent<AstronautAI>();
+                astronaut.Alert();
+            }
+            if (other.gameObject.CompareTag("Robot"))
+            {
                 RobotAI robot = other.gameObject.GetComponent<RobotAI>();
-
-                if (astronaut != null)
-                {
-                    astronaut.Alert();
-                    Debug.Log("Alerting astronaut" + other.gameObject.name);
-                }
-
-                if (robot != null)
-                {
-                    robot.Alert();
-                    Debug.Log("Alerting astronaut" + other.gameObject.name);
-                }
+                robot.Alert();
             }
         }
     }
@@ -182,6 +179,7 @@ public class AstronautAI : MonoBehaviour
 
         if (elapsedTime > alertTimer)
         {
+            visionScript.ToggleIndicator(true);
             currentState = FSMStates.Patrol;
         }
 
@@ -295,6 +293,9 @@ public class AstronautAI : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
 
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, alertRadius);
+        
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, chaseDistance);
     }

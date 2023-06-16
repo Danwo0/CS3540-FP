@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544e52e7528d39543a55e8259cace9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_angle: 10
+  m_angle: 15
   m_distance: 10
   m_isTrigger: 1
   m_isFixScale: 1
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 977950962158379651}
   m_Layer: 0
   m_Name: Robot
-  m_TagString: Enemy
+  m_TagString: Robot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -244,15 +244,14 @@ MonoBehaviour:
   enemySpeed: 3
   shootRate: 1
   alertTimer: 5
-  player: {fileID: 0}
-  bulletPrefab: {fileID: 9045565599046844531, guid: 755acdcc4bcd1dd4a87d74a250b8e211, type: 3}
-  barrel1: {fileID: 3415431819812326858}
-  barrel2: {fileID: 536044622979751482}
-  shootSFX: {fileID: 8300000, guid: bffcd77f0fdb45d4a8725ce7d5dea284, type: 3}
-  deadSFX: {fileID: 8300000, guid: e81741307efa96a44863e539661cb1d5, type: 3}
   bulletSpeed: 25
   damage: 20
-  shootInterval: 0.5
+  player: {fileID: 0}
+  bulletPrefab: {fileID: 9045565599046844531, guid: 755acdcc4bcd1dd4a87d74a250b8e211, type: 3}
+  shootSFX: {fileID: 8300000, guid: bffcd77f0fdb45d4a8725ce7d5dea284, type: 3}
+  deadSFX: {fileID: 8300000, guid: e81741307efa96a44863e539661cb1d5, type: 3}
+  barrel1: {fileID: 3415431819812326858}
+  barrel2: {fileID: 536044622979751482}
 --- !u!195 &847465194
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -755,7 +754,7 @@ GameObject:
   - component: {fileID: 8032607420566722044}
   m_Layer: 0
   m_Name: RobotBody
-  m_TagString: IgnoreCollision
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -153,6 +153,7 @@ public class RobotAI : MonoBehaviour
 
         if (elapsedTime > alertTimer)
         {
+            visionScript.ToggleIndicator(true);
             currentState = FSMStates.Patrol;
         }
 
@@ -266,12 +267,12 @@ public class RobotAI : MonoBehaviour
             elapsedTime = 0f;
         }
     }
-
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
-
+        
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, chaseDistance);
     }

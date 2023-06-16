@@ -12,7 +12,7 @@ public class Breakable : MonoBehaviour
    
    public void OnCollisionEnter(Collision collision)
    {
-      if (collision.collider.CompareTag("Projectile"))
+      if (collision.collider.CompareTag("EnemyProjectile") || collision.collider.CompareTag("PlayerProjectile"))
       {
          Transform currentCrate = gameObject.transform;
 
