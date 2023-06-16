@@ -3928,6 +3928,7 @@ MonoBehaviour:
   gravity: 9.81
   airControl: 1
   acceleration: 5
+  alertRadius: 5
 --- !u!114 &7049061234677372611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3988,6 +3989,7 @@ MonoBehaviour:
   normalSensitivity: 1
   aimSensitivity: 0.6
   projectileSpeed: 100
+  shootingAlertRadius: 10
 --- !u!1 &7049061234669954312
 GameObject:
   m_ObjectHideFlags: 0
