@@ -40,10 +40,13 @@ public class AstronautAI : MonoBehaviour
     private float distanceToPlayer;
     private bool playerInFOV;
     private float elapsedTime = 0;
+    private Vector3 alertPosition;
 
     private AstronautVision visionScript;
     private EnemyHealth enemyHealth;
     private int health;
+
+    private Collider[] nearbyColliders;
 
     // Animator anim;
     // NavMeshAgent agent;
@@ -74,11 +77,10 @@ public class AstronautAI : MonoBehaviour
             keyEnemyCount = 0;
             return;
         }
+
+        UpdateValues();
         
-        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
-        health = enemyHealth.currentHealth;
-
+        print(gameObject.name + " " + currentState);
         switch (currentState)
         {
             case FSMStates.Patrol:
@@ -106,6 +108,21 @@ public class AstronautAI : MonoBehaviour
         }
     }
 
+    void UpdateValues()
+    {
+        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        
+        int prevHealth = health;
+        health = enemyHealth.currentHealth;
+
+        if (health < prevHealth)
+        {
+            currentState = FSMStates.Alert;
+            elapsedTime = 0;
+            alertPosition = player.transform.position;
+        }
+    }
+
     public void PlayerSeen(bool newPlayerSeen)
     {
         this.playerInFOV = newPlayerSeen;
@@ -114,35 +131,39 @@ public class AstronautAI : MonoBehaviour
     
     public void Alert()
     {
-        this.currentState = FSMStates.Alert;
-        elapsedTime = 0;
-        visionScript.ToggleIndicator(false);
+        if (currentState == FSMStates.Idle || currentState == FSMStates.Patrol)
+        {
+            this.currentState = FSMStates.Alert;
+            elapsedTime = 0;
+            alertPosition = player.transform.position;
+        }
+    }
+
+    public void GunshotAlert()
+    {
+        if (currentState == FSMStates.Idle || currentState == FSMStates.Patrol || currentState == FSMStates.Alert)
+        {
+            this.currentState = FSMStates.Alert;
+            elapsedTime = 0;
+            alertPosition = player.transform.position;
+        }
     }
 
     void AlertNearby()
     {
         Collider[] others = Physics.OverlapSphere(transform.position, alertRadius);
-        
+
         foreach(Collider other in others)
         {
-            if (other.gameObject.CompareTag("Enemy"))
+            if (other.gameObject.CompareTag("Astronaut"))
             {
-                print("Alerting!");
-
                 AstronautAI astronaut = other.gameObject.GetComponent<AstronautAI>();
+                astronaut.Alert();
+            }
+            if (other.gameObject.CompareTag("Robot"))
+            {
                 RobotAI robot = other.gameObject.GetComponent<RobotAI>();
-
-                if (astronaut != null)
-                {
-                    astronaut.Alert();
-                    Debug.Log("Alerting astronaut" + other.gameObject.name);
-                }
-
-                if (robot != null)
-                {
-                    robot.Alert();
-                    Debug.Log("Alerting astronaut" + other.gameObject.name);
-                }
+                robot.Alert();
             }
         }
     }
@@ -173,19 +194,19 @@ public class AstronautAI : MonoBehaviour
 
     void UpdateAlertState()
     {
-        print("Alert!");
-
         if (distanceToPlayer < chaseDistance)
         {
+            visionScript.ToggleIndicator(false);
             currentState = FSMStates.Chase;
         }
 
         if (elapsedTime > alertTimer)
         {
+            visionScript.ToggleIndicator(true);
             currentState = FSMStates.Patrol;
         }
 
-        FaceTarget(player.transform.position);
+        FaceTarget(alertPosition);
     }
 
     void UpdateChaseState()
@@ -295,6 +316,9 @@ public class AstronautAI : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
 
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, alertRadius);
+        
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, chaseDistance);
     }

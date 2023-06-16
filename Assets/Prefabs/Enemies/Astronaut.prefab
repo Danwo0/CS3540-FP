@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 9172136665421823579}
   m_Layer: 0
   m_Name: Astronaut
-  m_TagString: Enemy
+  m_TagString: Astronaut
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -816,7 +816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   attackDistance: 5
-  chaseDistance: 10
+  chaseDistance: 15
   enemySpeed: 5
   shootRate: 1
   alertTimer: 5
@@ -1154,8 +1154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544e52e7528d39543a55e8259cace9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_angle: 10
-  m_distance: 6
+  m_angle: 20
+  m_distance: 12
   m_isTrigger: 1
   m_isFixScale: 1
 --- !u!114 &3031099752181241211

@@ -9,6 +9,7 @@ public class ThirdPersonMovementController : MonoBehaviour
     public float gravity = 9.81f;
     public float airControl = 1f;
     public float acceleration = 5f;
+    public float alertRadius = 5f;
 
     private CharacterController controller;
     private Animator anim;
@@ -22,9 +23,11 @@ public class ThirdPersonMovementController : MonoBehaviour
     private bool rotateOnMove = true;
 
     private bool isGrounded;
+    private bool isRunning;
+    private float currentAlertRadius;
     private Vector3 moveDirection;
     private float rotateAngle;
-    
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -73,7 +76,10 @@ public class ThirdPersonMovementController : MonoBehaviour
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
-        float targetSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeed * 2 : moveSpeed;
+        
+        isRunning = Input.GetKey(KeyCode.LeftShift);
+        currentAlertRadius = isRunning ? alertRadius * 1.5f : alertRadius;
+        float targetSpeed = isRunning ? moveSpeed * 2 : moveSpeed;
         targetSpeed *= speedBoost;
 
         float currentSpeed = new Vector3(controller.velocity.x, 0.0f, controller.velocity.z).magnitude;
@@ -119,6 +125,8 @@ public class ThirdPersonMovementController : MonoBehaviour
 
         moveDirection += targetDirection * speed;
         controller.Move(moveDirection * Time.deltaTime);
+
+        AlertNearby();
     }
 
     public void SetRotateOnMove(bool newRotateOnMove)
@@ -142,6 +150,34 @@ public class ThirdPersonMovementController : MonoBehaviour
             speedBoost = 1;
             jumpBoost = 2f;
         }
+    }
+    void AlertNearby()
+    {
+        Collider[] others =  Physics.OverlapSphere(transform.position, currentAlertRadius);
+
+        foreach(Collider other in others)
+        {
+            if (other.gameObject.CompareTag("Astronaut"))
+            {
+                AstronautAI astronaut = other.gameObject.GetComponent<AstronautAI>();
+                if (astronaut.currentState == AstronautAI.FSMStates.Idle ||
+                    astronaut.currentState == AstronautAI.FSMStates.Patrol)
+                    astronaut.Alert();
+            }
+            if (other.gameObject.CompareTag("Robot"))
+            {
+                RobotAI robot = other.gameObject.GetComponent<RobotAI>();
+                if (robot.currentState == RobotAI.FSMStates.Idle || 
+                    robot.currentState == RobotAI.FSMStates.Patrol) 
+                    robot.Alert();
+            }
+        }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, currentAlertRadius);
     }
     
 }

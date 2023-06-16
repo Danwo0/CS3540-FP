@@ -24,7 +24,6 @@ public class RobotAI : MonoBehaviour
     public float shootRate = 1.0f;
     public float alertTimer = 5.0f;
     public float bulletSpeed = 25f;
-    public int damage = 20;
 
     public GameObject player;
     public GameObject bulletPrefab;
@@ -42,6 +41,7 @@ public class RobotAI : MonoBehaviour
     private float distanceToPlayer;
     private bool playerInFOV;
     private float elapsedTime = 0;
+    private Vector3 alertPosition;
 
     private RobotVision visionScript;
     private EnemyHealth enemyHealth;
@@ -74,10 +74,9 @@ public class RobotAI : MonoBehaviour
     {
         if (LevelManager.isGameOver) return;
         
-        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        UpdateValues();
 
-        health = enemyHealth.currentHealth;
-
+        print(gameObject.name + " " + currentState);
         switch (currentState)
         {
             case FSMStates.Patrol:
@@ -104,6 +103,21 @@ public class RobotAI : MonoBehaviour
             currentState = FSMStates.Dead;
         }
     }
+    
+    void UpdateValues()
+    {
+        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        
+        int prevHealth = health;
+        health = enemyHealth.currentHealth;
+
+        if (health < prevHealth)
+        {
+            currentState = FSMStates.Alert;
+            elapsedTime = 0;
+            alertPosition = player.transform.position;
+        }
+    }
 
     public void PlayerSeen(bool newPlayerSeen)
     {
@@ -112,9 +126,22 @@ public class RobotAI : MonoBehaviour
 
     public void Alert()
     {
-        this.currentState = FSMStates.Alert;
-        elapsedTime = 0;
-        visionScript.ToggleIndicator(false);
+        if (currentState == FSMStates.Idle || currentState == FSMStates.Patrol)
+        {
+            this.currentState = FSMStates.Alert;
+            elapsedTime = 0;
+            alertPosition = player.transform.position;
+        }
+    }
+
+    public void GunshotAlert()
+    {
+        if (currentState == FSMStates.Idle || currentState == FSMStates.Patrol || currentState == FSMStates.Alert)
+        {
+            this.currentState = FSMStates.Alert;
+            elapsedTime = 0;
+            alertPosition = player.transform.position;
+        }
     }
 
     void UpdatePatrolState()
@@ -144,19 +171,19 @@ public class RobotAI : MonoBehaviour
 
     void UpdateAlertState()
     {
-        print("Alert!");
-
         if (distanceToPlayer < chaseDistance)
         {
+            visionScript.ToggleIndicator(false);
             currentState = FSMStates.Chase;
         }
 
         if (elapsedTime > alertTimer)
         {
+            visionScript.ToggleIndicator(true);
             currentState = FSMStates.Patrol;
         }
 
-        FaceTarget(player.transform.position);
+        FaceTarget(alertPosition);
     }
 
     void UpdateChaseState()
@@ -235,7 +262,7 @@ public class RobotAI : MonoBehaviour
         // agent.SetDestination(nextDestination);
     }
 
-    void FaceTarget(Vector3 target)
+    public void FaceTarget(Vector3 target)
     {
         Vector3 directionToTarget = (target - transform.position).normalized;
         directionToTarget.y = 0;
@@ -253,7 +280,6 @@ public class RobotAI : MonoBehaviour
             GameObject bullet = Instantiate
                 (bulletPrefab, bulletSource.position + bulletSource.forward, bulletSource.rotation) as GameObject;
 
-            bullet.GetComponent<EnemyBulletBehavior>().SetDamage(damage);
             bullet.transform.LookAt(player.transform);
 
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
@@ -266,12 +292,12 @@ public class RobotAI : MonoBehaviour
             elapsedTime = 0f;
         }
     }
-
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
-
+        
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, chaseDistance);
     }

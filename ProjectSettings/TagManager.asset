@@ -4,14 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
   - ProjectileParent
-  - Projectile
   - EnemyBullet
   - CinemachineTarget
   - PlayerTarget
-  - IgnoreCollision
   - PlayerProjectile
+  - Astronaut
+  - Robot
+  - Solider
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX

@@ -26,7 +26,7 @@ public class EnemyHit : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.collider.CompareTag("Projectile"))
+        if (other.collider.CompareTag("PlayerProjectile"))
         {
             Destroy(transform.parent.gameObject);
         }

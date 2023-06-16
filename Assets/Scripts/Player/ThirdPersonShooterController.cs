@@ -28,6 +28,7 @@ public class ThirdPersonShooterController : MonoBehaviour
     public float normalSensitivity = 1f;
     public float aimSensitivity = 0.6f;
     public float projectileSpeed = 100f;
+    public float shootingAlertRadius = 20f;
 
     private Animator anim;
     
@@ -127,6 +128,7 @@ public class ThirdPersonShooterController : MonoBehaviour
             {
                 anim.SetBool("attackRanged", true);
                 Invoke("FireProjectile", 0.2f);
+                AlertNearby();
             }
             else if (weaponType == 1)
             {
@@ -171,5 +173,34 @@ public class ThirdPersonShooterController : MonoBehaviour
         projectile.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
 
         AudioSource.PlayClipAtPoint(meleeSFX, transform.position);
+    }
+    
+    void AlertNearby()
+    {
+        Collider[] others =  Physics.OverlapSphere(transform.position, shootingAlertRadius);
+
+        foreach(Collider other in others)
+        {
+            if (other.gameObject.CompareTag("Astronaut"))
+            {
+                AstronautAI astronaut = other.gameObject.GetComponent<AstronautAI>();
+                if (astronaut.currentState == AstronautAI.FSMStates.Idle ||
+                    astronaut.currentState == AstronautAI.FSMStates.Patrol)
+                    astronaut.GunshotAlert();
+            }
+            if (other.gameObject.CompareTag("Robot"))
+            {
+                RobotAI robot = other.gameObject.GetComponent<RobotAI>();
+                if (robot.currentState == RobotAI.FSMStates.Idle || 
+                    robot.currentState == RobotAI.FSMStates.Patrol) 
+                    robot.GunshotAlert();
+            }
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, shootingAlertRadius);
     }
 }
