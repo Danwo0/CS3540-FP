@@ -41,6 +41,7 @@ public class RobotAI : MonoBehaviour
     private float distanceToPlayer;
     private bool playerInFOV;
     private float elapsedTime = 0;
+    private Vector3 alertPosition;
 
     private RobotVision visionScript;
     private EnemyHealth enemyHealth;
@@ -73,10 +74,9 @@ public class RobotAI : MonoBehaviour
     {
         if (LevelManager.isGameOver) return;
         
-        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        UpdateValues();
 
-        health = enemyHealth.currentHealth;
-
+        print(gameObject.name + " " + currentState);
         switch (currentState)
         {
             case FSMStates.Patrol:
@@ -103,6 +103,21 @@ public class RobotAI : MonoBehaviour
             currentState = FSMStates.Dead;
         }
     }
+    
+    void UpdateValues()
+    {
+        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        
+        int prevHealth = health;
+        health = enemyHealth.currentHealth;
+
+        if (health < prevHealth)
+        {
+            currentState = FSMStates.Alert;
+            elapsedTime = 0;
+            alertPosition = player.transform.position;
+        }
+    }
 
     public void PlayerSeen(bool newPlayerSeen)
     {
@@ -113,6 +128,7 @@ public class RobotAI : MonoBehaviour
     {
         this.currentState = FSMStates.Alert;
         elapsedTime = 0;
+        alertPosition = player.transform.position;
         visionScript.ToggleIndicator(false);
     }
 
@@ -147,6 +163,7 @@ public class RobotAI : MonoBehaviour
 
         if (distanceToPlayer < chaseDistance)
         {
+            visionScript.ToggleIndicator(false);
             currentState = FSMStates.Chase;
         }
 

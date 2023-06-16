@@ -40,6 +40,7 @@ public class AstronautAI : MonoBehaviour
     private float distanceToPlayer;
     private bool playerInFOV;
     private float elapsedTime = 0;
+    private Vector3 alertPosition;
 
     private AstronautVision visionScript;
     private EnemyHealth enemyHealth;
@@ -76,27 +77,22 @@ public class AstronautAI : MonoBehaviour
             keyEnemyCount = 0;
             return;
         }
+
+        UpdateValues();
         
-        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
-        health = enemyHealth.currentHealth;
-
+        print(gameObject.name + " " + currentState);
         switch (currentState)
         {
             case FSMStates.Patrol:
-                Debug.Log("State: Patrol");
                 UpdatePatrolState();
                 break;
             case FSMStates.Alert:
-                Debug.Log("State: Alert");
                 UpdateAlertState();
                 break;
             case FSMStates.Chase:
-                Debug.Log("State: Chase");
                 UpdateChaseState();
                 break;
             case FSMStates.Attack:
-                Debug.Log("State: Attack");
                 UpdateAttackState();
                 break;
             case FSMStates.Dead:
@@ -112,6 +108,21 @@ public class AstronautAI : MonoBehaviour
         }
     }
 
+    void UpdateValues()
+    {
+        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        
+        int prevHealth = health;
+        health = enemyHealth.currentHealth;
+
+        if (health < prevHealth)
+        {
+            currentState = FSMStates.Alert;
+            elapsedTime = 0;
+            alertPosition = player.transform.position;
+        }
+    }
+
     public void PlayerSeen(bool newPlayerSeen)
     {
         this.playerInFOV = newPlayerSeen;
@@ -122,6 +133,7 @@ public class AstronautAI : MonoBehaviour
     {
         this.currentState = FSMStates.Alert;
         elapsedTime = 0;
+        alertPosition = player.transform.position;
         visionScript.ToggleIndicator(false);
     }
 
@@ -174,6 +186,7 @@ public class AstronautAI : MonoBehaviour
 
         if (distanceToPlayer < chaseDistance)
         {
+            visionScript.ToggleIndicator(false);
             currentState = FSMStates.Chase;
         }
 
@@ -183,7 +196,7 @@ public class AstronautAI : MonoBehaviour
             currentState = FSMStates.Patrol;
         }
 
-        FaceTarget(player.transform.position);
+        //FaceTarget(player.transform.position);
     }
 
     void UpdateChaseState()
@@ -265,7 +278,7 @@ public class AstronautAI : MonoBehaviour
         // agent.SetDestination(nextDestination);
     }
 
-    public void FaceTarget(Vector3 target)
+    void FaceTarget(Vector3 target)
     {
         Vector3 directionToTarget = (target - transform.position).normalized;
         directionToTarget.y = 0;

@@ -6,10 +6,12 @@ public class ProjectileBehavior : MonoBehaviour
 {
     public int damage = 10;
     public float duration = 5f;
+    public Vector3 origin;
     
     void Start()
     {
         Destroy(gameObject, duration);
+        origin = transform.position;
     }
     
     private void OnCollisionEnter(Collision collision)

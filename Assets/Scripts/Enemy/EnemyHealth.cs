@@ -7,9 +7,8 @@ public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth = 100;
     public Slider healthBar;
-
     public int currentHealth;
-
+    
     void Awake()
     {
         healthBar = GetComponentInChildren<Slider>();
@@ -29,7 +28,17 @@ public class EnemyHealth : MonoBehaviour
             currentHealth -= damageAmount;
             healthBar.value = currentHealth;
         }
+    }
 
-        Debug.Log("Current Health:" + currentHealth);
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerProjectile"))
+        {
+            Vector3 source = collision.gameObject.GetComponent<ProjectileBehavior>().origin;
+            Vector3 directionToTarget = (source - transform.position).normalized;
+            directionToTarget.y = 0;
+            Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
+            transform.rotation = lookRotation;
+        }
     }
 }
