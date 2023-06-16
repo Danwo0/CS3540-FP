@@ -24,7 +24,6 @@ public class RobotAI : MonoBehaviour
     public float shootRate = 1.0f;
     public float alertTimer = 5.0f;
     public float bulletSpeed = 25f;
-    public int damage = 20;
 
     public GameObject player;
     public GameObject bulletPrefab;
@@ -236,7 +235,7 @@ public class RobotAI : MonoBehaviour
         // agent.SetDestination(nextDestination);
     }
 
-    void FaceTarget(Vector3 target)
+    public void FaceTarget(Vector3 target)
     {
         Vector3 directionToTarget = (target - transform.position).normalized;
         directionToTarget.y = 0;
@@ -254,7 +253,6 @@ public class RobotAI : MonoBehaviour
             GameObject bullet = Instantiate
                 (bulletPrefab, bulletSource.position + bulletSource.forward, bulletSource.rotation) as GameObject;
 
-            bullet.GetComponent<EnemyBulletBehavior>().SetDamage(damage);
             bullet.transform.LookAt(player.transform);
 
             Rigidbody rb = bullet.GetComponent<Rigidbody>();

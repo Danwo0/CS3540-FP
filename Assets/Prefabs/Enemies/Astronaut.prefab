@@ -1119,7 +1119,6 @@ GameObject:
   - component: {fileID: 8691091483422425810}
   - component: {fileID: 8691091483422425809}
   - component: {fileID: 3031099752181241211}
-  - component: {fileID: 1039148094}
   m_Layer: 2
   m_Name: Vision
   m_TagString: Untagged
@@ -1160,18 +1159,6 @@ MonoBehaviour:
   m_isTrigger: 1
   m_isFixScale: 1
 --- !u!114 &3031099752181241211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8691091483422425811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bfe32ea3385fff4db0cdb2ee28b1898, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1039148094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

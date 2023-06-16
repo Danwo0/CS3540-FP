@@ -265,7 +265,7 @@ public class AstronautAI : MonoBehaviour
         // agent.SetDestination(nextDestination);
     }
 
-    void FaceTarget(Vector3 target)
+    public void FaceTarget(Vector3 target)
     {
         Vector3 directionToTarget = (target - transform.position).normalized;
         directionToTarget.y = 0;
