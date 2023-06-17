@@ -15,16 +15,12 @@ public class EnemyBulletBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        Debug.Log(other.gameObject.name);
         if (other.collider.CompareTag("Player"))
         {
             var playerHealth = other.collider.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage(damageAmount);
         }
         Destroy(gameObject);
-    }
-
-    public void SetDamage(int newDamage)
-    {
-        damageAmount = newDamage;
     }
 }

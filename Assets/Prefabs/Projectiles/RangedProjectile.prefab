@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5615397503765701615}
   - component: {fileID: 5876334139601885143}
   - component: {fileID: 3352252355208316773}
-  - component: {fileID: 4315753404206566494}
   - component: {fileID: -8742625409183397691}
   m_Layer: 0
   m_Name: RangedProjectile
@@ -116,19 +115,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &4315753404206566494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8726825292919489769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f405dcd8b3b9d7c44b331f807bfe9121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 0.5
 --- !u!114 &-8742625409183397691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,3 +128,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  duration: 0.5
+  origin: {x: 0, y: 0, z: 0}

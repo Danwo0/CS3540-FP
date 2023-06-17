@@ -26,6 +26,7 @@ public class RobotAI : MonoBehaviour
     public float bulletSpeed = 25f;
 
     public GameObject player;
+    public GameObject playerTarget;
     public GameObject bulletPrefab;
 
     public AudioClip shootSFX;
@@ -56,6 +57,7 @@ public class RobotAI : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget");
         // wanderPoints = GameObject.FindGameObjectsWithTag("WanderPoint");
         // anim = GetComponent<Animator>();
         // wandTip = GameObject.FindGameObjectWithTag("WandTip");
@@ -280,7 +282,7 @@ public class RobotAI : MonoBehaviour
             GameObject bullet = Instantiate
                 (bulletPrefab, bulletSource.position + bulletSource.forward, bulletSource.rotation) as GameObject;
 
-            bullet.transform.LookAt(player.transform);
+            bullet.transform.LookAt(playerTarget.transform.position);
 
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.VelocityChange);
