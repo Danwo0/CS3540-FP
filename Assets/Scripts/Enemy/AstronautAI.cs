@@ -25,19 +25,14 @@ public class AstronautAI : MonoBehaviour
     public float enemySpeed = 5.0f;
     public float shootRate = 1.0f;
     public float alertTimer = 5.0f;
-<<<<<<< Updated upstream
     public float alertRadius = 20f;
 
-    public GameObject player;
-    public GameObject meleePrefab;
-=======
     public float fieldOfView = 45f;
 
     public GameObject player;
     public GameObject meleePrefab;
     public GameObject alertSphere;
     public Transform enemyEyes;
->>>>>>> Stashed changes
 
     public AudioClip meleeSFX;
     public AudioClip deadSFX;
@@ -145,7 +140,6 @@ public class AstronautAI : MonoBehaviour
         }
     }
 
-<<<<<<< Updated upstream
     public void GunshotAlert()
     {
         if (currentState == FSMStates.Idle || currentState == FSMStates.Patrol || currentState == FSMStates.Alert)
@@ -199,8 +193,6 @@ public class AstronautAI : MonoBehaviour
         // agent.SetDestination(nextDestination);
     }
 
-=======
->>>>>>> Stashed changes
     void UpdateAlertState()
     {
         if (distanceToPlayer < chaseDistance)
@@ -276,17 +268,12 @@ public class AstronautAI : MonoBehaviour
     void UpdateDeadState()
     {
         // anim.SetInteger("animState", 4);
-
-<<<<<<< Updated upstream
         AudioSource.PlayClipAtPoint(deadSFX, transform.position, 2f);
         
         keyEnemyCount--;
         if (keyEnemyCount <= 0) lm.LevelBeat();
         
         Destroy(gameObject);
-=======
-        Destroy(gameObject, 3);
->>>>>>> Stashed changes
     }
 
     void FindNextPoint()
