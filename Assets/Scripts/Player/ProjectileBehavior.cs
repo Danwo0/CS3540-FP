@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,6 +37,7 @@ public class ProjectileBehavior : MonoBehaviour
     private bool isFired = false;
     void Start()
     {
+        Destroy(gameObject, duration);
         origin = transform.position;
         startingScale = transform.localScale;
     }
