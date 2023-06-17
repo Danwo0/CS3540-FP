@@ -5,13 +5,21 @@ using UnityEngine;
 
 public class ProjectileBehavior : MonoBehaviour
 {
+    public enum AttackType
+    {
+        Melee,
+        Ranged
+    }
     public int baseDamage = 10;
     public float baseSpeed = 25f;
     public float baseGrowRate = 1f;
     public float baseDistance = 125f;
+    public AttackType type;
+    public AudioClip fireSFX;
+    public Sprite sprite;
     
     public Vector3 origin;
-
+    
     private float damageScale = 1.0f;
     private float speedScale = 1.0f;
     private float sizeScale = 1.0f;
@@ -24,18 +32,23 @@ public class ProjectileBehavior : MonoBehaviour
     private float finalDistance;
     private float duration;
 
+    private Vector3 startingScale;
+    
     private bool isReady = false;
     private bool isFired = false;
     void Start()
     {
         origin = transform.position;
+        startingScale = transform.localScale;
     }
 
     private void Update()
     {
         if (isFired)
         {
-            transform.localScale *= finalGrow;
+            // grows by finalGrow% of starting scale every frame
+            // i.e. 1.1 will grow the projectile 10% of base scale every frame
+            transform.localScale += (startingScale * (finalGrow - 1));
         }
         else if (isReady)
         {
@@ -44,7 +57,9 @@ public class ProjectileBehavior : MonoBehaviour
             duration  = finalDistance / finalSpeed;
 
             rb.AddForce(transform.forward * finalSpeed, ForceMode.VelocityChange);
-
+            
+            AudioSource.PlayClipAtPoint(fireSFX, origin);
+            
             isFired = true;
         }
     }
@@ -53,7 +68,7 @@ public class ProjectileBehavior : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Astronaut") || collision.gameObject.CompareTag("Robot"))
         {
-            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(baseDamage);
+            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(finalDamage);
         }
         if (!collision.gameObject.CompareTag("Player"))
         {
@@ -93,5 +108,11 @@ public class ProjectileBehavior : MonoBehaviour
     public void SetReady(bool status)
     {
         isReady = status;
+    }
+
+    public int GetTypeInt()
+    {
+        if (type == AttackType.Ranged) return 0;
+        else return 1;
     }
 }
