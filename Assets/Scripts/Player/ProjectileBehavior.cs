@@ -37,7 +37,6 @@ public class ProjectileBehavior : MonoBehaviour
     private bool isFired = false;
     void Start()
     {
-        Destroy(gameObject, duration);
         origin = transform.position;
         startingScale = transform.localScale;
     }
@@ -59,7 +58,8 @@ public class ProjectileBehavior : MonoBehaviour
             rb.AddForce(transform.forward * finalSpeed, ForceMode.VelocityChange);
             
             AudioSource.PlayClipAtPoint(fireSFX, origin);
-            
+
+            Destroy(gameObject, duration);
             isFired = true;
         }
     }
