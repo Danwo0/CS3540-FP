@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3352252355208316773}
   - component: {fileID: -8742625409183397691}
   m_Layer: 0
-  m_Name: RangedProjectile
+  m_Name: LaserProjectile
   m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7d86f90315e9b749a99eddfe89375b5, type: 2}
+  - {fileID: 2100000, guid: 0fc469c4bb5b13647a9af82d57dc60e4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,6 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555d1282ae59af643bac8b3a4ae258d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  duration: 0.5
+  baseDamage: 5
+  baseSpeed: 100
+  baseGrowRate: 1
+  baseDistance: 150
+  type: 1
+  fireSFX: {fileID: 8300000, guid: bffcd77f0fdb45d4a8725ce7d5dea284, type: 3}
+  sprite: {fileID: 21300000, guid: d4431d5472bf9104baa3002389489c32, type: 3}
   origin: {x: 0, y: 0, z: 0}

@@ -127,6 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555d1282ae59af643bac8b3a4ae258d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
-  duration: 0.1
+  baseDamage: 25
+  baseSpeed: 0.1
+  baseGrowRate: 1
+  baseDistance: 0.1
+  type: 0
+  fireSFX: {fileID: 8300000, guid: 1ebb08ab614f74345945cff93db2ce33, type: 3}
+  sprite: {fileID: 21300000, guid: 0c54bc26e645035489f1d2184d29a8ef, type: 3}
   origin: {x: 0, y: 0, z: 0}
