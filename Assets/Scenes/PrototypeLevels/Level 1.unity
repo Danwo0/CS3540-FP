@@ -2072,6 +2072,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6434160517174333052, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
+      propertyPath: selectionImage
+      value: 
+      objectReference: {fileID: 1106040066}
     - target: {fileID: 7049061234669954310, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: m_Name
       value: AlienPlayer

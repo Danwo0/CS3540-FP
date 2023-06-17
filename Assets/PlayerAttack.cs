@@ -8,12 +8,7 @@ public class PlayerAttack : MonoBehaviour
     public GameObject[] projectiles;
     public Transform projectileOrigin;
     
-    public AudioClip projectileSFX;
-    public AudioClip meleeSFX;
-    
     public Image selectionImage;
-    public Sprite gunSprite;
-    public Sprite meleeSprite;
     
     public float damageScale = 1.0f;
     public float speedScale = 1.0f;
@@ -39,7 +34,6 @@ public class PlayerAttack : MonoBehaviour
         anim = GetComponent<Animator>();
         projectileParent = GameObject.FindGameObjectWithTag("ProjectileParent").transform;
         weaponType = 0;
-        selectionImage.sprite = gunSprite;
     }
 
     // Update is called once per frame
