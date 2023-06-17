@@ -12,7 +12,6 @@ public class ThirdPersonShooterController : MonoBehaviour
     public Transform projectileOrigin;
     public GameObject projectilePrefab;
     public GameObject meleePrefab;
-    public Transform projectileParent;
     
     public AudioClip projectileSFX;
     public AudioClip meleeSFX;
@@ -28,13 +27,8 @@ public class ThirdPersonShooterController : MonoBehaviour
 
     public float normalSensitivity = 1f;
     public float aimSensitivity = 0.6f;
+    public float projectileSpeed = 100f;
     public float shootingAlertRadius = 20f;
-
-    public float damageScale = 1.0f;
-    public float speedScale = 1.0f;
-    public float sizeScale = 1.0f;
-    public float growScale = 1.0f;
-    public float distanceScale = 1.0f;
 
     private Animator anim;
     
@@ -50,7 +44,6 @@ public class ThirdPersonShooterController : MonoBehaviour
         mouseLook = GetComponent<CameraController>();
         controller = GetComponent<ThirdPersonMovementController>();
         anim = GetComponent<Animator>();
-        projectileParent = GameObject.FindGameObjectWithTag("ProjectileParent").transform;
         
         isAiming = false;
         weaponType = 0;
@@ -160,10 +153,11 @@ public class ThirdPersonShooterController : MonoBehaviour
         
         GameObject projectile = Instantiate
             (projectilePrefab, projectileOrigin.position, bulletDirection) as GameObject;
+            
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        rb.AddForce(projectile.transform.forward * projectileSpeed, ForceMode.VelocityChange);
 
-        ProjectileConfiguration(projectile);
-
-        projectile.transform.SetParent(projectileParent);
+        projectile.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
 
         AudioSource.PlayClipAtPoint(projectileSFX, transform.position);
     }
@@ -173,20 +167,12 @@ public class ThirdPersonShooterController : MonoBehaviour
         GameObject projectile = Instantiate
             (meleePrefab, projectileOrigin.position + transform.forward * 2, transform.rotation) as GameObject;
 
-        ProjectileConfiguration(projectile);
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        rb.AddForce(transform.forward, ForceMode.VelocityChange);
 
-        projectile.transform.SetParent(projectileParent);
+        projectile.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
 
         AudioSource.PlayClipAtPoint(meleeSFX, transform.position);
-    }
-
-    void ProjectileConfiguration(GameObject projectile)
-    {
-        ProjectileBehavior projectileScript = projectile.GetComponent<ProjectileBehavior>();
-        
-        projectileScript.SetProperties(damageScale, speedScale, sizeScale, growScale, distanceScale);
-        
-        projectileScript.SetReady(true);
     }
     
     void AlertNearby()
