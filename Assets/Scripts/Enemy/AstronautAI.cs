@@ -153,6 +153,7 @@ public class AstronautAI : MonoBehaviour
     {
         if (IsPlayerInClearFOV())
         {
+            print("CHASE");
             currentState = FSMStates.Chase;
             AlertNearby();
         }

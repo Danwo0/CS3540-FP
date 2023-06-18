@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class AstronautVision : MonoBehaviour
 {
-    private AstronautAI aiScript;
     private VisionAdjuster indicatorScript;
     
     void Start()
     {
-        aiScript = transform.parent.gameObject.GetComponent<AstronautAI>();
         indicatorScript = transform.GetChild(0).gameObject.GetComponent<VisionAdjuster>();
     }
     
