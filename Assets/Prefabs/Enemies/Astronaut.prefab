@@ -822,7 +822,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6761353605446791637}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24cb260ed2ea0d842bc97e12f8407bc3, type: 3}
   m_Name: 
@@ -838,6 +838,8 @@ MonoBehaviour:
   meleePrefab: {fileID: 9045565599046844531, guid: 7c0bde66e3602174c82e4e2a5eeed83b, type: 3}
   meleeSFX: {fileID: 8300000, guid: 1ebb08ab614f74345945cff93db2ce33, type: 3}
   deadSFX: {fileID: 8300000, guid: 1fa738313b21f1549ae26fd6e106e156, type: 3}
+  enemyEyes: {fileID: 0}
+  fieldOfView: 45
 --- !u!114 &9172136665421823579
 MonoBehaviour:
   m_ObjectHideFlags: 0

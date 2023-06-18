@@ -136,7 +136,7 @@ public class PlayerAttack : MonoBehaviour
                 AstronautAI astronaut = other.gameObject.GetComponent<AstronautAI>();
                 if (astronaut.currentState == AstronautAI.FSMStates.Idle ||
                     astronaut.currentState == AstronautAI.FSMStates.Patrol)
-                    astronaut.GunshotAlert();
+                    astronaut.Alert();
             }
             if (other.gameObject.CompareTag("Robot"))
             {

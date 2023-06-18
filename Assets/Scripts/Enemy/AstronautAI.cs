@@ -33,23 +33,24 @@ public class AstronautAI : MonoBehaviour
     public AudioClip meleeSFX;
     public AudioClip deadSFX;
     
-    private GameObject[] wanderPoints;
-    private int currentDestinationIndex = 0;
     private Vector3 nextDestination;
 
     private float distanceToPlayer;
-    private bool playerInFOV;
     private float elapsedTime = 0;
+    private float attackElapsedTime = 0;
     private Vector3 alertPosition;
 
     private AstronautVision visionScript;
     private EnemyHealth enemyHealth;
     private int health;
 
+    public Transform enemyEyes;
+    public float fieldOfView = 45f;
+
     private Collider[] nearbyColliders;
 
     // Animator anim;
-    // NavMeshAgent agent;
+    NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
@@ -58,15 +59,14 @@ public class AstronautAI : MonoBehaviour
         
         player = GameObject.FindGameObjectWithTag("Player");
         // anim = GetComponent<Animator>();
-        // agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
 
         enemyHealth = GetComponent<EnemyHealth>();
         visionScript = GetComponentInChildren<AstronautVision>();
         lm = FindObjectOfType<LevelManager>();
         health = enemyHealth.currentHealth;
         
-        currentState = FSMStates.Patrol;
-        //FindNextPoint();
+        currentState = FSMStates.Idle;
     }
 
     // Update is called once per frame
@@ -83,8 +83,8 @@ public class AstronautAI : MonoBehaviour
         print(gameObject.name + " " + currentState);
         switch (currentState)
         {
-            case FSMStates.Patrol:
-                UpdatePatrolState();
+            case FSMStates.Idle:
+                UpdateIdleState();
                 break;
             case FSMStates.Alert:
                 UpdateAlertState();
@@ -122,33 +122,15 @@ public class AstronautAI : MonoBehaviour
             alertPosition = player.transform.position;
         }
     }
-
-    public void PlayerSeen(bool newPlayerSeen)
-    {
-        this.playerInFOV = newPlayerSeen;
-        AlertNearby();
-    }
-    
     public void Alert()
     {
-        if (currentState == FSMStates.Idle || currentState == FSMStates.Patrol)
+        if (currentState == FSMStates.Idle)
         {
             this.currentState = FSMStates.Alert;
             elapsedTime = 0;
             alertPosition = player.transform.position;
         }
     }
-
-    public void GunshotAlert()
-    {
-        if (currentState == FSMStates.Idle || currentState == FSMStates.Patrol || currentState == FSMStates.Alert)
-        {
-            this.currentState = FSMStates.Alert;
-            elapsedTime = 0;
-            alertPosition = player.transform.position;
-        }
-    }
-
     void AlertNearby()
     {
         Collider[] others = Physics.OverlapSphere(transform.position, alertRadius);
@@ -167,43 +149,24 @@ public class AstronautAI : MonoBehaviour
             }
         }
     }
-    void UpdatePatrolState()
+    void UpdateIdleState()
     {
-        // print("Patrolling!");
-        // print(nextDestination);
-
-        // anim.SetInteger("animState", 1);
-
-        // agent.stoppingDistance = 0f;
-        // agent.speed = 3.5f;
-
-        if (Vector3.Distance(transform.position, nextDestination) < 2)
+        if (IsPlayerInClearFOV())
         {
-            FindNextPoint();
-        }
-        else if (playerInFOV)
-        {
-            visionScript.ToggleIndicator(false);
             currentState = FSMStates.Chase;
+            AlertNearby();
         }
-
-        // FaceTarget(nextDestination);
-
-        // agent.SetDestination(nextDestination);
     }
-
     void UpdateAlertState()
     {
-        if (distanceToPlayer < chaseDistance)
+        if (IsPlayerInClearFOV())
         {
-            visionScript.ToggleIndicator(false);
             currentState = FSMStates.Chase;
+            AlertNearby();
         }
-
-        if (elapsedTime > alertTimer)
+        else if (elapsedTime > alertTimer)
         {
-            visionScript.ToggleIndicator(true);
-            currentState = FSMStates.Patrol;
+            currentState = FSMStates.Idle;
         }
 
         FaceTarget(alertPosition);
@@ -211,12 +174,12 @@ public class AstronautAI : MonoBehaviour
 
     void UpdateChaseState()
     {
-        // print("Chasing!");
+        print("Chasing!");
 
         // anim.SetInteger("animState", 2);
 
-        // agent.stoppingDistance = attackDistance;
-        // agent.speed = enemySpeed;
+        agent.stoppingDistance = attackDistance;
+        agent.speed = enemySpeed;
 
         nextDestination = player.transform.position;
 
@@ -226,27 +189,23 @@ public class AstronautAI : MonoBehaviour
         }
         else if (distanceToPlayer > chaseDistance)
         {
-            visionScript.ToggleIndicator(true);
-            currentState = FSMStates.Patrol;
-            FindNextPoint();
+            currentState = FSMStates.Idle;
         }
 
         FaceTarget(nextDestination);
 
-        // transform.position = Vector3.MoveTowards(transform.position, nextDestination, enemySpeed * Time.deltaTime);
-
-        // agent.SetDestination(nextDestination);
+        agent.SetDestination(nextDestination);
     }
 
     void UpdateAttackState()
     {
         // print("Attacking!");
 
-        // agent.stoppingDistance = attackDistance;
+        agent.stoppingDistance = attackDistance;
 
         nextDestination = player.transform.position;
 
-        if (distanceToPlayer < attackDistance)
+        if (distanceToPlayer <= attackDistance)
         {
             currentState = FSMStates.Attack;
         }
@@ -256,9 +215,7 @@ public class AstronautAI : MonoBehaviour
         }
         else if (distanceToPlayer > chaseDistance)
         {
-            visionScript.ToggleIndicator(true);
-            currentState = FSMStates.Patrol;
-            FindNextPoint();
+            currentState = FSMStates.Idle;
         }
 
         FaceTarget(nextDestination);
@@ -279,15 +236,6 @@ public class AstronautAI : MonoBehaviour
         
         Destroy(gameObject);
     }
-
-    void FindNextPoint()
-    {
-        // nextDestination = wanderPoints[currentDestinationIndex].transform.position;
-        // currentDestinationIndex = (currentDestinationIndex + 1) % wanderPoints.Length;
-
-        // agent.SetDestination(nextDestination);
-    }
-
     void FaceTarget(Vector3 target)
     {
         Vector3 directionToTarget = (target - transform.position).normalized;
@@ -298,7 +246,7 @@ public class AstronautAI : MonoBehaviour
 
     void MeleeAttack()
     {
-        if (elapsedTime > shootRate)
+        if (attackElapsedTime > shootRate)
         {
             Vector3 pos = transform.position + transform.forward;
             pos.y += 2;
@@ -313,13 +261,43 @@ public class AstronautAI : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        // attack
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, alertRadius);
-        
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, chaseDistance);
+
+        Gizmos.color = Color.blue;
+        Vector3 frontRayPoint = enemyEyes.position + (enemyEyes.forward * chaseDistance);
+        Vector3 leftRayPoint = Quaternion.Euler(0, fieldOfView * .5f, 0) * frontRayPoint;
+        Vector3 rightRayPoint = Quaternion.Euler(0, -fieldOfView * .5f, 0) * frontRayPoint;
+
+        Debug.DrawLine(enemyEyes.position, frontRayPoint, Color.cyan);
+        Debug.DrawLine(enemyEyes.position, leftRayPoint, Color.yellow);
+        Debug.DrawLine(enemyEyes.position, rightRayPoint, Color.yellow);
+    }
+
+    // courtesy of Calgar Yildrim
+    bool IsPlayerInClearFOV()
+    {
+        RaycastHit hit;
+
+        Vector3 directionToPlayer = player.transform.position - enemyEyes.position;
+
+        if (Vector3.Angle(directionToPlayer, enemyEyes.forward) <= fieldOfView)
+        {
+            if (Physics.Raycast(enemyEyes.position, directionToPlayer, out hit, chaseDistance))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    print("Player in sight!");
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
     }
 }

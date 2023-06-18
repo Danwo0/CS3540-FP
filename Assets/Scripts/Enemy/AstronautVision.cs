@@ -19,7 +19,6 @@ public class AstronautVision : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Entered");
-            aiScript.PlayerSeen(true);
         }
     }
 
@@ -28,7 +27,6 @@ public class AstronautVision : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Exited");
-            aiScript.PlayerSeen(false);
         }
     }
     
