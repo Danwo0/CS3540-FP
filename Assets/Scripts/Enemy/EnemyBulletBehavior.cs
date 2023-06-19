@@ -5,29 +5,22 @@ using UnityEngine;
 
 public class EnemyBulletBehavior : MonoBehaviour
 {
-    public Transform player;
-    public int damageAmount = 30;
+    public int damageAmount = 20;
+    public float duration = 5f;
     
     void Start()
     {
-        if (player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-        }    
+        Destroy(gameObject, duration);
     }
 
     private void OnCollisionEnter(Collision other)
     {
+        Debug.Log(other.gameObject.name);
         if (other.collider.CompareTag("Player"))
         {
             var playerHealth = other.collider.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage(damageAmount);
-            Destroy(gameObject);
         }
-    }
-
-    public void SetDamage(int newDamage)
-    {
-        damageAmount = newDamage;
+        Destroy(gameObject);
     }
 }

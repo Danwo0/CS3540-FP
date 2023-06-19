@@ -3827,11 +3827,11 @@ GameObject:
   - component: {fileID: 7049061234670123302}
   - component: {fileID: 7049061234677372612}
   - component: {fileID: 7049061234677372614}
-  - component: {fileID: 7049061234677372615}
   - component: {fileID: 7049061234677372608}
   - component: {fileID: 7049061234677372611}
   - component: {fileID: 7049061234677372610}
   - component: {fileID: 7049061234677372605}
+  - component: {fileID: 6434160517174333052}
   m_Layer: 0
   m_Name: AlienPlayer
   m_TagString: Player
@@ -3897,20 +3897,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 10, z: 0}
---- !u!136 &7049061234677372615
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7049061234669954310}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 9.962524
-  m_Height: 19.925049
-  m_Direction: 1
-  m_Center: {x: 0, y: 9.27, z: -0.2}
 --- !u!114 &7049061234677372608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3928,6 +3914,7 @@ MonoBehaviour:
   gravity: 9.81
   airControl: 1
   acceleration: 5
+  alertRadius: 5
 --- !u!114 &7049061234677372611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3973,21 +3960,40 @@ MonoBehaviour:
   aimColliderMask:
     serializedVersion: 2
     m_Bits: 1
-  projectileOrigin: {fileID: 5101625129168971460}
-  projectilePrefab: {fileID: 8726825292919489769, guid: d1e53a7b0cfc9304a9940ac0f4afae5a, type: 3}
-  meleePrefab: {fileID: 1377514370119029230, guid: c36d2e0b526354e4a9ad9ff440f6a5e4, type: 3}
-  projectileSFX: {fileID: 8300000, guid: bffcd77f0fdb45d4a8725ce7d5dea284, type: 3}
-  meleeSFX: {fileID: 8300000, guid: 1ebb08ab614f74345945cff93db2ce33, type: 3}
-  jumpSFX: {fileID: 0}
-  landSFX: {fileID: 0}
-  selectionImage: {fileID: 0}
-  gunSprite: {fileID: 21300000, guid: 5a3caf4fed7abb245b13d5775d8e8ba2, type: 3}
-  meleeSprite: {fileID: 21300000, guid: 0c54bc26e645035489f1d2184d29a8ef, type: 3}
   isDebugging: 0
   debug: {fileID: 0}
   normalSensitivity: 1
   aimSensitivity: 0.6
-  projectileSpeed: 100
+  mouseWorldPosition: {x: 0, y: 0, z: 0}
+  isAiming: 0
+--- !u!114 &6434160517174333052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7049061234669954310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef833c98963bf4646b7f96b9d868f178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectiles:
+  - {fileID: 1377514370119029230, guid: c36d2e0b526354e4a9ad9ff440f6a5e4, type: 3}
+  - {fileID: 8726825292919489769, guid: d1e53a7b0cfc9304a9940ac0f4afae5a, type: 3}
+  - {fileID: 8726825292919489769, guid: 8bb01df9b658bc04ba9fa364958208b0, type: 3}
+  projectileOrigin: {fileID: 5101625129168971460}
+  projectileSFX: {fileID: 8300000, guid: b51854597354ccc41b4c03a823a2271d, type: 3}
+  meleeSFX: {fileID: 8300000, guid: 1ebb08ab614f74345945cff93db2ce33, type: 3}
+  selectionImage: {fileID: 0}
+  gunSprite: {fileID: 21300000, guid: 5a3caf4fed7abb245b13d5775d8e8ba2, type: 3}
+  meleeSprite: {fileID: 21300000, guid: 0c54bc26e645035489f1d2184d29a8ef, type: 3}
+  damageScale: 1
+  speedScale: 1
+  sizeScale: 1
+  growScale: 1
+  distanceScale: 1
+  shootingAlertRadius: 10
 --- !u!1 &7049061234669954312
 GameObject:
   m_ObjectHideFlags: 0
