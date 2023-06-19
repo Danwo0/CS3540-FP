@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.VR;
+using UnityEngine.XR;
 
 public class MirrorCameraScript : MonoBehaviour
 {
@@ -204,6 +204,11 @@ public class MirrorCameraScript : MonoBehaviour
     // Cleanup all the objects we possibly have created
     private void OnDisable()
     {
+        if (cameraObject.targetTexture == reflectionTexture)
+        {
+            cameraObject.targetTexture = null; // Unset the target texture before destroying
+        }
+
         if (reflectionTexture)
         {
             DestroyImmediate(reflectionTexture);
