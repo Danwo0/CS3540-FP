@@ -11,7 +11,6 @@ public class AstronautAI : MonoBehaviour
     public enum FSMStates
     {
         Idle,
-        Patrol,
         Alert,
         Chase,
         Attack,
@@ -49,6 +48,7 @@ public class AstronautAI : MonoBehaviour
 
     private Collider[] nearbyColliders;
 
+    Vector3 previousLocation;
     // Animator anim;
     NavMeshAgent agent;
 
@@ -101,6 +101,7 @@ public class AstronautAI : MonoBehaviour
         }
 
         elapsedTime += Time.deltaTime;
+        attackElapsedTime += Time.deltaTime;
 
         if (health <= 0)
         {
@@ -153,7 +154,7 @@ public class AstronautAI : MonoBehaviour
     {
         if (IsPlayerInClearFOV())
         {
-            print("CHASE");
+            previousLocation = transform.position;
             currentState = FSMStates.Chase;
             AlertNearby();
         }
@@ -162,11 +163,13 @@ public class AstronautAI : MonoBehaviour
     {
         if (IsPlayerInClearFOV())
         {
+            previousLocation = transform.position;
             currentState = FSMStates.Chase;
             AlertNearby();
         }
         else if (elapsedTime > alertTimer)
         {
+            nextDestination = previousLocation;
             currentState = FSMStates.Idle;
         }
 
@@ -175,47 +178,42 @@ public class AstronautAI : MonoBehaviour
 
     void UpdateChaseState()
     {
-        print("Chasing!");
-
         // anim.SetInteger("animState", 2);
 
-        agent.stoppingDistance = attackDistance;
         agent.speed = enemySpeed;
 
         nextDestination = player.transform.position;
 
-        if (distanceToPlayer <= attackDistance)
+        if (distanceToPlayer <= attackDistance + .5f)
         {
             currentState = FSMStates.Attack;
         }
         else if (distanceToPlayer > chaseDistance)
         {
+            nextDestination = previousLocation;
             currentState = FSMStates.Idle;
         }
 
         FaceTarget(nextDestination);
-
         agent.SetDestination(nextDestination);
     }
 
     void UpdateAttackState()
     {
-        // print("Attacking!");
-
-        agent.stoppingDistance = attackDistance;
-
         nextDestination = player.transform.position;
 
         if (distanceToPlayer <= attackDistance)
         {
             currentState = FSMStates.Attack;
         }
-        else if (distanceToPlayer > attackDistance && distanceToPlayer <= chaseDistance)
+        else if (distanceToPlayer > attackDistance + .5f && distanceToPlayer <= chaseDistance)
         {
             currentState = FSMStates.Chase;
         }
         else if (distanceToPlayer > chaseDistance)
         {
+            nextDestination = previousLocation;
+            agent.SetDestination(nextDestination);
             currentState = FSMStates.Idle;
         }
 
@@ -256,7 +254,7 @@ public class AstronautAI : MonoBehaviour
             projectile.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
             AudioSource.PlayClipAtPoint(meleeSFX, transform.position);
 
-            elapsedTime = 0f;
+            attackElapsedTime = 0f;
         }
     }
 

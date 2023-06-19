@@ -160,8 +160,7 @@ public class ThirdPersonMovementController : MonoBehaviour
             if (other.gameObject.CompareTag("Astronaut"))
             {
                 AstronautAI astronaut = other.gameObject.GetComponent<AstronautAI>();
-                if (astronaut.currentState == AstronautAI.FSMStates.Idle ||
-                    astronaut.currentState == AstronautAI.FSMStates.Patrol)
+                if (astronaut.currentState == AstronautAI.FSMStates.Idle)
                     astronaut.Alert();
             }
             if (other.gameObject.CompareTag("Robot"))

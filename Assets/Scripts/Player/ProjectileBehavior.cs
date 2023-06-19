@@ -64,7 +64,7 @@ public class ProjectileBehavior : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Astronaut") || collision.gameObject.CompareTag("Robot"))
         {
