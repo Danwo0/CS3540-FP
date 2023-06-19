@@ -30,8 +30,7 @@ public class SoldierAI : MonoBehaviour
     public AudioClip shootSFX;
     public AudioClip deadSFX;
     
-    public Transform barrel1;
-    public Transform barrel2;
+    public Transform barrel;
     
     private GameObject[] wanderPoints;
     private int currentDestinationIndex = 0;
@@ -48,8 +47,6 @@ public class SoldierAI : MonoBehaviour
 
     // Animator anim;
     private UnityEngine.AI.NavMeshAgent agent;
-
-    private int barrel;
 
     // Start is called before the first frame update
     void Start()
@@ -274,11 +271,9 @@ public class SoldierAI : MonoBehaviour
     {
         if (elapsedTime > shootRate)
         {
-            Transform bulletSource = barrel % 2 == 0 ? barrel1 : barrel2;
-            barrel = (barrel + 1) % 2;
 
             GameObject bullet = Instantiate
-                (bulletPrefab, bulletSource.position + bulletSource.forward, bulletSource.rotation) as GameObject;
+                (bulletPrefab, barrel.position + barrel.forward, barrel.rotation) as GameObject;
 
             bullet.transform.LookAt(playerTarget.transform.position);
 
@@ -287,7 +282,7 @@ public class SoldierAI : MonoBehaviour
 
             bullet.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
 
-            AudioSource.PlayClipAtPoint(shootSFX, bulletSource.position);
+            AudioSource.PlayClipAtPoint(shootSFX, barrel.position);
 
             elapsedTime = 0f;
         }
