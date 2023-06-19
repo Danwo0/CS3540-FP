@@ -30,7 +30,7 @@ public class SoldierAI : MonoBehaviour
     public AudioClip shootSFX;
     public AudioClip deadSFX;
     
-    public Transform barrel;
+    public Transform muzzle;
     
     private GameObject[] wanderPoints;
     private int currentDestinationIndex = 0;
@@ -41,7 +41,7 @@ public class SoldierAI : MonoBehaviour
     private float elapsedTime = 0;
     private Vector3 alertPosition;
 
-    private RobotVision visionScript;
+    private SoldierVision visionScript;
     private EnemyHealth enemyHealth;
     private int health;
 
@@ -59,7 +59,7 @@ public class SoldierAI : MonoBehaviour
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         enemyHealth = GetComponent<EnemyHealth>();
-        visionScript = GetComponentInChildren<RobotVision>();
+        visionScript = GetComponentInChildren<SoldierVision>();
         health = enemyHealth.currentHealth;
 
         currentState = FSMStates.Patrol;
@@ -271,9 +271,8 @@ public class SoldierAI : MonoBehaviour
     {
         if (elapsedTime > shootRate)
         {
-
             GameObject bullet = Instantiate
-                (bulletPrefab, barrel.position + barrel.forward, barrel.rotation) as GameObject;
+                (bulletPrefab, muzzle.position + muzzle.forward, muzzle.rotation) as GameObject;
 
             bullet.transform.LookAt(playerTarget.transform.position);
 
@@ -282,7 +281,7 @@ public class SoldierAI : MonoBehaviour
 
             bullet.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
 
-            AudioSource.PlayClipAtPoint(shootSFX, barrel.position);
+            AudioSource.PlayClipAtPoint(shootSFX, muzzle.position);
 
             elapsedTime = 0f;
         }

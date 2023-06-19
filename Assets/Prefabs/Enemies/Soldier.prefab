@@ -611,7 +611,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3018612301519004543}
   - component: {fileID: 3018612301511838947}
-  - component: {fileID: 6813547320670686447}
   m_Layer: 0
   m_Name: Robot_Soldier
   m_TagString: Untagged
@@ -664,19 +663,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!65 &6813547320670686447
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3018612301519240863}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 0.75}
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &3018612301519240865
 GameObject:
   m_ObjectHideFlags: 0
@@ -2906,9 +2892,10 @@ GameObject:
   - component: {fileID: 758211393064275312}
   - component: {fileID: 6661828697469126525}
   - component: {fileID: 4343169078944337740}
+  - component: {fileID: 7535370714034064163}
   m_Layer: 0
   m_Name: Soldier
-  m_TagString: Untagged
+  m_TagString: Soldier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2942,9 +2929,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3012f415b5ed7e45a2ccd306c64b81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 100
+  startingHealth: 50
   healthBar: {fileID: 5265105835668744994}
-  currentHealth: 0
+  currentHealth: 50
 --- !u!114 &6661828697469126525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2969,7 +2956,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 9045565599046844531, guid: 755acdcc4bcd1dd4a87d74a250b8e211, type: 3}
   shootSFX: {fileID: 8300000, guid: bffcd77f0fdb45d4a8725ce7d5dea284, type: 3}
   deadSFX: {fileID: 8300000, guid: 1fa738313b21f1549ae26fd6e106e156, type: 3}
-  barrel: {fileID: 0}
+  muzzle: {fileID: 724153686341100499}
 --- !u!195 &4343169078944337740
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2992,6 +2979,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &7535370714034064163
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7316554639476128452}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 3.5, z: 1.5}
+  m_Center: {x: 0, y: 1.75, z: 0}
 --- !u!1001 &3018612302343459648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3194,6 +3194,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 629045fa9985cd94499aea418191eb74, type: 3}
+--- !u!1 &3268111195489529412 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8808574553100904808, guid: 629045fa9985cd94499aea418191eb74, type: 3}
+  m_PrefabInstance: {fileID: 6297437678040155948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1384226831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3268111195489529412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e6babf10df4de145ba3462714862ee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5036357900848327940 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1333139020807760424, guid: 629045fa9985cd94499aea418191eb74, type: 3}

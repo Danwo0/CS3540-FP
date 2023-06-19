@@ -11,8 +11,8 @@ TagManager:
   - PlayerProjectile
   - Astronaut
   - Robot
-  - Solider
   - EnemyProjectile
+  - Soldier
   layers:
   - Default
   - TransparentFX
