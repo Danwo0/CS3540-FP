@@ -5,9 +5,8 @@ using UnityEngine.AI;
 
 public class AstronautAI : MonoBehaviour
 {
-    public static int keyEnemyCount = 0;
     private LevelManager lm;
-    
+
     public enum FSMStates
     {
         Idle,
@@ -31,7 +30,7 @@ public class AstronautAI : MonoBehaviour
 
     public AudioClip meleeSFX;
     public AudioClip deadSFX;
-    
+
     private Vector3 nextDestination;
 
     private float distanceToPlayer;
@@ -39,7 +38,6 @@ public class AstronautAI : MonoBehaviour
     private float attackElapsedTime = 0;
     private Vector3 alertPosition;
 
-    private AstronautVision visionScript;
     private EnemyHealth enemyHealth;
     private int health;
 
@@ -48,23 +46,21 @@ public class AstronautAI : MonoBehaviour
 
     private Collider[] nearbyColliders;
 
-    Vector3 previousLocation;
     // Animator anim;
     NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
     {
-        keyEnemyCount++;
-        
         player = GameObject.FindGameObjectWithTag("Player");
         // anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
 
         enemyHealth = GetComponent<EnemyHealth>();
-        visionScript = GetComponentInChildren<AstronautVision>();
         lm = FindObjectOfType<LevelManager>();
         health = enemyHealth.currentHealth;
+
+        LevelManager.keyEnemyCount++;
         
         currentState = FSMStates.Idle;
     }
@@ -74,12 +70,11 @@ public class AstronautAI : MonoBehaviour
     {
         if (LevelManager.isGameOver)
         {
-            keyEnemyCount = 0;
             return;
         }
 
         UpdateValues();
-        
+
         print(gameObject.name + " " + currentState);
         switch (currentState)
         {
@@ -103,8 +98,9 @@ public class AstronautAI : MonoBehaviour
         elapsedTime += Time.deltaTime;
         attackElapsedTime += Time.deltaTime;
 
-        if (health <= 0)
+        if (health <= 0 && currentState != FSMStates.Dead)
         {
+            AudioSource.PlayClipAtPoint(deadSFX, transform.position);
             currentState = FSMStates.Dead;
         }
     }
@@ -112,7 +108,7 @@ public class AstronautAI : MonoBehaviour
     void UpdateValues()
     {
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-        
+
         int prevHealth = health;
         health = enemyHealth.currentHealth;
 
@@ -123,6 +119,7 @@ public class AstronautAI : MonoBehaviour
             alertPosition = player.transform.position;
         }
     }
+
     public void Alert()
     {
         if (currentState == FSMStates.Idle)
@@ -132,17 +129,19 @@ public class AstronautAI : MonoBehaviour
             alertPosition = player.transform.position;
         }
     }
+
     void AlertNearby()
     {
         Collider[] others = Physics.OverlapSphere(transform.position, alertRadius);
 
-        foreach(Collider other in others)
+        foreach (Collider other in others)
         {
             if (other.gameObject.CompareTag("Astronaut"))
             {
                 AstronautAI astronaut = other.gameObject.GetComponent<AstronautAI>();
                 astronaut.Alert();
             }
+
             if (other.gameObject.CompareTag("Robot"))
             {
                 RobotAI robot = other.gameObject.GetComponent<RobotAI>();
@@ -150,26 +149,25 @@ public class AstronautAI : MonoBehaviour
             }
         }
     }
+
     void UpdateIdleState()
     {
         if (IsPlayerInClearFOV())
         {
-            previousLocation = transform.position;
             currentState = FSMStates.Chase;
             AlertNearby();
         }
     }
+
     void UpdateAlertState()
     {
         if (IsPlayerInClearFOV())
         {
-            previousLocation = transform.position;
             currentState = FSMStates.Chase;
             AlertNearby();
         }
         else if (elapsedTime > alertTimer)
         {
-            nextDestination = previousLocation;
             currentState = FSMStates.Idle;
         }
 
@@ -190,7 +188,6 @@ public class AstronautAI : MonoBehaviour
         }
         else if (distanceToPlayer > chaseDistance)
         {
-            nextDestination = previousLocation;
             currentState = FSMStates.Idle;
         }
 
@@ -212,8 +209,6 @@ public class AstronautAI : MonoBehaviour
         }
         else if (distanceToPlayer > chaseDistance)
         {
-            nextDestination = previousLocation;
-            agent.SetDestination(nextDestination);
             currentState = FSMStates.Idle;
         }
 
@@ -228,13 +223,15 @@ public class AstronautAI : MonoBehaviour
     {
         // anim.SetInteger("animState", 4);
 
+        GetComponent<BoxCollider>().transform.Translate(Vector3.down * 1000f);
+        
         AudioSource.PlayClipAtPoint(deadSFX, transform.position, 2f);
-        
-        keyEnemyCount--;
-        if (keyEnemyCount <= 0) lm.LevelBeat();
-        
-        Destroy(gameObject);
+
+        LevelManager.keyEnemyCount--;
+
+        Destroy(gameObject, .1f);
     }
+
     void FaceTarget(Vector3 target)
     {
         Vector3 directionToTarget = (target - transform.position).normalized;
@@ -293,10 +290,13 @@ public class AstronautAI : MonoBehaviour
                     print("Player in sight!");
                     return true;
                 }
+
                 return false;
             }
+
             return false;
         }
+
         return false;
     }
 }

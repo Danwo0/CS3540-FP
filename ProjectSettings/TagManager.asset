@@ -14,6 +14,7 @@ TagManager:
   - Solider
   - EnemyProjectile
   - AlertImage
+  - EnemyVision
   layers:
   - Default
   - TransparentFX

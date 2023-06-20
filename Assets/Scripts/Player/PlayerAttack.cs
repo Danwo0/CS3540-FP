@@ -141,8 +141,8 @@ public class PlayerAttack : MonoBehaviour
             {
                 RobotAI robot = other.gameObject.GetComponent<RobotAI>();
                 if (robot.currentState == RobotAI.FSMStates.Idle || 
-                    robot.currentState == RobotAI.FSMStates.Patrol) 
-                    robot.GunshotAlert();
+                    robot.currentState == RobotAI.FSMStates.Idle) 
+                    robot.Alert();
             }
         }
     }

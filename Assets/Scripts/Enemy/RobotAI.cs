@@ -9,7 +9,6 @@ public class RobotAI : MonoBehaviour
     public enum FSMStates
     {
         Idle,
-        Patrol,
         Alert,
         Chase,
         Attack,
@@ -31,12 +30,10 @@ public class RobotAI : MonoBehaviour
 
     public AudioClip shootSFX;
     public AudioClip deadSFX;
-    
+
     public Transform barrel1;
     public Transform barrel2;
-    
-    private GameObject[] wanderPoints;
-    private int currentDestinationIndex = 0;
+
     private Vector3 nextDestination;
 
     private float distanceToPlayer;
@@ -44,9 +41,11 @@ public class RobotAI : MonoBehaviour
     private float elapsedTime = 0;
     private Vector3 alertPosition;
 
-    private RobotVision visionScript;
     private EnemyHealth enemyHealth;
     private int health;
+
+    public Transform enemyEyes;
+    public float fieldOfView = 45f;
 
     // Animator anim;
     private NavMeshAgent agent;
@@ -58,31 +57,26 @@ public class RobotAI : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget");
-        // wanderPoints = GameObject.FindGameObjectsWithTag("WanderPoint");
-        // anim = GetComponent<Animator>();
-        // wandTip = GameObject.FindGameObjectWithTag("WandTip");
         agent = GetComponent<NavMeshAgent>();
 
         enemyHealth = GetComponent<EnemyHealth>();
-        visionScript = GetComponentInChildren<RobotVision>();
         health = enemyHealth.currentHealth;
 
-        currentState = FSMStates.Patrol;
-        //FindNextPoint();
+        currentState = FSMStates.Idle;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (LevelManager.isGameOver) return;
-        
+
         UpdateValues();
 
         print(gameObject.name + " " + currentState);
         switch (currentState)
         {
-            case FSMStates.Patrol:
-                UpdatePatrolState();
+            case FSMStates.Idle:
+                UpdateIdleState();
                 break;
             case FSMStates.Alert:
                 UpdateAlertState();
@@ -100,16 +94,17 @@ public class RobotAI : MonoBehaviour
 
         elapsedTime += Time.deltaTime;
 
-        if (health <= 0)
+        if (health <= 0 && currentState != FSMStates.Dead)
         {
+            AudioSource.PlayClipAtPoint(deadSFX, transform.position);
             currentState = FSMStates.Dead;
         }
     }
-    
+
     void UpdateValues()
     {
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-        
+
         int prevHealth = health;
         health = enemyHealth.currentHealth;
 
@@ -121,14 +116,9 @@ public class RobotAI : MonoBehaviour
         }
     }
 
-    public void PlayerSeen(bool newPlayerSeen)
-    {
-        this.playerInFOV = newPlayerSeen;
-    }
-
     public void Alert()
     {
-        if (currentState == FSMStates.Idle || currentState == FSMStates.Patrol)
+        if (currentState == FSMStates.Idle)
         {
             this.currentState = FSMStates.Alert;
             elapsedTime = 0;
@@ -136,53 +126,23 @@ public class RobotAI : MonoBehaviour
         }
     }
 
-    public void GunshotAlert()
+    void UpdateIdleState()
     {
-        if (currentState == FSMStates.Idle || currentState == FSMStates.Patrol || currentState == FSMStates.Alert)
+        if (IsPlayerInClearFOV())
         {
-            this.currentState = FSMStates.Alert;
-            elapsedTime = 0;
-            alertPosition = player.transform.position;
-        }
-    }
-
-    void UpdatePatrolState()
-    {
-        // print("Patrolling!");
-        // print(nextDestination);
-
-        // anim.SetInteger("animState", 1);
-
-        // agent.stoppingDistance = 0f;
-        // agent.speed = 3.5f;
-
-        if (Vector3.Distance(transform.position, nextDestination) < 2)
-        {
-            FindNextPoint();
-        }
-        else if (playerInFOV)
-        {
-            visionScript.ToggleIndicator(false);
             currentState = FSMStates.Chase;
         }
-
-        // FaceTarget(nextDestination);
-
-        // agent.SetDestination(nextDestination);
     }
 
     void UpdateAlertState()
     {
-        if (distanceToPlayer < chaseDistance)
+        if (IsPlayerInClearFOV())
         {
-            visionScript.ToggleIndicator(false);
             currentState = FSMStates.Chase;
         }
-
-        if (elapsedTime > alertTimer)
+        else if (elapsedTime > alertTimer)
         {
-            visionScript.ToggleIndicator(true);
-            currentState = FSMStates.Patrol;
+            currentState = FSMStates.Idle;
         }
 
         FaceTarget(alertPosition);
@@ -190,54 +150,40 @@ public class RobotAI : MonoBehaviour
 
     void UpdateChaseState()
     {
-        // print("Chasing!");
-
         // anim.SetInteger("animState", 2);
 
-        agent.stoppingDistance = attackDistance;
         agent.speed = enemySpeed;
 
+        nextDestination = player.transform.position;
+
+        if (distanceToPlayer <= attackDistance + .5f)
+        {
+            currentState = FSMStates.Attack;
+        }
+        else if (distanceToPlayer > chaseDistance)
+        {
+            currentState = FSMStates.Idle;
+        }
+
+        FaceTarget(nextDestination);
+        agent.SetDestination(nextDestination);
+    }
+
+    void UpdateAttackState()
+    {
         nextDestination = player.transform.position;
 
         if (distanceToPlayer <= attackDistance)
         {
             currentState = FSMStates.Attack;
         }
-        else if (distanceToPlayer > chaseDistance)
-        {
-            visionScript.ToggleIndicator(true);
-            currentState = FSMStates.Patrol;
-            FindNextPoint();
-        }
-
-        FaceTarget(nextDestination);
-
-        // transform.position = Vector3.MoveTowards(transform.position, nextDestination, enemySpeed * Time.deltaTime);
-
-        agent.SetDestination(nextDestination);
-    }
-
-    void UpdateAttackState()
-    {
-        // print("Attacking!");
-
-        agent.stoppingDistance = attackDistance;
-
-        nextDestination = player.transform.position;
-
-        if (distanceToPlayer < attackDistance)
-        {
-            currentState = FSMStates.Attack;
-        }
-        else if (distanceToPlayer > attackDistance && distanceToPlayer <= chaseDistance)
+        else if (distanceToPlayer > attackDistance + .5f && distanceToPlayer <= chaseDistance)
         {
             currentState = FSMStates.Chase;
         }
         else if (distanceToPlayer > chaseDistance)
         {
-            visionScript.ToggleIndicator(true);
-            currentState = FSMStates.Patrol;
-            FindNextPoint();
+            currentState = FSMStates.Idle;
         }
 
         FaceTarget(nextDestination);
@@ -251,17 +197,8 @@ public class RobotAI : MonoBehaviour
     {
         // anim.SetInteger("animState", 4);
 
-        AudioSource.PlayClipAtPoint(deadSFX, transform.position);
-
-        Destroy(gameObject);
-    }
-
-    void FindNextPoint()
-    {
-        // nextDestination = wanderPoints[currentDestinationIndex].transform.position;
-        // currentDestinationIndex = (currentDestinationIndex + 1) % wanderPoints.Length;
-
-        // agent.SetDestination(nextDestination);
+        GetComponent<SphereCollider>().transform.Translate(Vector3.down * 1000f);
+        Destroy(gameObject, .1f);
     }
 
     public void FaceTarget(Vector3 target)
@@ -294,13 +231,49 @@ public class RobotAI : MonoBehaviour
             elapsedTime = 0f;
         }
     }
-    
+
     private void OnDrawGizmos()
     {
+        // attack
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
-        
+
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, chaseDistance);
+
+        Gizmos.color = Color.blue;
+        Vector3 frontRayPoint = enemyEyes.position + (enemyEyes.forward * chaseDistance);
+        Vector3 leftRayPoint = Quaternion.Euler(0, fieldOfView * .5f, 0) * frontRayPoint;
+        Vector3 rightRayPoint = Quaternion.Euler(0, -fieldOfView * .5f, 0) * frontRayPoint;
+
+        Debug.DrawLine(enemyEyes.position, frontRayPoint, Color.cyan);
+        Debug.DrawLine(enemyEyes.position, leftRayPoint, Color.yellow);
+        Debug.DrawLine(enemyEyes.position, rightRayPoint, Color.yellow);
+    }
+
+    // courtesy of Calgar Yildrim
+    bool IsPlayerInClearFOV()
+    {
+        RaycastHit hit;
+
+        Vector3 directionToPlayer = player.transform.position - enemyEyes.position;
+
+        if (Vector3.Angle(directionToPlayer, enemyEyes.forward) <= fieldOfView)
+        {
+            if (Physics.Raycast(enemyEyes.position, directionToPlayer, out hit, chaseDistance))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    print("Player in sight!");
+                    return true;
+                }
+
+                return false;
+            }
+
+            return false;
+        }
+
+        return false;
     }
 }
