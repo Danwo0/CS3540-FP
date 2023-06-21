@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class AstronautAI : MonoBehaviour
 {
-    private LevelManager lm;
+    public static int keyEnemyCount = 0;
 
     public enum FSMStates
     {
@@ -51,15 +51,13 @@ public class AstronautAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        keyEnemyCount++;
         player = GameObject.FindGameObjectWithTag("Player");
         // anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
 
         enemyHealth = GetComponent<EnemyHealth>();
-        lm = FindObjectOfType<LevelManager>();
         health = enemyHealth.currentHealth;
-
-        LevelManager.keyEnemyCount++;
         
         currentState = FSMStates.Idle;
     }
@@ -100,7 +98,6 @@ public class AstronautAI : MonoBehaviour
         if (health <= 0 && currentState != FSMStates.Dead)
         {
             AudioSource.PlayClipAtPoint(deadSFX, transform.position);
-            lm.DecreaseCounter();
             currentState = FSMStates.Dead;
         }
     }

@@ -16,8 +16,6 @@ public class LevelManager : MonoBehaviour
     public AudioClip gameOverSFX;
     public AudioClip gameWonSFX;
 
-    public static int keyEnemyCount;
-    
     public static bool isGameOver = false;
     public static bool isLightOn = true;
 
@@ -26,7 +24,6 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        keyEnemyCount = 0;
         isGameOver = false;
         isLightOn = true;
         countDown = levelDuration;
@@ -56,15 +53,6 @@ public class LevelManager : MonoBehaviour
         SetCountText();
     }
 
-    public void DecreaseCounter()
-    {
-        keyEnemyCount--;
-        if (keyEnemyCount <= 0)
-        {
-            LevelBeat();
-        }
-    }
-
     private void SetTimerText()
     {
         timerText.text = countDown.ToString("f2");
@@ -72,7 +60,7 @@ public class LevelManager : MonoBehaviour
 
     private void SetCountText()
     {
-        enemyCountText.text = "Targets Left: " + keyEnemyCount.ToString("00");
+        enemyCountText.text = "Targets Left: " + AstronautAI.keyEnemyCount.ToString("00");
     }
     
     public void LevelLost()
