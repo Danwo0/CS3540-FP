@@ -19,7 +19,6 @@ public class ThirdPersonMovementController : MonoBehaviour
     
     private float angVelocity = 0f;
     private float speed = 0f;
-    private string currentItem = "";
     private bool rotateOnMove = true;
 
     private bool isGrounded;
@@ -39,7 +38,6 @@ public class ThirdPersonMovementController : MonoBehaviour
     {
         if (LevelManager.isGameOver) return;
         
-        PowerUp();
         Setup();
         Jump();
         Move();
@@ -134,22 +132,25 @@ public class ThirdPersonMovementController : MonoBehaviour
         rotateOnMove = newRotateOnMove;
     }
     
-    public void setCurrentItem(string item)
+    public void PowerUp(string pickup, float duration)
     {
-        currentItem = item;
-    }
-    
-    void PowerUp()
-    {
-        if(currentItem == "speed")
+        Invoke("PowerDown", duration);
+
+        if(pickup == "speed")
         {
             speedBoost = 1.5f;
             jumpBoost = 1;
-        } else if (currentItem == "jump")
+        } else if (pickup == "jump")
         {
             speedBoost = 1;
             jumpBoost = 2f;
         }
+    }
+
+    void PowerDown()
+    {
+        speedBoost = 1f;
+        jumpBoost = 1f;
     }
     void AlertNearby()
     {

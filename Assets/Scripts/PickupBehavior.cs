@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PickupBehavior : MonoBehaviour
 {
+    public float pickupLifetime = 60f;
     public float duration = 60f;
     public string pickupType = "";
     public AudioClip pickupSFX;
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, duration);
+        Destroy(gameObject, pickupLifetime);
     }
 
     // Update is called once per frame
@@ -24,7 +25,7 @@ public class PickupBehavior : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(pickupSFX, transform.position);
 
-            other.GetComponent<ThirdPersonMovementController>().setCurrentItem(pickupType);
+            other.GetComponent<ThirdPersonMovementController>().PowerUp(pickupType, duration);
 
             Destroy(gameObject);
         }
