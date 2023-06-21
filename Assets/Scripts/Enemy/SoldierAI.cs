@@ -117,9 +117,7 @@ public class SoldierAI : MonoBehaviour
 
         if (health < prevHealth)
         {
-            currentState = FSMStates.Alert;
-            elapsedTime = 0;
-            alertPosition = player.transform.position;
+            Alert();
         }
         
         if (LevelManager.isLightOn)
@@ -263,6 +261,7 @@ public class SoldierAI : MonoBehaviour
         if (isDead) return;
         
         isDead = true;
+        agent.isStopped = true;
         anim.SetInteger("animState", 5);
 
         AudioSource.PlayClipAtPoint(deadSFX, transform.position);
