@@ -98,6 +98,7 @@ public class AstronautAI : MonoBehaviour
         if (health <= 0 && currentState != FSMStates.Dead)
         {
             AudioSource.PlayClipAtPoint(deadSFX, transform.position);
+            keyEnemyCount--;
             currentState = FSMStates.Dead;
         }
     }
