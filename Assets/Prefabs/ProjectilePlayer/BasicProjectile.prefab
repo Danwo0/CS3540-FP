@@ -133,5 +133,5 @@ MonoBehaviour:
   baseDistance: 125
   type: 1
   fireSFX: {fileID: 8300000, guid: b51854597354ccc41b4c03a823a2271d, type: 3}
-  sprite: {fileID: 21300000, guid: 5a3caf4fed7abb245b13d5775d8e8ba2, type: 3}
+  sprite: {fileID: 21300000, guid: 131e961397e39b645adc33118e53cbab, type: 3}
   origin: {x: 0, y: 0, z: 0}
