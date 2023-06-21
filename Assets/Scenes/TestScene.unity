@@ -513,7 +513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &406944677
 Transform:
   m_ObjectHideFlags: 0
@@ -632,17 +632,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &491673102 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 436593224815811149, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
-  m_PrefabInstance: {fileID: 4369137550583572455}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &511499092
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,17 +729,6 @@ Transform:
   m_Father: {fileID: 1632013872}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &516986762 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4860090054972232867, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
-  m_PrefabInstance: {fileID: 4369137550583572455}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &534347877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1272,6 +1250,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2529264756408383456, guid: 0fa2da099acc6ae4c818cbf505de8c72, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264756408383456, guid: 0fa2da099acc6ae4c818cbf505de8c72, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264756408383456, guid: 0fa2da099acc6ae4c818cbf505de8c72, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 2529264756408383458, guid: 0fa2da099acc6ae4c818cbf505de8c72, type: 3}
       propertyPath: m_Name
       value: PowerUpWeaponCanvas
@@ -1383,6 +1373,14 @@ PrefabInstance:
     - target: {fileID: 2529264756645305864, guid: 0fa2da099acc6ae4c818cbf505de8c72, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264757012197161, guid: 0fa2da099acc6ae4c818cbf505de8c72, type: 3}
+      propertyPath: m_CellSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264757012197161, guid: 0fa2da099acc6ae4c818cbf505de8c72, type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fa2da099acc6ae4c818cbf505de8c72, type: 3}
@@ -2084,8 +2082,23 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6792912658097678073, guid: 52aaa0eb94f17ec4cb8a3cf621445688, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.84
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52aaa0eb94f17ec4cb8a3cf621445688, type: 3}
+--- !u!114 &4228137113388301738 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 436593224815811149, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+  m_PrefabInstance: {fileID: 4369137550583572455}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4369137550583572455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2338,11 +2351,11 @@ PrefabInstance:
     - target: {fileID: 7049061234677372610, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: healthText
       value: 
-      objectReference: {fileID: 491673102}
+      objectReference: {fileID: 4228137113388301738}
     - target: {fileID: 7049061234677372610, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: healthSlider
       value: 
-      objectReference: {fileID: 516986762}
+      objectReference: {fileID: 9210082599150416708}
     - target: {fileID: 7049061234677372615, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -2480,11 +2493,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 261600442188382417, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8027850325763812782, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
       propertyPath: m_Name
@@ -2593,11 +2606,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8815181745211056942, guid: b5e8e711fdf383b4295c497370317b88, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8815181745211056942, guid: b5e8e711fdf383b4295c497370317b88, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5e8e711fdf383b4295c497370317b88, type: 3}
+--- !u!114 &9210082599150416708 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4860090054972232867, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+  m_PrefabInstance: {fileID: 4369137550583572455}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
