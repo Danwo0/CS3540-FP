@@ -8,16 +8,11 @@ public class PickupBehavior : MonoBehaviour
     public float duration = 60f;
     public string pickupType = "";
     public AudioClip pickupSFX;
-    // Start is called before the first frame update
+    public Sprite sprite;
+
     void Start()
     {
         Destroy(gameObject, pickupLifetime);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -25,7 +20,7 @@ public class PickupBehavior : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(pickupSFX, transform.position);
 
-            other.GetComponent<ThirdPersonMovementController>().PowerUp(pickupType, duration);
+            other.GetComponent<ThirdPersonMovementController>().PowerUp(pickupType, duration, sprite);
 
             Destroy(gameObject);
         }

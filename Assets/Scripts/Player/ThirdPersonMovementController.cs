@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ThirdPersonMovementController : MonoBehaviour
 {
+    public Text powerUpTimer;
+    public Image powerUpImage;
+
     public float moveSpeed = 5f;
     public float jumpHeight = 3f;
     public float gravity = 9.81f;
@@ -16,6 +20,7 @@ public class ThirdPersonMovementController : MonoBehaviour
     
     private float speedBoost = 1f;
     private float jumpBoost = 1f;
+    private float countDown;
     
     private float angVelocity = 0f;
     private float speed = 0f;
@@ -26,11 +31,16 @@ public class ThirdPersonMovementController : MonoBehaviour
     private float currentAlertRadius;
     private Vector3 moveDirection;
     private float rotateAngle;
+    private Color clean = new Color();
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+
+        clean.a = 0f;
+
+        powerUpImage.color = clean;
     }
 
     // Update is called once per frame
@@ -41,6 +51,16 @@ public class ThirdPersonMovementController : MonoBehaviour
         Setup();
         Jump();
         Move();
+
+        if (countDown > 0)
+        {
+            countDown -= Time.deltaTime;
+
+            powerUpTimer.text = countDown.ToString("f2");
+        } else
+        {
+            powerUpTimer.text = "";
+        }
     }
     
     void Setup()
@@ -131,10 +151,15 @@ public class ThirdPersonMovementController : MonoBehaviour
     {
         rotateOnMove = newRotateOnMove;
     }
-    
-    public void PowerUp(string pickup, float duration)
+
+    public void PowerUp(string pickup, float duration, Sprite sprite)
     {
+        PowerDown();
         Invoke("PowerDown", duration);
+
+        powerUpImage.sprite = sprite;
+        powerUpImage.color = new Color(255,255,255,1);
+        countDown = duration;
 
         if(pickup == "speed")
         {
@@ -149,6 +174,7 @@ public class ThirdPersonMovementController : MonoBehaviour
 
     void PowerDown()
     {
+        powerUpImage.color = clean;
         speedBoost = 1f;
         jumpBoost = 1f;
     }
