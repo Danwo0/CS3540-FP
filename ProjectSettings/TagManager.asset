@@ -11,8 +11,11 @@ TagManager:
   - PlayerProjectile
   - Astronaut
   - Robot
-  - Solider
   - EnemyProjectile
+  - Soldier
+  - AlertImage
+  - EnemyVision
+  - PlayerDetector
   layers:
   - Default
   - TransparentFX

@@ -66,15 +66,18 @@ public class ProjectileBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Astronaut") || collision.gameObject.CompareTag("Robot"))
+        if (collision.gameObject.CompareTag("Astronaut") || collision.gameObject.CompareTag("Robot") || collision.gameObject.CompareTag("Soldier"))
         {
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(finalDamage);
         }
-        if (!collision.gameObject.CompareTag("Player"))
+        if (!(collision.gameObject.CompareTag("Player") 
+              || collision.gameObject.CompareTag("EnemyVision")) 
+              || collision.gameObject.CompareTag("PlayerDetector"))
         {
             Destroy(gameObject);
         }
     }
+    
 
     public void SetProperties
     (float newDamageScale, float newSpeedScale, float newSizeScale, float newGrowScale,float newDistance)
