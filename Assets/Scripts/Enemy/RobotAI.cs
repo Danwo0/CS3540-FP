@@ -47,6 +47,10 @@ public class RobotAI : MonoBehaviour
     public Transform enemyEyes;
     public float fieldOfView = 45f;
 
+    private float curAttackDistance = 15.0f;
+    private float curChaseDistance = 20.0f;
+    private float curFOV = 45f;
+    
     // Animator anim;
     private NavMeshAgent agent;
 
@@ -112,6 +116,19 @@ public class RobotAI : MonoBehaviour
             elapsedTime = 0;
             alertPosition = player.transform.position;
         }
+        
+        if (LevelManager.isLightOn)
+        {
+            curAttackDistance = attackDistance;
+            curChaseDistance = chaseDistance;
+            curFOV = fieldOfView;
+        }
+        else
+        {
+            curAttackDistance = attackDistance * 0.5f;
+            curChaseDistance = chaseDistance * 0.5f;
+            curFOV = fieldOfView * 1.25f;
+        }
     }
 
     public void Alert()
@@ -154,11 +171,11 @@ public class RobotAI : MonoBehaviour
 
         nextDestination = player.transform.position;
 
-        if (distanceToPlayer <= attackDistance + .5f)
+        if (distanceToPlayer <= curAttackDistance + .5f)
         {
             currentState = FSMStates.Attack;
         }
-        else if (distanceToPlayer > chaseDistance)
+        else if (distanceToPlayer > curChaseDistance)
         {
             currentState = FSMStates.Idle;
         }
@@ -171,15 +188,15 @@ public class RobotAI : MonoBehaviour
     {
         nextDestination = player.transform.position;
 
-        if (distanceToPlayer <= attackDistance)
+        if (distanceToPlayer <= curAttackDistance)
         {
             currentState = FSMStates.Attack;
         }
-        else if (distanceToPlayer > attackDistance + .5f && distanceToPlayer <= chaseDistance)
+        else if (distanceToPlayer > curAttackDistance + .5f && distanceToPlayer <= curChaseDistance)
         {
             currentState = FSMStates.Chase;
         }
-        else if (distanceToPlayer > chaseDistance)
+        else if (distanceToPlayer > curChaseDistance)
         {
             currentState = FSMStates.Idle;
         }
@@ -234,19 +251,10 @@ public class RobotAI : MonoBehaviour
     {
         // attack
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackDistance);
+        Gizmos.DrawWireSphere(transform.position, curAttackDistance);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, chaseDistance);
-
-        Gizmos.color = Color.blue;
-        Vector3 frontRayPoint = enemyEyes.position + (enemyEyes.forward * chaseDistance);
-        Vector3 leftRayPoint = Quaternion.Euler(0, fieldOfView * .5f, 0) * frontRayPoint;
-        Vector3 rightRayPoint = Quaternion.Euler(0, -fieldOfView * .5f, 0) * frontRayPoint;
-
-        Debug.DrawLine(enemyEyes.position, frontRayPoint, Color.cyan);
-        Debug.DrawLine(enemyEyes.position, leftRayPoint, Color.yellow);
-        Debug.DrawLine(enemyEyes.position, rightRayPoint, Color.yellow);
+        Gizmos.DrawWireSphere(transform.position, curChaseDistance);
     }
 
     // courtesy of Calgar Yildrim
@@ -256,9 +264,9 @@ public class RobotAI : MonoBehaviour
 
         Vector3 directionToPlayer = player.transform.position - enemyEyes.position;
 
-        if (Vector3.Angle(directionToPlayer, enemyEyes.forward) <= fieldOfView)
+        if (Vector3.Angle(directionToPlayer, enemyEyes.forward) <= curFOV)
         {
-            if (Physics.Raycast(enemyEyes.position, directionToPlayer, out hit, chaseDistance))
+            if (Physics.Raycast(enemyEyes.position, directionToPlayer, out hit, curChaseDistance))
             {
                 if (hit.collider.CompareTag("PlayerDetector"))
                 {

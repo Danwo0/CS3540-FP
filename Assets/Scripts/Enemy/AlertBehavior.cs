@@ -13,7 +13,7 @@ public class AlertBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (AlertCounter.alertedCounter > 0)
+        if (AlertCounter.alertedCounter > 0 || ProxAlertCounter.alertedCounter > 0)
         {
             transform.Find("AlertDanger").gameObject.SetActive(true);
         }

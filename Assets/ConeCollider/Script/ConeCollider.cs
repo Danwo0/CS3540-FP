@@ -115,7 +115,7 @@ public class ConeCollider : MonoBehaviour {
         }
         else
         {
-            float newAngle = startingAngle * 1.5f;
+            float newAngle = startingAngle * 1.25f;
             float newDistance = startingDistance * 0.5f;
             
             m_angle = newAngle;

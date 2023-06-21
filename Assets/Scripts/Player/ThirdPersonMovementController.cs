@@ -24,7 +24,7 @@ public class ThirdPersonMovementController : MonoBehaviour
 
     private bool isGrounded;
     private bool isRunning;
-    private float currentAlertRadius;
+    public float currentAlertRadius;
     private Vector3 moveDirection;
     private float rotateAngle;
 

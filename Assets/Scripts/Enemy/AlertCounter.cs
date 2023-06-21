@@ -6,11 +6,14 @@ using UnityEngine;
 public class AlertCounter : MonoBehaviour
 {
     public static int alertedCounter;
+
+    private bool detected = false;
     
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            detected = true;
             alertedCounter++;
             Debug.Log("current count: " + alertedCounter);
         }
@@ -20,6 +23,7 @@ public class AlertCounter : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            detected = false;
             alertedCounter--;
             Debug.Log("current count: " + alertedCounter);
         }
@@ -27,7 +31,7 @@ public class AlertCounter : MonoBehaviour
 
     private void OnDestroy()
     {
-        alertedCounter--;
+        if (detected) alertedCounter--;
         Debug.Log("current count: " + alertedCounter);
     }
 }
