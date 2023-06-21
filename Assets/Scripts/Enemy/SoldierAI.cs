@@ -176,13 +176,17 @@ public class SoldierAI : MonoBehaviour
 
     void UpdateAlertState()
     {
+        agent.isStopped = true;
+        
         if (IsPlayerInClearFOV())
         {
+            agent.isStopped = false;
             currentState = FSMStates.Chase;
         }
 
         if (elapsedTime > alertTimer)
         {
+            agent.isStopped = false;
             ReturnToNeutral();
         }
 
@@ -204,7 +208,7 @@ public class SoldierAI : MonoBehaviour
         {
             currentState = FSMStates.Attack;
         }
-        else if (distanceToPlayer > curChaseDistance)
+        else if (distanceToPlayer > curChaseDistance + .5f)
         {
             ReturnToNeutral();
         }
@@ -259,6 +263,7 @@ public class SoldierAI : MonoBehaviour
         else
         {
             currentState = FSMStates.Idle;
+            agent.SetDestination(transform.position);
         }
     }
     void FindNextPoint()

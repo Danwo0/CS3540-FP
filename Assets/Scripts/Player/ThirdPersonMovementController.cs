@@ -169,6 +169,14 @@ public class ThirdPersonMovementController : MonoBehaviour
                 if (robot.currentState == RobotAI.FSMStates.Idle) 
                     robot.Alert();
             }
+            if (other.gameObject.CompareTag("Soldier"))
+            {
+                Debug.Log(other.gameObject.name);
+                SoldierAI soldier = other.gameObject.GetComponent<SoldierAI>();
+                if (soldier.currentState == SoldierAI.FSMStates.Idle ||
+                    soldier.currentState == SoldierAI.FSMStates.Patrol) 
+                    soldier.Alert();
+            }
         }
     }
     

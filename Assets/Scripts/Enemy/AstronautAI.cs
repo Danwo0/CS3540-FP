@@ -162,6 +162,12 @@ public class AstronautAI : MonoBehaviour
                 RobotAI robot = other.gameObject.GetComponent<RobotAI>();
                 robot.Alert();
             }
+            
+            if (other.gameObject.CompareTag("Soldier"))
+            {
+                SoldierAI soldier = other.gameObject.GetComponent<SoldierAI>();
+                soldier.Alert();
+            }
         }
     }
 
