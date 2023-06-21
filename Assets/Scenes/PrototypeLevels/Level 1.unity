@@ -2044,10 +2044,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7049061234677372605, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
-      propertyPath: selectionImage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7049061234677372605, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: aimVirtualCamera
       value: 
       objectReference: {fileID: 1702132505}
@@ -2067,10 +2063,6 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 4860090055070127998}
-    - target: {fileID: 7049061234677372614, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
-      propertyPath: m_StepOffset
-      value: 0.3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
 --- !u!1001 &1813496357
