@@ -47,8 +47,7 @@ public class AstronautAI : MonoBehaviour
     private Collider[] nearbyColliders;
 
     // Animator anim;
-    NavMeshAgent agent;
-
+    private NavMeshAgent agent;
     // Start is called before the first frame update
     void Start()
     {
@@ -227,7 +226,7 @@ public class AstronautAI : MonoBehaviour
         
         AudioSource.PlayClipAtPoint(deadSFX, transform.position, 2f);
 
-        LevelManager.keyEnemyCount--;
+        lm.DecreaseCounter();
 
         Destroy(gameObject, .1f);
     }

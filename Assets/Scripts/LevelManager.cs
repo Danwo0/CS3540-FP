@@ -40,10 +40,6 @@ public class LevelManager : MonoBehaviour
         {
             if (countDown > 0)
             {
-                if (keyEnemyCount <= 0)
-                {
-                    LevelBeat();
-                }
                 countDown -= Time.deltaTime;
                 bgmSource.pitch = countDown > levelDuration * 0.25f ? 
                         0.9f + (levelDuration - countDown) / (levelDuration * 0.75f) * 0.2f : 
@@ -58,6 +54,15 @@ public class LevelManager : MonoBehaviour
             SetTimerText();
         }
         SetCountText();
+    }
+
+    public void DecreaseCounter()
+    {
+        keyEnemyCount--;
+        if (keyEnemyCount <= 0)
+        {
+            LevelBeat();
+        }
     }
 
     private void SetTimerText()
