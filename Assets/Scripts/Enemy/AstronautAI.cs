@@ -73,6 +73,7 @@ public class AstronautAI : MonoBehaviour
     {
         if (LevelManager.isGameOver)
         {
+            keyEnemyCount = 0;
             return;
         }
 
@@ -161,6 +162,12 @@ public class AstronautAI : MonoBehaviour
                 RobotAI robot = other.gameObject.GetComponent<RobotAI>();
                 robot.Alert();
             }
+            
+            if (other.gameObject.CompareTag("Soldier"))
+            {
+                SoldierAI soldier = other.gameObject.GetComponent<SoldierAI>();
+                soldier.Alert();
+            }
         }
     }
 
@@ -191,7 +198,8 @@ public class AstronautAI : MonoBehaviour
     void UpdateChaseState()
     {
         // anim.SetInteger("animState", 2);
-
+        
+        agent.stoppingDistance = attackDistance;
         agent.speed = enemySpeed;
 
         nextDestination = player.transform.position;
@@ -211,6 +219,7 @@ public class AstronautAI : MonoBehaviour
 
     void UpdateAttackState()
     {
+        agent.stoppingDistance = attackDistance;
         nextDestination = player.transform.position;
 
         if (distanceToPlayer <= curAttackDistance)

@@ -167,6 +167,7 @@ public class RobotAI : MonoBehaviour
     {
         // anim.SetInteger("animState", 2);
 
+        agent.stoppingDistance = attackDistance;
         agent.speed = enemySpeed;
 
         nextDestination = player.transform.position;
@@ -186,6 +187,8 @@ public class RobotAI : MonoBehaviour
 
     void UpdateAttackState()
     {
+        agent.stoppingDistance = attackDistance;
+        
         nextDestination = player.transform.position;
 
         if (distanceToPlayer <= curAttackDistance)
@@ -257,7 +260,7 @@ public class RobotAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, curChaseDistance);
     }
 
-    // courtesy of Calgar Yildrim
+    // courtesy of Caglar Yildrim
     bool IsPlayerInClearFOV()
     {
         RaycastHit hit;

@@ -144,9 +144,15 @@ public class PlayerAttack : MonoBehaviour
             if (other.gameObject.CompareTag("Robot"))
             {
                 RobotAI robot = other.gameObject.GetComponent<RobotAI>();
-                if (robot.currentState == RobotAI.FSMStates.Idle || 
-                    robot.currentState == RobotAI.FSMStates.Idle) 
+                if (robot.currentState == RobotAI.FSMStates.Idle) 
                     robot.Alert();
+            }
+            if (other.gameObject.CompareTag("Soldier"))
+            {
+                SoldierAI soldier = other.gameObject.GetComponent<SoldierAI>();
+                if (soldier.currentState == SoldierAI.FSMStates.Idle 
+                    || soldier.currentState == SoldierAI.FSMStates.Patrol) 
+                    soldier.Alert();
             }
         }
     }
