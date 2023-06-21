@@ -76,14 +76,11 @@ public class ThirdPersonMovementController : MonoBehaviour
         // on the ground start jumping
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
-            anim.SetBool("isJumping", true);
-            anim.SetBool("isGrounded", false);
             moveDirection.y = Mathf.Sqrt(2 * jumpHeight * jumpBoost * gravity);
         } 
         // on the ground
         else if (isGrounded)
         {
-            anim.SetBool("isGrounded", true);
             moveDirection.y = 0.0f;
         }
         // gravity as constant force
