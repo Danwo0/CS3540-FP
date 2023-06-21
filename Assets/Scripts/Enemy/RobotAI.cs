@@ -97,7 +97,7 @@ public class RobotAI : MonoBehaviour
 
         elapsedTime += Time.deltaTime;
 
-        if (health <= 0 && currentState != FSMStates.Dead)
+        if (health <= 0)
         {
             currentState = FSMStates.Dead;
         }

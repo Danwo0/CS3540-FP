@@ -3010,7 +3010,7 @@ MonoBehaviour:
   attackDistance: 16
   chaseDistance: 25
   enemySpeed: 6
-  shootRate: 0.5
+  shootRate: 0.25
   alertTimer: 5
   bulletSpeed: 50
   player: {fileID: 0}

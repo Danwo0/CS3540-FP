@@ -43,6 +43,7 @@ public class SoldierAI : MonoBehaviour
 
     private EnemyHealth enemyHealth;
     private int health;
+    private bool isDead;
 
     public Transform enemyEyes;
     public float fieldOfView = 45f;
@@ -64,6 +65,7 @@ public class SoldierAI : MonoBehaviour
 
         enemyHealth = GetComponent<EnemyHealth>();
         health = enemyHealth.currentHealth;
+        isDead = false;
 
         ReturnToNeutral();
     }
@@ -258,10 +260,13 @@ public class SoldierAI : MonoBehaviour
 
     void UpdateDeadState()
     {
+        if (isDead) return;
+        
+        isDead = true;
         anim.SetInteger("animState", 5);
 
         AudioSource.PlayClipAtPoint(deadSFX, transform.position);
-        Destroy(gameObject);
+        Destroy(gameObject, 3f);
     }
 
     void ReturnToNeutral()
