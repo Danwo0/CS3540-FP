@@ -100,6 +100,7 @@ public class AstronautAI : MonoBehaviour
         if (health <= 0 && currentState != FSMStates.Dead)
         {
             AudioSource.PlayClipAtPoint(deadSFX, transform.position);
+            lm.DecreaseCounter();
             currentState = FSMStates.Dead;
         }
     }
@@ -223,10 +224,6 @@ public class AstronautAI : MonoBehaviour
         // anim.SetInteger("animState", 4);
 
         GetComponent<BoxCollider>().transform.Translate(Vector3.down * 1000f);
-        
-        AudioSource.PlayClipAtPoint(deadSFX, transform.position, 2f);
-
-        lm.DecreaseCounter();
 
         Destroy(gameObject, .1f);
     }
