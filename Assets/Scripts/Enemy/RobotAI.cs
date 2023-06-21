@@ -72,7 +72,6 @@ public class RobotAI : MonoBehaviour
 
         UpdateValues();
 
-        print(gameObject.name + " " + currentState);
         switch (currentState)
         {
             case FSMStates.Idle:
@@ -96,7 +95,6 @@ public class RobotAI : MonoBehaviour
 
         if (health <= 0 && currentState != FSMStates.Dead)
         {
-            AudioSource.PlayClipAtPoint(deadSFX, transform.position);
             currentState = FSMStates.Dead;
         }
     }
@@ -197,8 +195,8 @@ public class RobotAI : MonoBehaviour
     {
         // anim.SetInteger("animState", 4);
 
-        GetComponent<SphereCollider>().transform.Translate(Vector3.down * 1000f);
-        Destroy(gameObject, .1f);
+        AudioSource.PlayClipAtPoint(deadSFX, transform.position);
+        Destroy(gameObject);
     }
 
     public void FaceTarget(Vector3 target)
@@ -262,9 +260,8 @@ public class RobotAI : MonoBehaviour
         {
             if (Physics.Raycast(enemyEyes.position, directionToPlayer, out hit, chaseDistance))
             {
-                if (hit.collider.CompareTag("Player"))
+                if (hit.collider.CompareTag("PlayerDetector"))
                 {
-                    print("Player in sight!");
                     return true;
                 }
 

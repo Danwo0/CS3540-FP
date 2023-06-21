@@ -33,7 +33,11 @@ public class PlayerAttack : MonoBehaviour
         shooterController = GetComponent<ThirdPersonShooterController>();
         anim = GetComponent<Animator>();
         projectileParent = GameObject.FindGameObjectWithTag("ProjectileParent").transform;
-        weaponType = 0;
+        
+        currentWeapon = 0;
+        ProjectileBehavior properties = projectiles[currentWeapon].GetComponent<ProjectileBehavior>();
+        weaponType = properties.GetTypeInt();
+        selectionImage.sprite = properties.sprite;
     }
 
     // Update is called once per frame

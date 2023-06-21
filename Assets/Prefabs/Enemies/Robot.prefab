@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8774910398174567333}
   - component: {fileID: 2934756544277815760}
+  - component: {fileID: 1581861187}
   m_Layer: 2
   m_Name: Vision
   m_TagString: EnemyVision
@@ -80,6 +81,18 @@ MonoBehaviour:
   m_distance: 30
   m_isTrigger: 1
   m_isFixScale: 1
+--- !u!114 &1581861187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258944690405316837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a1745ca056dfb408c5e12a17a4a601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1786088376641611888
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +104,7 @@ GameObject:
   - component: {fileID: 6807201483398029317}
   - component: {fileID: 8079322599432420887}
   - component: {fileID: 9008971681988987835}
+  - component: {fileID: 181254750}
   m_Layer: 2
   m_Name: VisionIndicator
   m_TagString: Untagged
@@ -128,7 +142,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786088376641611888}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -163,6 +177,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &181254750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786088376641611888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8abe5e6da96634442aad616a2d24c96f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6247815135451774202
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +247,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8027850325763812782}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8, y: 1.2, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -290,7 +316,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8027850325763812782}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.2

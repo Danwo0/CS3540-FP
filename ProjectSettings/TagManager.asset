@@ -15,7 +15,7 @@ TagManager:
   - EnemyProjectile
   - AlertImage
   - EnemyVision
-  - LevelManager
+  - PlayerDetector
   layers:
   - Default
   - TransparentFX

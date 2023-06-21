@@ -812,7 +812,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6761353605446791637}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2, y: 2.5, z: 2}
@@ -1080,6 +1080,7 @@ GameObject:
   - component: {fileID: 8691091483044377232}
   - component: {fileID: 8691091483044377233}
   - component: {fileID: 8691091483044377234}
+  - component: {fileID: 1674313572}
   m_Layer: 2
   m_Name: VisionIndicator
   m_TagString: Untagged
@@ -1152,6 +1153,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1674313572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691091483044377236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8abe5e6da96634442aad616a2d24c96f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8691091483422425811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8691091483422425810}
   - component: {fileID: 8691091483422425809}
+  - component: {fileID: 1510884030}
   m_Layer: 2
   m_Name: Vision
   m_TagString: EnemyVision
@@ -1201,6 +1215,18 @@ MonoBehaviour:
   m_distance: 20
   m_isTrigger: 1
   m_isFixScale: 1
+--- !u!114 &1510884030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691091483422425811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a1745ca056dfb408c5e12a17a4a601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1918809618044588230
 PrefabInstance:
   m_ObjectHideFlags: 0

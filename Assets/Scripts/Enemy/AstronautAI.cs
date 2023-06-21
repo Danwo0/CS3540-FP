@@ -40,6 +40,7 @@ public class AstronautAI : MonoBehaviour
 
     private EnemyHealth enemyHealth;
     private int health;
+    private LevelManager lm;
 
     public Transform enemyEyes;
     public float fieldOfView = 45f;
@@ -55,6 +56,7 @@ public class AstronautAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         // anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        lm = FindObjectOfType<LevelManager>();
 
         enemyHealth = GetComponent<EnemyHealth>();
         health = enemyHealth.currentHealth;
@@ -72,7 +74,6 @@ public class AstronautAI : MonoBehaviour
 
         UpdateValues();
 
-        print(gameObject.name + " " + currentState);
         switch (currentState)
         {
             case FSMStates.Idle:
@@ -97,8 +98,6 @@ public class AstronautAI : MonoBehaviour
 
         if (health <= 0 && currentState != FSMStates.Dead)
         {
-            AudioSource.PlayClipAtPoint(deadSFX, transform.position);
-            keyEnemyCount--;
             currentState = FSMStates.Dead;
         }
     }
@@ -220,10 +219,15 @@ public class AstronautAI : MonoBehaviour
     void UpdateDeadState()
     {
         // anim.SetInteger("animState", 4);
-
-        GetComponent<BoxCollider>().transform.Translate(Vector3.down * 1000f);
-
-        Destroy(gameObject, .1f);
+        AudioSource.PlayClipAtPoint(deadSFX, transform.position);
+        keyEnemyCount--;
+        
+        Destroy(gameObject);
+        
+        if (keyEnemyCount <= 0)
+        {
+            lm.LevelBeat();
+        }
     }
 
     void FaceTarget(Vector3 target)
@@ -279,9 +283,8 @@ public class AstronautAI : MonoBehaviour
         {
             if (Physics.Raycast(enemyEyes.position, directionToPlayer, out hit, chaseDistance))
             {
-                if (hit.collider.CompareTag("Player"))
+                if (hit.collider.CompareTag("PlayerDetector"))
                 {
-                    print("Player in sight!");
                     return true;
                 }
 
