@@ -51,7 +51,7 @@ public class SoldierAI : MonoBehaviour
     private float curChaseDistance = 20.0f;
     private float curFOV = 45f;
     
-    // Animator anim;
+    Animator anim;
     private UnityEngine.AI.NavMeshAgent agent;
 
     // Start is called before the first frame update
@@ -59,8 +59,7 @@ public class SoldierAI : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget");
-        // wanderPoints = GameObject.FindGameObjectsWithTag("WanderPoint");
-        // anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         enemyHealth = GetComponent<EnemyHealth>();
@@ -147,6 +146,7 @@ public class SoldierAI : MonoBehaviour
 
     void UpdateIdleState()
     {
+        anim.SetInteger("animState", 0);
         if (IsPlayerInClearFOV())
         {
             currentState = FSMStates.Chase;
@@ -155,7 +155,7 @@ public class SoldierAI : MonoBehaviour
 
     void UpdatePatrolState()
     {
-        // anim.SetInteger("animState", 1);
+        anim.SetInteger("animState", 1);
 
         agent.stoppingDistance = 0f;
         agent.speed = 3.5f;
@@ -176,6 +176,8 @@ public class SoldierAI : MonoBehaviour
 
     void UpdateAlertState()
     {
+        anim.SetInteger("animState", 2);
+        
         agent.isStopped = true;
         
         if (IsPlayerInClearFOV())
@@ -195,9 +197,7 @@ public class SoldierAI : MonoBehaviour
 
     void UpdateChaseState()
     {
-        // print("Chasing!");
-
-        // anim.SetInteger("animState", 2);
+        anim.SetInteger("animState", 3);
 
         agent.stoppingDistance = attackDistance;
         agent.speed = enemySpeed;
@@ -219,8 +219,8 @@ public class SoldierAI : MonoBehaviour
 
     void UpdateAttackState()
     {
-        // print("Attacking!");
-
+        anim.SetInteger("animState", 4);
+        
         agent.stoppingDistance = attackDistance;
 
         nextDestination = player.transform.position;
@@ -240,14 +240,12 @@ public class SoldierAI : MonoBehaviour
 
         FaceTarget(nextDestination);
 
-        // anim.SetInteger("animState", 3);
-
         ShootProjectile();
     }
 
     void UpdateDeadState()
     {
-        // anim.SetInteger("animState", 4);
+        anim.SetInteger("animState", 5);
 
         AudioSource.PlayClipAtPoint(deadSFX, transform.position);
         Destroy(gameObject);

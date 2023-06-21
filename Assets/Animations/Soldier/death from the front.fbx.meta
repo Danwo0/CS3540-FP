@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1e7939967b5375644952c37a89a69a55
+guid: 4739bad6dfb6e544cb4f39fbf43c8160
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -19,17 +19,12 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'mixamo.com' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'Neck' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n"
-    animationRetargetingWarnings: "\nRetargeting quality report for clip 'mixamo.com':\n\tHead
-      average position error 2.3 mm and maximum position error 2.5 mm at time 0:
-      4 (50.0%) Frame 4\n"
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
