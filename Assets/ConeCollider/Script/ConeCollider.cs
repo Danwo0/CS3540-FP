@@ -16,8 +16,17 @@ public class ConeCollider : MonoBehaviour {
     private Vector3 m_localScale;
     [SerializeField]
     private bool m_isFixScale = true;
-    
+
+    private bool prevLightOn;
+    private float startingAngle;
+    private float startingDistance;
+
     void OnEnable()
+    {
+        Init();
+    }
+
+    private void Init()
     {
         //リソースロード
         GameObject cone = Resources.Load("Prefab/ConeCollider") as GameObject;
@@ -87,18 +96,42 @@ public class ConeCollider : MonoBehaviour {
         }
     }
 
-    void OnDisable()
-    {
-        var meshCollider = gameObject.GetComponent<MeshCollider>();
-        Destroy(meshCollider);
-    }
-
     private void Start() {
+        startingAngle = m_angle;
+        startingDistance = m_distance;
 
+        prevLightOn = true;
     }
 
     private void Update() {
+        bool currentLightOn = LevelManager.isLightOn;
 
+        if (currentLightOn == prevLightOn) return;
+        
+        if (currentLightOn)
+        {
+            m_angle = startingAngle;
+            m_distance = startingDistance;
+        }
+        else
+        {
+            float newAngle = startingAngle * 1.25f;
+            float newDistance = startingDistance * 0.5f;
+            
+            m_angle = newAngle;
+            m_distance = newDistance;
+        }
+
+        prevLightOn = currentLightOn;
+        UpdateConeCollider();
+    }
+
+    private void UpdateConeCollider()
+    {
+        var meshCollider = gameObject.GetComponent<MeshCollider>();
+        Destroy(meshCollider);
+
+        Init();
     }
 
     GameObject DebugObject(Vector3 pos, float scale = 1.0f, string name = "Sphere")
