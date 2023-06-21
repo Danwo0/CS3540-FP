@@ -33,7 +33,11 @@ public class PlayerAttack : MonoBehaviour
         shooterController = GetComponent<ThirdPersonShooterController>();
         anim = GetComponent<Animator>();
         projectileParent = GameObject.FindGameObjectWithTag("ProjectileParent").transform;
-        weaponType = 0;
+        
+        currentWeapon = 0;
+        ProjectileBehavior properties = projectiles[currentWeapon].GetComponent<ProjectileBehavior>();
+        weaponType = properties.GetTypeInt();
+        selectionImage.sprite = properties.sprite;
     }
 
     // Update is called once per frame
@@ -134,16 +138,15 @@ public class PlayerAttack : MonoBehaviour
             if (other.gameObject.CompareTag("Astronaut"))
             {
                 AstronautAI astronaut = other.gameObject.GetComponent<AstronautAI>();
-                if (astronaut.currentState == AstronautAI.FSMStates.Idle ||
-                    astronaut.currentState == AstronautAI.FSMStates.Patrol)
-                    astronaut.GunshotAlert();
+                if (astronaut.currentState == AstronautAI.FSMStates.Idle)
+                    astronaut.Alert();
             }
             if (other.gameObject.CompareTag("Robot"))
             {
                 RobotAI robot = other.gameObject.GetComponent<RobotAI>();
                 if (robot.currentState == RobotAI.FSMStates.Idle || 
-                    robot.currentState == RobotAI.FSMStates.Patrol) 
-                    robot.GunshotAlert();
+                    robot.currentState == RobotAI.FSMStates.Idle) 
+                    robot.Alert();
             }
         }
     }

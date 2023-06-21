@@ -70,11 +70,14 @@ public class ProjectileBehavior : MonoBehaviour
         {
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(finalDamage);
         }
-        if (!collision.gameObject.CompareTag("Player"))
+        if (!(collision.gameObject.CompareTag("Player") 
+              || collision.gameObject.CompareTag("EnemyVision")) 
+              || collision.gameObject.CompareTag("PlayerDetector"))
         {
             Destroy(gameObject);
         }
     }
+    
 
     public void SetProperties
     (float newDamageScale, float newSpeedScale, float newSizeScale, float newGrowScale,float newDistance)
