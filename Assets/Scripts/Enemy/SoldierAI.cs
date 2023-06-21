@@ -199,7 +199,7 @@ public class SoldierAI : MonoBehaviour
     {
         anim.SetInteger("animState", 3);
 
-        agent.stoppingDistance = attackDistance;
+        agent.stoppingDistance = curAttackDistance * 0.75f;
         agent.speed = enemySpeed;
 
         nextDestination = player.transform.position;
@@ -207,6 +207,7 @@ public class SoldierAI : MonoBehaviour
         if (distanceToPlayer <= curAttackDistance + .5f)
         {
             currentState = FSMStates.Attack;
+            anim.SetInteger("strafeState", 1);
         }
         else if (distanceToPlayer > curChaseDistance + .5f)
         {
@@ -220,16 +221,14 @@ public class SoldierAI : MonoBehaviour
     void UpdateAttackState()
     {
         anim.SetInteger("animState", 4);
+        var strafeSpeed = enemySpeed * 0.5f;
         
-        agent.stoppingDistance = attackDistance;
+        agent.stoppingDistance = attackDistance * 0.75f;
+        agent.speed = strafeSpeed;
 
         nextDestination = player.transform.position;
 
-        if (distanceToPlayer <= curAttackDistance)
-        {
-            currentState = FSMStates.Attack;
-        }
-        else if (distanceToPlayer > curAttackDistance + .5f && distanceToPlayer <= curChaseDistance)
+        if (distanceToPlayer > curAttackDistance + .5f && distanceToPlayer <= curChaseDistance)
         {
             currentState = FSMStates.Chase;
         }
@@ -237,9 +236,23 @@ public class SoldierAI : MonoBehaviour
         {
             ReturnToNeutral();
         }
-
+        
+        if (distanceToPlayer < curAttackDistance * 0.67f)
+        {
+            anim.SetInteger("strafeState", 2);
+            agent.isStopped = true;
+            
+            transform.position = Vector3.Lerp
+                (transform.position, transform.position - transform.forward, Time.deltaTime * strafeSpeed);
+        }
+        else
+        {
+            agent.isStopped = false;
+            if (agent.velocity != Vector3.zero) anim.SetInteger("strafeState", 1);
+            else anim.SetInteger("strafeState", 0);
+        }
+        
         FaceTarget(nextDestination);
-
         ShootProjectile();
     }
 
