@@ -32,7 +32,7 @@ public class SoldierAI : MonoBehaviour
     
     public Transform muzzle;
     
-    private GameObject[] wanderPoints;
+    public GameObject[] patrolPoints;
     private int currentDestinationIndex = 0;
     private Vector3 nextDestination;
 
@@ -41,10 +41,16 @@ public class SoldierAI : MonoBehaviour
     private float elapsedTime = 0;
     private Vector3 alertPosition;
 
-    private SoldierVision visionScript;
     private EnemyHealth enemyHealth;
     private int health;
 
+    public Transform enemyEyes;
+    public float fieldOfView = 45f;
+
+    private float curAttackDistance = 15.0f;
+    private float curChaseDistance = 20.0f;
+    private float curFOV = 45f;
+    
     // Animator anim;
     private UnityEngine.AI.NavMeshAgent agent;
 
@@ -55,15 +61,12 @@ public class SoldierAI : MonoBehaviour
         playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget");
         // wanderPoints = GameObject.FindGameObjectsWithTag("WanderPoint");
         // anim = GetComponent<Animator>();
-        // wandTip = GameObject.FindGameObjectWithTag("WandTip");
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         enemyHealth = GetComponent<EnemyHealth>();
-        visionScript = GetComponentInChildren<SoldierVision>();
         health = enemyHealth.currentHealth;
 
-        currentState = FSMStates.Patrol;
-        //FindNextPoint();
+        ReturnToNeutral();
     }
 
     // Update is called once per frame
@@ -75,7 +78,10 @@ public class SoldierAI : MonoBehaviour
 
         print(gameObject.name + " " + currentState);
         switch (currentState)
-        {
+        {   
+            case FSMStates.Idle:
+                UpdateIdleState();
+                break;
             case FSMStates.Patrol:
                 UpdatePatrolState();
                 break;
@@ -114,11 +120,19 @@ public class SoldierAI : MonoBehaviour
             elapsedTime = 0;
             alertPosition = player.transform.position;
         }
-    }
-
-    public void PlayerSeen(bool newPlayerSeen)
-    {
-        this.playerInFOV = newPlayerSeen;
+        
+        if (LevelManager.isLightOn)
+        {
+            curAttackDistance = attackDistance;
+            curChaseDistance = chaseDistance;
+            curFOV = fieldOfView;
+        }
+        else
+        {
+            curAttackDistance = attackDistance * 0.5f;
+            curChaseDistance = chaseDistance * 0.5f;
+            curFOV = fieldOfView * 1.25f;
+        }
     }
 
     public void Alert()
@@ -131,53 +145,45 @@ public class SoldierAI : MonoBehaviour
         }
     }
 
-    public void GunshotAlert()
+    void UpdateIdleState()
     {
-        if (currentState == FSMStates.Idle || currentState == FSMStates.Patrol || currentState == FSMStates.Alert)
+        if (IsPlayerInClearFOV())
         {
-            this.currentState = FSMStates.Alert;
-            elapsedTime = 0;
-            alertPosition = player.transform.position;
+            currentState = FSMStates.Chase;
         }
     }
 
     void UpdatePatrolState()
     {
-        // print("Patrolling!");
-        // print(nextDestination);
-
         // anim.SetInteger("animState", 1);
 
-        // agent.stoppingDistance = 0f;
-        // agent.speed = 3.5f;
+        agent.stoppingDistance = 0f;
+        agent.speed = 3.5f;
 
         if (Vector3.Distance(transform.position, nextDestination) < 2)
         {
             FindNextPoint();
         }
-        else if (playerInFOV)
+        else if (IsPlayerInClearFOV())
         {
-            visionScript.ToggleIndicator(false);
             currentState = FSMStates.Chase;
         }
 
-        // FaceTarget(nextDestination);
+        FaceTarget(nextDestination);
 
-        // agent.SetDestination(nextDestination);
+        agent.SetDestination(nextDestination);
     }
 
     void UpdateAlertState()
     {
-        if (distanceToPlayer < chaseDistance)
+        if (IsPlayerInClearFOV())
         {
-            visionScript.ToggleIndicator(false);
             currentState = FSMStates.Chase;
         }
 
         if (elapsedTime > alertTimer)
         {
-            visionScript.ToggleIndicator(true);
-            currentState = FSMStates.Patrol;
+            ReturnToNeutral();
         }
 
         FaceTarget(alertPosition);
@@ -194,21 +200,16 @@ public class SoldierAI : MonoBehaviour
 
         nextDestination = player.transform.position;
 
-        if (distanceToPlayer <= attackDistance)
+        if (distanceToPlayer <= curAttackDistance + .5f)
         {
             currentState = FSMStates.Attack;
         }
-        else if (distanceToPlayer > chaseDistance)
+        else if (distanceToPlayer > curChaseDistance)
         {
-            visionScript.ToggleIndicator(true);
-            currentState = FSMStates.Patrol;
-            FindNextPoint();
+            ReturnToNeutral();
         }
 
         FaceTarget(nextDestination);
-
-        // transform.position = Vector3.MoveTowards(transform.position, nextDestination, enemySpeed * Time.deltaTime);
-
         agent.SetDestination(nextDestination);
     }
 
@@ -220,19 +221,17 @@ public class SoldierAI : MonoBehaviour
 
         nextDestination = player.transform.position;
 
-        if (distanceToPlayer < attackDistance)
+        if (distanceToPlayer <= curAttackDistance)
         {
             currentState = FSMStates.Attack;
         }
-        else if (distanceToPlayer > attackDistance && distanceToPlayer <= chaseDistance)
+        else if (distanceToPlayer > curAttackDistance + .5f && distanceToPlayer <= curChaseDistance)
         {
             currentState = FSMStates.Chase;
         }
-        else if (distanceToPlayer > chaseDistance)
+        else if (distanceToPlayer > curChaseDistance)
         {
-            visionScript.ToggleIndicator(true);
-            currentState = FSMStates.Patrol;
-            FindNextPoint();
+            ReturnToNeutral();
         }
 
         FaceTarget(nextDestination);
@@ -247,16 +246,27 @@ public class SoldierAI : MonoBehaviour
         // anim.SetInteger("animState", 4);
 
         AudioSource.PlayClipAtPoint(deadSFX, transform.position);
-
         Destroy(gameObject);
     }
 
+    void ReturnToNeutral()
+    {
+        if (patrolPoints.Length > 0)
+        {
+            currentState = FSMStates.Patrol;
+            FindNextPoint();
+        }
+        else
+        {
+            currentState = FSMStates.Idle;
+        }
+    }
     void FindNextPoint()
     {
-        // nextDestination = wanderPoints[currentDestinationIndex].transform.position;
-        // currentDestinationIndex = (currentDestinationIndex + 1) % wanderPoints.Length;
+        nextDestination = patrolPoints[currentDestinationIndex].transform.position;
+        currentDestinationIndex = (currentDestinationIndex + 1) % patrolPoints.Length;
 
-        // agent.SetDestination(nextDestination);
+        agent.SetDestination(nextDestination);
     }
 
     public void FaceTarget(Vector3 target)
@@ -294,5 +304,30 @@ public class SoldierAI : MonoBehaviour
         
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, chaseDistance);
+    }
+    
+    // courtesy of Caglar Yildrim
+    bool IsPlayerInClearFOV()
+    {
+        RaycastHit hit;
+
+        Vector3 directionToPlayer = player.transform.position - enemyEyes.position;
+
+        if (Vector3.Angle(directionToPlayer, enemyEyes.forward) <= curFOV)
+        {
+            if (Physics.Raycast(enemyEyes.position, directionToPlayer, out hit, curChaseDistance))
+            {
+                if (hit.collider.CompareTag("PlayerDetector"))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return false;
+        }
+
+        return false;
     }
 }
