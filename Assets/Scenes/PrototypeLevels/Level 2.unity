@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0007770211, g: 0.0040905345, b: 0.020102436, a: 1}
+  m_IndirectSpecularColor: {r: 0.00077701965, g: 0.0040905294, b: 0.020102464, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1068,7 +1068,7 @@ PrefabInstance:
       objectReference: {fileID: 1317335769}
     - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
       propertyPath: nextLevel
-      value: Level 1
+      value: Level 3
       objectReference: {fileID: 0}
     - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
       propertyPath: timerText

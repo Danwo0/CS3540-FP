@@ -13,6 +13,9 @@ TagManager:
   - Robot
   - Solider
   - EnemyProjectile
+  - AlertImage
+  - EnemyVision
+  - PlayerDetector
   layers:
   - Default
   - TransparentFX
