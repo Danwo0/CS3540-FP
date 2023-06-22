@@ -7,6 +7,7 @@ public class Breakable : MonoBehaviour
    public GameObject cratePieces;
    public float explosionForce = 100f;
    public float explosionRadius = 10f;
+   public AudioClip explosionSound;
 
    public GameObject[] loots;
    
@@ -34,6 +35,7 @@ public class Breakable : MonoBehaviour
             Instantiate(loots[value % length], currentCrate.position, currentCrate.rotation);
          }
 
+            AudioSource.PlayClipAtPoint(explosionSound, transform.position);
          Destroy(gameObject);
       }
    }

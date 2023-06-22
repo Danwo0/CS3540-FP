@@ -130,6 +130,7 @@ MonoBehaviour:
   cratePieces: {fileID: 1000013709254234, guid: a7c1e80a958a7455abd946d86379a1c8, type: 3}
   explosionForce: 100
   explosionRadius: 10
+  explosionSound: {fileID: 8300000, guid: fe8ccead0b3c94d4c81db8b10b76a9d8, type: 3}
   loots:
   - {fileID: 8645260350993093668, guid: 52aaa0eb94f17ec4cb8a3cf621445688, type: 3}
   - {fileID: 2987281366875299184, guid: 2a3b27fa0a2243d47a9814146cd3be5c, type: 3}
