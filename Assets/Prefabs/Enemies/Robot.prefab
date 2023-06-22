@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  attackDistance: 15
+  attackDistance: 12
   chaseDistance: 20
   enemySpeed: 3
   shootRate: 1

@@ -51,12 +51,10 @@ public class RobotAI : MonoBehaviour
     private float curChaseDistance = 20.0f;
     private float curFOV = 45f;
     
-    // Animator anim;
     private NavMeshAgent agent;
 
     private int barrel;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -69,7 +67,6 @@ public class RobotAI : MonoBehaviour
         currentState = FSMStates.Idle;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (LevelManager.isGameOver) return;
@@ -97,7 +94,7 @@ public class RobotAI : MonoBehaviour
 
         elapsedTime += Time.deltaTime;
 
-        if (health <= 0 && currentState != FSMStates.Dead)
+        if (health <= 0)
         {
             currentState = FSMStates.Dead;
         }
@@ -112,9 +109,7 @@ public class RobotAI : MonoBehaviour
 
         if (health < prevHealth)
         {
-            currentState = FSMStates.Alert;
-            elapsedTime = 0;
-            alertPosition = player.transform.position;
+            Alert();
         }
         
         if (LevelManager.isLightOn)
@@ -165,8 +160,7 @@ public class RobotAI : MonoBehaviour
 
     void UpdateChaseState()
     {
-        // anim.SetInteger("animState", 2);
-
+        agent.stoppingDistance = attackDistance;
         agent.speed = enemySpeed;
 
         nextDestination = player.transform.position;
@@ -186,6 +180,8 @@ public class RobotAI : MonoBehaviour
 
     void UpdateAttackState()
     {
+        agent.stoppingDistance = attackDistance;
+        
         nextDestination = player.transform.position;
 
         if (distanceToPlayer <= curAttackDistance)
@@ -203,15 +199,12 @@ public class RobotAI : MonoBehaviour
 
         FaceTarget(nextDestination);
 
-        // anim.SetInteger("animState", 3);
-
         ShootProjectile();
     }
 
     void UpdateDeadState()
     {
-        // anim.SetInteger("animState", 4);
-
+        agent.isStopped = true;
         AudioSource.PlayClipAtPoint(deadSFX, transform.position);
         Destroy(gameObject);
     }
@@ -257,7 +250,7 @@ public class RobotAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, curChaseDistance);
     }
 
-    // courtesy of Calgar Yildrim
+    // courtesy of Caglar Yildrim
     bool IsPlayerInClearFOV()
     {
         RaycastHit hit;

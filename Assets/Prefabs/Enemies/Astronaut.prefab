@@ -834,7 +834,7 @@ MonoBehaviour:
   attackDistance: 5
   chaseDistance: 15
   enemySpeed: 5
-  shootRate: 1
+  shootRate: 1.1
   alertTimer: 5
   alertRadius: 20
   player: {fileID: 0}

@@ -41,6 +41,7 @@ public class AstronautAI : MonoBehaviour
     private EnemyHealth enemyHealth;
     private int health;
     private LevelManager lm;
+    private bool isDead;
 
     public Transform enemyEyes;
     public float fieldOfView = 45f;
@@ -51,19 +52,20 @@ public class AstronautAI : MonoBehaviour
     private float curChaseDistance = 20.0f;
     private float curFOV = 45f;
 
-    // Animator anim;
+    Animator anim;
     private NavMeshAgent agent;
-    // Start is called before the first frame update
+    
     void Start()
     {
         keyEnemyCount++;
         player = GameObject.FindGameObjectWithTag("Player");
-        // anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         lm = FindObjectOfType<LevelManager>();
 
         enemyHealth = GetComponent<EnemyHealth>();
         health = enemyHealth.currentHealth;
+        isDead = false;
         
         currentState = FSMStates.Idle;
     }
@@ -73,6 +75,7 @@ public class AstronautAI : MonoBehaviour
     {
         if (LevelManager.isGameOver)
         {
+            keyEnemyCount = 0;
             return;
         }
 
@@ -100,7 +103,7 @@ public class AstronautAI : MonoBehaviour
         elapsedTime += Time.deltaTime;
         attackElapsedTime += Time.deltaTime;
 
-        if (health <= 0 && currentState != FSMStates.Dead)
+        if (health <= 0)
         {
             currentState = FSMStates.Dead;
         }
@@ -115,9 +118,7 @@ public class AstronautAI : MonoBehaviour
 
         if (health < prevHealth)
         {
-            currentState = FSMStates.Alert;
-            elapsedTime = 0;
-            alertPosition = player.transform.position;
+            Alert();
         }
 
         if (LevelManager.isLightOn)
@@ -161,11 +162,18 @@ public class AstronautAI : MonoBehaviour
                 RobotAI robot = other.gameObject.GetComponent<RobotAI>();
                 robot.Alert();
             }
+            
+            if (other.gameObject.CompareTag("Soldier"))
+            {
+                SoldierAI soldier = other.gameObject.GetComponent<SoldierAI>();
+                soldier.Alert();
+            }
         }
     }
 
     void UpdateIdleState()
     {
+        anim.SetInteger("animState", 0);
         if (IsPlayerInClearFOV())
         {
             currentState = FSMStates.Chase;
@@ -175,6 +183,7 @@ public class AstronautAI : MonoBehaviour
 
     void UpdateAlertState()
     {
+        anim.SetInteger("animState", 1);
         if (IsPlayerInClearFOV())
         {
             currentState = FSMStates.Chase;
@@ -190,8 +199,9 @@ public class AstronautAI : MonoBehaviour
 
     void UpdateChaseState()
     {
-        // anim.SetInteger("animState", 2);
-
+        anim.SetInteger("animState", 2);
+        
+        agent.stoppingDistance = attackDistance;
         agent.speed = enemySpeed;
 
         nextDestination = player.transform.position;
@@ -211,6 +221,8 @@ public class AstronautAI : MonoBehaviour
 
     void UpdateAttackState()
     {
+        anim.SetInteger("animState", 3);
+        agent.stoppingDistance = attackDistance;
         nextDestination = player.transform.position;
 
         if (distanceToPlayer <= curAttackDistance)
@@ -228,18 +240,20 @@ public class AstronautAI : MonoBehaviour
 
         FaceTarget(nextDestination);
 
-        // anim.SetInteger("animState", 3);
-
         MeleeAttack();
     }
 
     void UpdateDeadState()
     {
-        // anim.SetInteger("animState", 4);
+        if (isDead) return;
+
+        isDead = true;
+        agent.isStopped = true;
+        anim.SetInteger("animState", 4);
         AudioSource.PlayClipAtPoint(deadSFX, transform.position);
         keyEnemyCount--;
         
-        Destroy(gameObject);
+        Destroy(gameObject, 3f);
         
         if (keyEnemyCount <= 0)
         {
@@ -259,7 +273,7 @@ public class AstronautAI : MonoBehaviour
     {
         if (attackElapsedTime > shootRate)
         {
-            Vector3 pos = transform.position + transform.forward;
+            Vector3 pos = transform.position + (transform.forward * 2);
             pos.y += 2;
 
             GameObject projectile = Instantiate(meleePrefab, pos, transform.rotation) as GameObject;

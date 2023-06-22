@@ -66,7 +66,7 @@ public class ProjectileBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Astronaut") || collision.gameObject.CompareTag("Robot"))
+        if (collision.gameObject.CompareTag("Astronaut") || collision.gameObject.CompareTag("Robot") || collision.gameObject.CompareTag("Soldier"))
         {
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(finalDamage);
         }
