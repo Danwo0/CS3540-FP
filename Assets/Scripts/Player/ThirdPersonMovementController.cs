@@ -25,7 +25,6 @@ public class ThirdPersonMovementController : MonoBehaviour
     private float angVelocity = 0f;
     private float speed = 0f;
     private bool rotateOnMove = true;
-    public AudioClip jumpSFX;
 
     private bool isGrounded;
     private bool isRunning;
@@ -36,6 +35,16 @@ public class ThirdPersonMovementController : MonoBehaviour
 
     void Start()
     {
+        if (PlayerPrefs.HasKey("PlayerPositionX") &&
+            PlayerPrefs.HasKey("PlayerPositionY") &&
+            PlayerPrefs.HasKey("PlayerPositionZ"))
+        {
+            float posX = PlayerPrefs.GetFloat("PlayerPositionX");
+            float posY = PlayerPrefs.GetFloat("PlayerPositionY");
+            float posZ = PlayerPrefs.GetFloat("PlayerPositionZ");
+            transform.position = new Vector3(posX, posY, posZ);
+        }
+
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
 
@@ -77,12 +86,14 @@ public class ThirdPersonMovementController : MonoBehaviour
         // on the ground start jumping
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
-            AudioSource.PlayClipAtPoint(jumpSFX,transform.position);
+            anim.SetBool("isJumping", true);
+            anim.SetBool("isGrounded", false);
             moveDirection.y = Mathf.Sqrt(2 * jumpHeight * jumpBoost * gravity);
         } 
         // on the ground
         else if (isGrounded)
         {
+            anim.SetBool("isGrounded", true);
             moveDirection.y = 0.0f;
         }
         // gravity as constant force
@@ -211,5 +222,12 @@ public class ThirdPersonMovementController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, currentAlertRadius);
     }
-    
+
+    private void OnApplicationQuit()
+    {
+        // Save the player position to PlayerPrefs when the application quits
+        PlayerPrefs.SetFloat("PlayerPositionX", transform.position.x);
+        PlayerPrefs.SetFloat("PlayerPositionY", transform.position.y);
+        PlayerPrefs.SetFloat("PlayerPositionZ", transform.position.z);
+    }
 }

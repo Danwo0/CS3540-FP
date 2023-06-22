@@ -51,10 +51,12 @@ public class RobotAI : MonoBehaviour
     private float curChaseDistance = 20.0f;
     private float curFOV = 45f;
     
+    // Animator anim;
     private NavMeshAgent agent;
 
     private int barrel;
 
+    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -67,6 +69,7 @@ public class RobotAI : MonoBehaviour
         currentState = FSMStates.Idle;
     }
 
+    // Update is called once per frame
     void Update()
     {
         if (LevelManager.isGameOver) return;
@@ -94,7 +97,7 @@ public class RobotAI : MonoBehaviour
 
         elapsedTime += Time.deltaTime;
 
-        if (health <= 0)
+        if (health <= 0 && currentState != FSMStates.Dead)
         {
             currentState = FSMStates.Dead;
         }
@@ -109,7 +112,9 @@ public class RobotAI : MonoBehaviour
 
         if (health < prevHealth)
         {
-            Alert();
+            currentState = FSMStates.Alert;
+            elapsedTime = 0;
+            alertPosition = player.transform.position;
         }
         
         if (LevelManager.isLightOn)
@@ -160,6 +165,8 @@ public class RobotAI : MonoBehaviour
 
     void UpdateChaseState()
     {
+        // anim.SetInteger("animState", 2);
+
         agent.stoppingDistance = attackDistance;
         agent.speed = enemySpeed;
 
@@ -199,12 +206,15 @@ public class RobotAI : MonoBehaviour
 
         FaceTarget(nextDestination);
 
+        // anim.SetInteger("animState", 3);
+
         ShootProjectile();
     }
 
     void UpdateDeadState()
     {
-        agent.isStopped = true;
+        // anim.SetInteger("animState", 4);
+
         AudioSource.PlayClipAtPoint(deadSFX, transform.position);
         Destroy(gameObject);
     }

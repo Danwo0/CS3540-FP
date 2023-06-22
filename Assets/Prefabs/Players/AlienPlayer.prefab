@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &261994440
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 261994441}
-  m_Layer: 0
-  m_Name: Mouth
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &261994441
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 261994440}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.0502, y: 0.005, z: 0.0002}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7049061234670123144}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &5101625129168971461
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5101625129168971461}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 9.75, z: 20.65}
+  m_LocalPosition: {x: 0, y: 9.75, z: 16.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3224,8 +3193,7 @@ Transform:
   m_LocalPosition: {x: -0, y: 0.01050059, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 261994441}
+  m_Children: []
   m_Father: {fileID: 7049061234670123150}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3926,7 +3894,7 @@ CharacterController:
   m_Height: 19.25
   m_Radius: 9.6
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 10, z: 0}
@@ -3942,16 +3910,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4acd0a3133cd534497545722abf06e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpTimer: {fileID: 0}
-  powerUpImage: {fileID: 0}
   moveSpeed: 5
   jumpHeight: 3
   gravity: 9.81
   airControl: 1
   acceleration: 5
   alertRadius: 5
-  jumpSFX: {fileID: 8300000, guid: 3594900cfc85fd341ba377f95ea1815a, type: 3}
-  currentAlertRadius: 0
 --- !u!114 &7049061234677372611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4017,9 +3981,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 1377514370119029230, guid: c36d2e0b526354e4a9ad9ff440f6a5e4, type: 3}
-  - {fileID: 4406246469846550585, guid: 10add4bc7efeb014bb282edc4756515b, type: 3}
-  - {fileID: 4021660054286840875, guid: ef0930fd423a8bd4c849eeb939904a22, type: 3}
-  projectileOrigin: {fileID: 261994441}
+  - {fileID: 8726825292919489769, guid: d1e53a7b0cfc9304a9940ac0f4afae5a, type: 3}
+  - {fileID: 8726825292919489769, guid: 8bb01df9b658bc04ba9fa364958208b0, type: 3}
+  projectileOrigin: {fileID: 5101625129168971460}
   selectionImage: {fileID: 0}
   damageScale: 1
   speedScale: 1

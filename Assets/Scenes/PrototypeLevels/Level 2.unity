@@ -1121,7 +1121,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
 --- !u!114 &336378592 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4510214767599998592, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2129710635699014661, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
   m_PrefabInstance: {fileID: 336378591}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -6087,28 +6087,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8027850325763812783, guid: ecc97a830d4f69f4c9af91a3a985e05c, type: 3}
   m_PrefabInstance: {fileID: 1206309444}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1214875860 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2529264756914052390, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
-  m_PrefabInstance: {fileID: 336378591}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1214875861 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2529264755876398891, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
-  m_PrefabInstance: {fileID: 336378591}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1232634392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6167,19 +6145,11 @@ PrefabInstance:
     - target: {fileID: 7049061234677372605, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: selectionImage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 336378592}
     - target: {fileID: 7049061234677372605, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: aimVirtualCamera
       value: 
       objectReference: {fileID: 1925299054}
-    - target: {fileID: 7049061234677372608, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
-      propertyPath: powerUpImage
-      value: 
-      objectReference: {fileID: 1214875861}
-    - target: {fileID: 7049061234677372608, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
-      propertyPath: powerUpTimer
-      value: 
-      objectReference: {fileID: 1214875860}
     - target: {fileID: 7049061234677372610, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: healthText
       value: 
