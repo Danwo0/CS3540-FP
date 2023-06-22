@@ -1,16 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LightSwitchBehavior : MonoBehaviour
 {
-    public Light lightSource;
+    private Light[] lightSources;
 
     private bool switchOn;
     private bool playerDetected;
     
     void Start()
     {
+        var sources = GameObject.FindGameObjectsWithTag("Light");
+        lightSources = Array.ConvertAll(sources, source => source.GetComponent<Light>());
         switchOn = true;
         playerDetected = false;
     }
@@ -24,7 +27,9 @@ public class LightSwitchBehavior : MonoBehaviour
         {
             switchOn = !switchOn;
             LevelManager.isLightOn = switchOn;
-            lightSource.intensity = switchOn ? 1.0f : 0.2f;
+            foreach (Light light in lightSources) {
+                light.intensity = switchOn ? 1.0f : 0.2f;
+            }
         }
     }
 

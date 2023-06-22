@@ -16,6 +16,8 @@ TagManager:
   - AlertImage
   - EnemyVision
   - PlayerDetector
+  - Door
+  - Light
   layers:
   - Default
   - TransparentFX
