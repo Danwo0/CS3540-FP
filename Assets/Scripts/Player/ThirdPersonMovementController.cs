@@ -35,6 +35,16 @@ public class ThirdPersonMovementController : MonoBehaviour
 
     void Start()
     {
+        if (PlayerPrefs.HasKey("PlayerPositionX") &&
+            PlayerPrefs.HasKey("PlayerPositionY") &&
+            PlayerPrefs.HasKey("PlayerPositionZ"))
+        {
+            float posX = PlayerPrefs.GetFloat("PlayerPositionX");
+            float posY = PlayerPrefs.GetFloat("PlayerPositionY");
+            float posZ = PlayerPrefs.GetFloat("PlayerPositionZ");
+            transform.position = new Vector3(posX, posY, posZ);
+        }
+
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
 
@@ -212,5 +222,12 @@ public class ThirdPersonMovementController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, currentAlertRadius);
     }
-    
+
+    private void OnApplicationQuit()
+    {
+        // Save the player position to PlayerPrefs when the application quits
+        PlayerPrefs.SetFloat("PlayerPositionX", transform.position.x);
+        PlayerPrefs.SetFloat("PlayerPositionY", transform.position.y);
+        PlayerPrefs.SetFloat("PlayerPositionZ", transform.position.z);
+    }
 }
