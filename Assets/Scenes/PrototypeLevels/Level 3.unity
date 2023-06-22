@@ -2193,7 +2193,7 @@ PrefabInstance:
       objectReference: {fileID: 1937265890}
     - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
       propertyPath: levelDuration
-      value: 150
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
       propertyPath: enemyCountText

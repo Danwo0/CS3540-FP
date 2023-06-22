@@ -2029,8 +2029,8 @@ MonoBehaviour:
     should harvest your planet, you choose to take matters into your own hand. The
     goal is to eliminate all\r\nhumans on the ship within three different levels
     before they land on Earth. Each level is timed and ultimately\r\npart of a larger
-    countdown. As you progress you can level up your skills and gain new abilities
-    as the humans\r\nand their robot companions get stronger as you progress"
+    countdown. As you progress you will face new enemies and be able to interact
+    with the map\n(hint: press E) to achieve your ultimate goal of revenge..."
 --- !u!222 &1139373081
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2969,7 +2969,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1730930078
 RectTransform:
   m_ObjectHideFlags: 0
