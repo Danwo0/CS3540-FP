@@ -2185,7 +2185,7 @@ PrefabInstance:
       objectReference: {fileID: 2063803053}
     - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
       propertyPath: nextLevel
-      value: 
+      value: Victory
       objectReference: {fileID: 0}
     - target: {fileID: 3461676769320771945, guid: b885a87ea1257644c99348d15bdf126a, type: 3}
       propertyPath: timerText
