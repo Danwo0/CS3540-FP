@@ -1340,14 +1340,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6661828697469126525, guid: dab93549ef13f0149bdd485da8004480, type: 3}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 9045565599046844531, guid: 653cb5a85c4622246809ee687b23fbd6, type: 3}
-    - target: {fileID: 6661828697469126525, guid: dab93549ef13f0149bdd485da8004480, type: 3}
-      propertyPath: attackDistance
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 7316554639476128452, guid: dab93549ef13f0149bdd485da8004480, type: 3}
       propertyPath: m_Name
       value: Soldier
@@ -1931,10 +1923,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 872303982}
     - target: {fileID: 7049061234677372605, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
-      propertyPath: selectionImage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7049061234677372605, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: aimVirtualCamera
       value: 
       objectReference: {fileID: 1938186958}
@@ -1954,10 +1942,6 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 9210082599150416708}
-    - target: {fileID: 7049061234677372615, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
 --- !u!1001 &6042565133912084171
@@ -2154,10 +2138,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 406944677}
     m_Modifications:
-    - target: {fileID: 2686910579782987364, guid: b5e8e711fdf383b4295c497370317b88, type: 3}
-      propertyPath: attackDistance
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 6761353605446495733, guid: b5e8e711fdf383b4295c497370317b88, type: 3}
       propertyPath: m_RootOrder
       value: 1

@@ -25,6 +25,7 @@ public class ThirdPersonMovementController : MonoBehaviour
     private float angVelocity = 0f;
     private float speed = 0f;
     private bool rotateOnMove = true;
+    public AudioClip jumpSFX;
 
     private bool isGrounded;
     private bool isRunning;
@@ -76,6 +77,7 @@ public class ThirdPersonMovementController : MonoBehaviour
         // on the ground start jumping
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
+            AudioSource.PlayClipAtPoint(jumpSFX,transform.position);
             moveDirection.y = Mathf.Sqrt(2 * jumpHeight * jumpBoost * gravity);
         } 
         // on the ground
