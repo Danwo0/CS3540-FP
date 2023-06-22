@@ -36,15 +36,15 @@ public class ThirdPersonMovementController : MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.HasKey("PlayerPositionX") &&
-            PlayerPrefs.HasKey("PlayerPositionY") &&
-            PlayerPrefs.HasKey("PlayerPositionZ"))
-        {
-            float posX = PlayerPrefs.GetFloat("PlayerPositionX");
-            float posY = PlayerPrefs.GetFloat("PlayerPositionY");
-            float posZ = PlayerPrefs.GetFloat("PlayerPositionZ");
-            transform.position = new Vector3(posX, posY, posZ);
-        }
+        //if (PlayerPrefs.HasKey("PlayerPositionX") &&
+        //    PlayerPrefs.HasKey("PlayerPositionY") &&
+        //    PlayerPrefs.HasKey("PlayerPositionZ"))
+        //{
+        //    float posX = PlayerPrefs.GetFloat("PlayerPositionX");
+        //    float posY = PlayerPrefs.GetFloat("PlayerPositionY");
+        //    float posZ = PlayerPrefs.GetFloat("PlayerPositionZ");
+        //    transform.position = new Vector3(posX, posY, posZ);
+        //}
         
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
