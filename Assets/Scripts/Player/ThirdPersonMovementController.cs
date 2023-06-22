@@ -77,7 +77,7 @@ public class ThirdPersonMovementController : MonoBehaviour
         // on the ground start jumping
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
-            AudioSource.PlayClipAtPoint(jumpSFX,transform.position);enabled so
+            AudioSource.PlayClipAtPoint(jumpSFX,transform.position);
             moveDirection.y = Mathf.Sqrt(2 * jumpHeight * jumpBoost * gravity);
         } 
         // on the ground
