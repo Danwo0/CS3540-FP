@@ -30,7 +30,8 @@ public class ThirdPersonShooterController : MonoBehaviour
         mouseLook = GetComponent<CameraController>();
         controller = GetComponent<ThirdPersonMovementController>();
         anim = GetComponent<Animator>();
-        
+
+        normalSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 5) / 5f;
         isAiming = false;
     }
 
