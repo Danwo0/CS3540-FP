@@ -3950,6 +3950,7 @@ MonoBehaviour:
   airControl: 1
   acceleration: 5
   alertRadius: 5
+  jumpSFX: {fileID: 8300000, guid: 3594900cfc85fd341ba377f95ea1815a, type: 3}
   currentAlertRadius: 0
 --- !u!114 &7049061234677372611
 MonoBehaviour:

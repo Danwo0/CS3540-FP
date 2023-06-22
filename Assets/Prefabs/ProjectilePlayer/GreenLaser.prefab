@@ -5066,8 +5066,8 @@ GameObject:
   - component: {fileID: 4459617209565817173}
   - component: {fileID: 991945047269027676}
   m_Layer: 0
-  m_Name: vfx_Projectile_ArrowGreen
-  m_TagString: Untagged
+  m_Name: GreenLaser
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

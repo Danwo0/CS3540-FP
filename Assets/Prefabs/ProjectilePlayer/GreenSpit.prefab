@@ -43790,8 +43790,8 @@ GameObject:
   - component: {fileID: 3917139310197948881}
   - component: {fileID: 3818467069238275161}
   m_Layer: 0
-  m_Name: vfx_Projectile_Firefrost01_Green
-  m_TagString: Untagged
+  m_Name: GreenSpit
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43933,6 +43933,6 @@ MonoBehaviour:
   baseGrowRate: 1
   baseDistance: 125
   type: 1
-  fireSFX: {fileID: 8300000, guid: b51854597354ccc41b4c03a823a2271d, type: 3}
+  fireSFX: {fileID: 8300000, guid: 6582b0551ca5a1446b4e43a481b71fd9, type: 3}
   sprite: {fileID: 21300000, guid: 131e961397e39b645adc33118e53cbab, type: 3}
   origin: {x: 0, y: 0, z: 0}
