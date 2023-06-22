@@ -43,7 +43,6 @@ public class SoldierAI : MonoBehaviour
 
     private EnemyHealth enemyHealth;
     private int health;
-    private bool isDead;
 
     public Transform enemyEyes;
     public float fieldOfView = 45f;
@@ -52,7 +51,7 @@ public class SoldierAI : MonoBehaviour
     private float curChaseDistance = 20.0f;
     private float curFOV = 45f;
     
-    Animator anim;
+    // Animator anim;
     private UnityEngine.AI.NavMeshAgent agent;
 
     // Start is called before the first frame update
@@ -60,12 +59,12 @@ public class SoldierAI : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget");
-        anim = GetComponentInChildren<Animator>();
+        // wanderPoints = GameObject.FindGameObjectsWithTag("WanderPoint");
+        // anim = GetComponent<Animator>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         enemyHealth = GetComponent<EnemyHealth>();
         health = enemyHealth.currentHealth;
-        isDead = false;
 
         ReturnToNeutral();
     }
@@ -117,7 +116,9 @@ public class SoldierAI : MonoBehaviour
 
         if (health < prevHealth)
         {
-            Alert();
+            currentState = FSMStates.Alert;
+            elapsedTime = 0;
+            alertPosition = player.transform.position;
         }
         
         if (LevelManager.isLightOn)
@@ -146,7 +147,6 @@ public class SoldierAI : MonoBehaviour
 
     void UpdateIdleState()
     {
-        anim.SetInteger("animState", 0);
         if (IsPlayerInClearFOV())
         {
             currentState = FSMStates.Chase;
@@ -155,7 +155,7 @@ public class SoldierAI : MonoBehaviour
 
     void UpdatePatrolState()
     {
-        anim.SetInteger("animState", 1);
+        // anim.SetInteger("animState", 1);
 
         agent.stoppingDistance = 0f;
         agent.speed = 3.5f;
@@ -176,8 +176,6 @@ public class SoldierAI : MonoBehaviour
 
     void UpdateAlertState()
     {
-        anim.SetInteger("animState", 2);
-        
         agent.isStopped = true;
         
         if (IsPlayerInClearFOV())
@@ -197,9 +195,11 @@ public class SoldierAI : MonoBehaviour
 
     void UpdateChaseState()
     {
-        anim.SetInteger("animState", 3);
+        // print("Chasing!");
 
-        agent.stoppingDistance = curAttackDistance * 0.75f;
+        // anim.SetInteger("animState", 2);
+
+        agent.stoppingDistance = attackDistance;
         agent.speed = enemySpeed;
 
         nextDestination = player.transform.position;
@@ -207,7 +207,6 @@ public class SoldierAI : MonoBehaviour
         if (distanceToPlayer <= curAttackDistance + .5f)
         {
             currentState = FSMStates.Attack;
-            anim.SetInteger("strafeState", 1);
         }
         else if (distanceToPlayer > curChaseDistance + .5f)
         {
@@ -220,15 +219,17 @@ public class SoldierAI : MonoBehaviour
 
     void UpdateAttackState()
     {
-        anim.SetInteger("animState", 4);
-        var strafeSpeed = enemySpeed * 0.5f;
-        
-        agent.stoppingDistance = attackDistance * 0.75f;
-        agent.speed = strafeSpeed;
+        // print("Attacking!");
+
+        agent.stoppingDistance = attackDistance;
 
         nextDestination = player.transform.position;
 
-        if (distanceToPlayer > curAttackDistance + .5f && distanceToPlayer <= curChaseDistance)
+        if (distanceToPlayer <= curAttackDistance)
+        {
+            currentState = FSMStates.Attack;
+        }
+        else if (distanceToPlayer > curAttackDistance + .5f && distanceToPlayer <= curChaseDistance)
         {
             currentState = FSMStates.Chase;
         }
@@ -236,36 +237,20 @@ public class SoldierAI : MonoBehaviour
         {
             ReturnToNeutral();
         }
-        
-        if (distanceToPlayer < curAttackDistance * 0.67f)
-        {
-            anim.SetInteger("strafeState", 2);
-            agent.isStopped = true;
-            
-            transform.position = Vector3.Lerp
-                (transform.position, transform.position - transform.forward, Time.deltaTime * strafeSpeed);
-        }
-        else
-        {
-            agent.isStopped = false;
-            if (agent.velocity != Vector3.zero) anim.SetInteger("strafeState", 1);
-            else anim.SetInteger("strafeState", 0);
-        }
-        
+
         FaceTarget(nextDestination);
+
+        // anim.SetInteger("animState", 3);
+
         ShootProjectile();
     }
 
     void UpdateDeadState()
     {
-        if (isDead) return;
-        
-        isDead = true;
-        agent.isStopped = true;
-        anim.SetInteger("animState", 5);
+        // anim.SetInteger("animState", 4);
 
         AudioSource.PlayClipAtPoint(deadSFX, transform.position);
-        Destroy(gameObject, 3f);
+        Destroy(gameObject);
     }
 
     void ReturnToNeutral()

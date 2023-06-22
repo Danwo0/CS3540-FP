@@ -183,7 +183,7 @@ MonoBehaviour:
   bulletSpeed: 25
   player: {fileID: 0}
   playerTarget: {fileID: 0}
-  bulletPrefab: {fileID: 8453378832653170227, guid: 3dc7c7d89c56a57429d31edd98d586e8, type: 3}
+  bulletPrefab: {fileID: 9045565599046844531, guid: 755acdcc4bcd1dd4a87d74a250b8e211, type: 3}
   shootSFX: {fileID: 8300000, guid: bffcd77f0fdb45d4a8725ce7d5dea284, type: 3}
   deadSFX: {fileID: 8300000, guid: e81741307efa96a44863e539661cb1d5, type: 3}
   barrel1: {fileID: 3415431819812326858}
