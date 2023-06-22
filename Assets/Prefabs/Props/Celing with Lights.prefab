@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 2908177412643548755}
   m_Layer: 0
   m_Name: Point light (3)
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 5940701405842443021}
   m_Layer: 0
   m_Name: Point light (7)
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 7489197647725190366}
   m_Layer: 0
   m_Name: Point light (5)
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 1603727331321434435}
   m_Layer: 0
   m_Name: Point light (6)
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1418,7 +1418,7 @@ GameObject:
   - component: {fileID: 8090383534477180038}
   m_Layer: 0
   m_Name: Point light (4)
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1710,7 +1710,7 @@ GameObject:
   - component: {fileID: 2357061506972453754}
   m_Layer: 0
   m_Name: Point light (1)
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1804,7 +1804,7 @@ GameObject:
   - component: {fileID: 4327857916250596084}
   m_Layer: 0
   m_Name: Point light
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2393,7 +2393,7 @@ GameObject:
   - component: {fileID: 8381994992465362202}
   m_Layer: 0
   m_Name: Point light (2)
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
