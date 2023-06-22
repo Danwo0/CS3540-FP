@@ -434,6 +434,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2529264755745291338, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264755745291338, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264755745291338, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264755745291338, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264755745291338, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264755745291338, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264756942845319, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264756942845319, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264756942845319, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264756942845319, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264756942845319, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529264756942845319, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4369137550847473498, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1203,6 +1251,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Astronaut (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 8815181745211056942, guid: b5e8e711fdf383b4295c497370317b88, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815181745211056942, guid: b5e8e711fdf383b4295c497370317b88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5e8e711fdf383b4295c497370317b88, type: 3}
 --- !u!4 &937926474 stripped
@@ -1546,17 +1602,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bb36230c3d5cd847bab92dc243cbfad, type: 3}
---- !u!114 &1106040066 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2129710635699014661, guid: c88ed3d019e0aac49bc9b5ea1b6fb06e, type: 3}
-  m_PrefabInstance: {fileID: 198853597}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1109536552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2162,7 +2207,7 @@ PrefabInstance:
     - target: {fileID: 6434160517174333052, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: selectionImage
       value: 
-      objectReference: {fileID: 1106040066}
+      objectReference: {fileID: 0}
     - target: {fileID: 7049061234669954310, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: m_Name
       value: AlienPlayer
@@ -2214,7 +2259,7 @@ PrefabInstance:
     - target: {fileID: 7049061234677372605, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: selectionImage
       value: 
-      objectReference: {fileID: 1106040066}
+      objectReference: {fileID: 0}
     - target: {fileID: 7049061234677372605, guid: 32520d48250db9843b5c2639d2a056d0, type: 3}
       propertyPath: aimVirtualCamera
       value: 
