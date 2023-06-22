@@ -831,7 +831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  attackDistance: 5
+  attackDistance: 4
   chaseDistance: 15
   enemySpeed: 5
   shootRate: 1.1
@@ -840,7 +840,7 @@ MonoBehaviour:
   player: {fileID: 0}
   meleePrefab: {fileID: 9045565599046844531, guid: 7c0bde66e3602174c82e4e2a5eeed83b, type: 3}
   meleeSFX: {fileID: 8300000, guid: 1ebb08ab614f74345945cff93db2ce33, type: 3}
-  deadSFX: {fileID: 8300000, guid: 1fa738313b21f1549ae26fd6e106e156, type: 3}
+  deadSFX: {fileID: 8300000, guid: 2e2d611b503c81d43beff00c14000c20, type: 3}
   enemyEyes: {fileID: 7594388787531849159}
   fieldOfView: 45
 --- !u!114 &9172136665421823579

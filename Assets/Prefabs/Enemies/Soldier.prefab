@@ -3007,17 +3007,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  attackDistance: 16
+  attackDistance: 20
   chaseDistance: 25
   enemySpeed: 6
-  shootRate: 0.25
+  shootRate: 0.2
   alertTimer: 5
   bulletSpeed: 50
   player: {fileID: 0}
   playerTarget: {fileID: 0}
-  bulletPrefab: {fileID: 9045565599046844531, guid: 755acdcc4bcd1dd4a87d74a250b8e211, type: 3}
-  shootSFX: {fileID: 8300000, guid: bffcd77f0fdb45d4a8725ce7d5dea284, type: 3}
-  deadSFX: {fileID: 8300000, guid: 1fa738313b21f1549ae26fd6e106e156, type: 3}
+  bulletPrefab: {fileID: 1818248952081956662, guid: 6d5803a6e5627184bba6fff41883bd47, type: 3}
+  shootSFX: {fileID: 8300000, guid: b64222aef5ccdde4ea2cf8c5bf9656d3, type: 3}
+  deadSFX: {fileID: 8300000, guid: 2e2d611b503c81d43beff00c14000c20, type: 3}
   muzzle: {fileID: 724153686341100499}
   patrolPoints: []
   enemyEyes: {fileID: 5685193221022733443}
